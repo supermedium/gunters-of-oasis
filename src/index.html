@@ -1,0 +1,32 @@
+<html>
+  <head>
+    <title>Supermedium</title>
+    <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
+    <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
+    <script src="build/build.js?v={{ DATETIME }}"></script>
+    {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
+  </head>
+  <body>
+    <a-scene environment="{{ environment or 'preset: forest' }}">
+      <a-assets>
+      </a-assets>
+
+      <a-entity id="cameraRig">
+        <a-camera id="camera" look-controls position="0 1.6 0"></a-camera>
+
+        <!-- Primary hand. -->
+        <a-entity id="primaryHandContainer">
+          <a-entity id="primaryHand" controller="hand: right"></a-entity>
+        </a-entity>
+
+        <!-- Secondary hand. -->
+        <a-entity id="secondaryHandContainer">
+          <a-entity id="secondaryHand" controller="hand: left"></a-entity>
+        </a-entity>
+      </a-entity>
+
+      <a-entity position="0 2.416 -0.5" light="color: #f0c8ed; type: point; intensity: 1.36"></a-entity>
+      <a-entity light="color: #df5ea2; type: hemisphere; groundColor: #5cbeed; intensity: 1.99" ></a-entity>
+    </a-scene>
+  </body>
+</html>

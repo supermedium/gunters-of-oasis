@@ -1,0 +1,15 @@
+*.sw*
+.DS_Store
+node_modules
+lobby/index.html
+build.js
+package-lock.json
+.dropbox
+Icon*
+npm-debug.log
+lobby/track.html
+
+build
+dump.rdb
+.ghpages
+serviceWorker.js

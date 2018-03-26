@@ -75,11 +75,11 @@ SECTOR_PAGES.forEach(sector => {
     var i;
     var randomZone;
     pageData.links = [];
-    for (i = 0; i < Math.ceil(Math.random() * 5) + 2; i++) {
+    for (i = 0; i < Math.round(Math.random() * 5) + 2; i++) {
       // Get random zone.
       randomZone = sector[Math.floor(Math.random() * sector.length)];
       pageData.links.push({
-        position: `${Math.random() * 60 - 30} 0 ${Math.random() * 60 - 30}`,
+        position: `${Math.random() * 30 - 15} 0 ${Math.random() * 30 - 15}`,
         sectorType: randomZone.sectorType,
         url: `oasis/${randomZone.seed}.html`
       })

@@ -1,44 +1,25 @@
 var MinifyPlugin = require('babel-minify-webpack-plugin');
+var Nunjucks = require('nunjucks');
 var fs = require('fs');
 var htmlMinify = require('html-minifier').minify;
-var moment = require('moment');
 var ip = require('ip');
-var Nunjucks = require('nunjucks');
+var moment = require('moment');
 var path = require('path');
 var webpack = require('webpack');
 
+var OasisGenerator = require('./generator/index');
+
 process.env.HOST = ip.address();
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
-
-// Set up templating.
-var nunjucks = Nunjucks.configure(path.resolve(__dirname, 'src'), {noCache: true});
-nunjucks.addGlobal('DEBUG_AFRAME', process.env.DEBUG_AFRAME);
-nunjucks.addGlobal('HOST', ip.address());
-nunjucks.addGlobal('IS_PRODUCTION', process.env.NODE_ENV === 'production');
-nunjucks.addGlobal('IS_WEBPACK', true);
-nunjucks.addGlobal('DATETIME', Date.now());
-nunjucks.addGlobal('PRETTY_DATETIME', moment().format('MMMM Do YYYY, h:mm a'));
-
-// Initial Nunjucks render.
-var html = nunjucks.render('index.html');
-if (process.env.NODE_ENV === 'production') {
-  // Minify HTML.
-  var htmlConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true,
-                    removeComments: true}
-  html = htmlMinify(html, htmlConfig);
-}
-fs.writeFileSync('index.html', html);
 
 // For development, watch HTML for changes to compile Nunjucks.
 // The production Express server will handle Nunjucks by itself.
 if (process.env.NODE_ENV !== 'production') {
   fs.watch('src', {recursive: true}, (eventType, filename) => {
-    if (filename.indexOf('.html') === -1 && filename.indexOf('featured.json') === -1) {
-      return;
-    }
+    if (!filename.endsWith('.html')) { return; }
     console.log(`${filename} updated.`);
     try {
-      fs.writeFileSync('index.html', nunjucks.render('index.html'));
+      OasisGenerator.generateFromJson('oasis.json');
     } catch (e) {
       console.error(e);
     }

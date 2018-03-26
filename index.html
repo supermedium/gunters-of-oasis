@@ -3,12 +3,17 @@
     <title>Supermedium</title>
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
-    <script src="build/build.js?v=1522048126997"></script>
+    
+      <script src="build/build.js"></script>
+    
     
   </head>
   <body>
     <a-scene environment="preset: forest">
       <a-assets>
+        <a-mixin id="portal"
+          link="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
+          raycastable></a-mixin>
       </a-assets>
 
       <a-entity id="cameraRig">
@@ -25,8 +30,45 @@
         </a-entity>
       </a-entity>
 
-      <a-entity position="0 2.416 -0.5" light="color: #f0c8ed; type: point; intensity: 1.36"></a-entity>
-      <a-entity light="color: #df5ea2; type: hemisphere; groundColor: #5cbeed; intensity: 1.99" ></a-entity>
+      
+        <a-entity id="homeLinks" layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
+          
+            <a-entity mixin="portal" link="href: oasis/csU9X.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/dZRIy.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/DzmZm.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/ecWn4.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/yZf2n.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/S7QPy.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/4gIir.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/YOlH2.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/kfAJI.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/yv2Uq.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/C86mE.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/O8Cc5.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/YeVfH.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/MZyjA.html"></a-entity>
+          
+            <a-entity mixin="portal" link="href: oasis/F6NoW.html"></a-entity>
+          
+        </a-entity>
+      
+
+      
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]"></a-entity>
+      
     </a-scene>
   </body>
 </html>

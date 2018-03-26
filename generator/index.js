@@ -1,41 +1,41 @@
 var fs = require('fs');
-var nunjucks = require('nunjucks');
+var Nunjucks = require('nunjucks');
 
-var template = fs.readFileSync('./src/index.html', 'utf-8');
+var nunjucks = Nunjucks.configure(__dirname, {noCache: true});
+
+// Generate from JSON filename.
+function generateFromJson (filename) {
+  generate(JSON.parse(fs.readFileSync(filename, 'utf-8')));
+};
+module.exports.generateFromJson = generateFromJson;
+
+// Re-generate if already generated.
+if (fs.existsSync('oasis.json')) {
+  generateFromJson('oasis.json');
+  return;
+}
 
 var AVG_ZONES = 40;
 var MIN_ZONES = 20;
 
 // Generation config.
 var SECTORS = [
-  {
-    environmentType: 'forest'
-  },
-  {
-    environmentType: 'tron'
-  },
-  {
-    environmentType: 'volcano'
-  },
-  {
-    environmentType: 'arches'
-  },
-  {
-    environmentType: 'japan'
-  },
-  {
-    environmentType: 'egypt'
-  }
+  {environmentType: 'forest'},
+  {environmentType: 'tron'},
+  {environmentType: 'volcano'},
+  {environmentType: 'arches'},
+  {environmentType: 'japan'},
+  {environmentType: 'egypt'},
+  {environmentType: 'contact'},
+  {environmentType: 'goaland'},
+  {environmentType: 'yavapai'},
+  {environmentType: 'goldmine'},
+  {environmentType: 'threetowers'},
+  {environmentType: 'poison'},
+  {environmentType: 'dream'},
+  {environmentType: 'starry'},
+  {environmentType: 'osiris'}
 ];
-
-/**
- * Links for home zone.
- * [
- *   [environmentType": "tron", "seed": "12345"}],
- *   [environmentType": "volcano", "seed": "abcdef"}]
- * ]
- */
-var INDEX_SECTORS = [];
 
 /**
  * Data structure for all sectors and zones to generate pages.
@@ -66,21 +66,61 @@ SECTORS.forEach((sector, sectorIndex) => {
       seed: seed
     });
   }
-
-  // Keep track of index sectors for the home zone.
-  INDEX_SECTORS.push({
-    environmentType: sector.environmentType,
-    url: `oasis/${seed}.html`
-  });
 });
 
-// Generate pages.
+// Generate links.
 SECTOR_PAGES.forEach(sector => {
   sector.forEach(pageData => {
-    html = nunjucks.renderString(template, pageData);
-    fs.writeFileSync(`oasis/${pageData.seed}.html`, html);
+    var i;
+    var randomZone;
+    pageData.links = [];
+    for (i = 0; i < Math.ceil(Math.random() * 5); i++) {
+      // Get random zone.
+      randomZone = sector[Math.floor(Math.random() * sector.length)];
+      pageData.links.push({
+        position: `${Math.random() * 60 - 30} 2 ${Math.random() * 60 - 30}`,
+        url: `oasis/${randomZone.seed}.html`
+      })
+    }
   });
 });
+
+// Generate home zone.
+var HOME_ZONE = {
+  IS_HOME: true,
+  links: SECTOR_PAGES.map((sector, i) => {
+    var randomZone;
+    randomZone = sector[Math.floor(Math.random() * sector.length)];
+    return {
+      position: `${i} 1.6 -5`,
+      url: `oasis/${randomZone.seed}.html`
+    };
+  })
+};
+
+// Compile final data structure.
+var DATA = {HOME: HOME_ZONE, SECTORS: SECTOR_PAGES};
+
+// Write JSON.
+fs.writeFileSync('oasis.json', JSON.stringify(DATA));
+
+// Final step: Generate.
+generate(DATA);
+
+function generate (data) {
+  var template = fs.readFileSync('./src/index.html', 'utf-8');
+
+  // Write home.
+  fs.writeFileSync(`index.html`, nunjucks.renderString(template, data.HOME));
+
+  // Write sectors.
+  data.SECTORS.forEach(sector => {
+    sector.forEach(pageData => {
+      html = nunjucks.renderString(template, pageData);
+      fs.writeFileSync(`oasis/${pageData.seed}.html`, html);
+    });
+  });
+}
 
 /**
  * Random string.

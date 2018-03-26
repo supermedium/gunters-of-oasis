@@ -1,24 +1,23 @@
+{% set ROOT = IS_HOME and '' or '../' %}
+
 <html>
   <head>
-    <title>Supermedium</title>
+    <title>OASIS</title>
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
-    {% if IS_HOME %}
-      <script src="build/build.js"></script>
-    {% else %}
-      <script src="../build/build.js"></script>
-    {% endif %}
+    <script src="{{ ROOT }}build/build.js"></script>
     {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
   </head>
   <body>
     <a-scene environment="{{ environment or 'preset: forest' }}">
       <a-assets>
+        <a-mixin id="teleport" teleport-controls="type: parabolic; collisionEntities: a-entity[raycastable], .environment; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05"></a-mixin>
         <a-mixin id="portal"
           look-at="#camera"
           oasis-portal="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
           raycastable></a-mixin>
         <a-mixin id="hoverAnimation"
-          animation="property: object3D.position.y; from: 1.6; to: 1.7; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
+          animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
       </a-assets>
 
       <a-entity id="cameraRig">
@@ -26,26 +25,25 @@
 
         <!-- Primary hand. -->
         <a-entity id="primaryHandContainer">
-          <a-entity id="primaryHand" controller="hand: right"></a-entity>
+          <a-entity id="primaryHand" mixin="teleport" hand-controls="right"></a-entity>
         </a-entity>
 
         <!-- Secondary hand. -->
         <a-entity id="secondaryHandContainer">
-          <a-entity id="secondaryHand" controller="hand: left"></a-entity>
+          <a-entity id="secondaryHand" mixin="teleport" hand-controls="left"></a-entity>
         </a-entity>
       </a-entity>
 
-      {% if IS_HOME %}
-        <a-entity id="homeLinks" mixin="hoverAnimation" layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
+      <a-entity id="portals"
+        mixin="hoverAnimation"
+        {% if IS_HOME %}layout="type: circle; radius: 10; plane: xz" position="0 1.6 0"{% endif %}>
           {% for link in links %}
-            <a-entity mixin="portal" oasis-portal="href: {{ link.url }}"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: {{ link.url }}; image: {{ ROOT }}assets/img/{{ link.sectorType }}.png"
+              {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
           {% endfor %}
-        </a-entity>
-      {% else %}
-        {% for link in links %}
-          <a-entity mixin="portal hoverAnimation" oasis-portal="href: {{ link.url }}" position="{{ link.position }}"></a-entity>
-        {% endfor %}
-      {% endif %}
+      </a-entity>
 
       {% if not IS_PRODUCTION %}
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]"></a-entity>

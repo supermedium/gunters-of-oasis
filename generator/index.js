@@ -63,6 +63,7 @@ SECTORS.forEach((sector, sectorIndex) => {
     seed = randomId();
     SECTOR_PAGES[sectorIndex].push({
       environment: `preset: ${sector.environmentType}; seed: ${seed}`,
+      sectorType: sector.environmentType,
       seed: seed
     });
   }
@@ -74,11 +75,12 @@ SECTOR_PAGES.forEach(sector => {
     var i;
     var randomZone;
     pageData.links = [];
-    for (i = 0; i < Math.ceil(Math.random() * 5); i++) {
+    for (i = 0; i < Math.ceil(Math.random() * 5) + 2; i++) {
       // Get random zone.
       randomZone = sector[Math.floor(Math.random() * sector.length)];
       pageData.links.push({
-        position: `${Math.random() * 60 - 30} 2 ${Math.random() * 60 - 30}`,
+        position: `${Math.random() * 60 - 30} 0 ${Math.random() * 60 - 30}`,
+        sectorType: randomZone.sectorType,
         url: `oasis/${randomZone.seed}.html`
       })
     }
@@ -93,6 +95,7 @@ var HOME_ZONE = {
     randomZone = sector[Math.floor(Math.random() * sector.length)];
     return {
       position: `${i} 1.6 -5`,
+      sectorType: randomZone.sectorType,
       url: `oasis/${randomZone.seed}.html`
     };
   })

@@ -7,5 +7,6 @@ require('aframe-layout-component');
 require('aframe-look-at-component');
 require('aframe-proxy-event-component');
 require('aframe-slice9-component');
+require('aframe-teleport-controls');
 
 requireAll(require.context('./components/', true, /\.js$/));

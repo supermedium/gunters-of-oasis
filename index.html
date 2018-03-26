@@ -1,22 +1,23 @@
+
+
 <html>
   <head>
-    <title>Supermedium</title>
+    <title>OASIS</title>
     <link rel="shortcut icon" href="assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
-    
-      <script src="build/build.js"></script>
-    
+    <script src="../build/build.js"></script>
     
   </head>
   <body>
     <a-scene environment="preset: forest">
       <a-assets>
+        <a-mixin id="teleport" teleport-controls="type: parabolic; collisionEntities: a-entity[raycastable], .environment; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05"></a-mixin>
         <a-mixin id="portal"
           look-at="#camera"
           oasis-portal="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
           raycastable></a-mixin>
         <a-mixin id="hoverAnimation"
-          animation="property: object3D.position.y; from: 1.6; to: 1.7; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
+          animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
       </a-assets>
 
       <a-entity id="cameraRig">
@@ -24,50 +25,95 @@
 
         <!-- Primary hand. -->
         <a-entity id="primaryHandContainer">
-          <a-entity id="primaryHand" controller="hand: right"></a-entity>
+          <a-entity id="primaryHand" mixin="teleport" hand-controls="right"></a-entity>
         </a-entity>
 
         <!-- Secondary hand. -->
         <a-entity id="secondaryHandContainer">
-          <a-entity id="secondaryHand" controller="hand: left"></a-entity>
+          <a-entity id="secondaryHand" mixin="teleport" hand-controls="left"></a-entity>
         </a-entity>
       </a-entity>
 
-      
-        <a-entity id="homeLinks" mixin="hoverAnimation" layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
+      <a-entity id="portals"
+        mixin="hoverAnimation"
+        layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/csU9X.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/Gca37.html; image: ../assets/img/forest.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/dZRIy.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/msb4G.html; image: ../assets/img/tron.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/DzmZm.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/ccFcJ.html; image: ../assets/img/volcano.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/ecWn4.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/JrVuW.html; image: ../assets/img/arches.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/yZf2n.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/e1IF8.html; image: ../assets/img/japan.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/S7QPy.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/Zmq3P.html; image: ../assets/img/egypt.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/4gIir.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/2DI1a.html; image: ../assets/img/contact.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/YOlH2.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/nXvnb.html; image: ../assets/img/goaland.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/kfAJI.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/VGAaf.html; image: ../assets/img/yavapai.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/yv2Uq.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/Q5MLf.html; image: ../assets/img/goldmine.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/C86mE.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/IZ6xL.html; image: ../assets/img/threetowers.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/O8Cc5.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/TS33r.html; image: ../assets/img/poison.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/YeVfH.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/Z2kxp.html; image: ../assets/img/dream.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/MZyjA.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/HFlNY.html; image: ../assets/img/starry.png"
+              ></a-entity>
           
-            <a-entity mixin="portal" oasis-portal="href: oasis/F6NoW.html"></a-entity>
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/H8UXp.html; image: ../assets/img/osiris.png"
+              ></a-entity>
           
-        </a-entity>
-      
+      </a-entity>
 
       
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]"></a-entity>

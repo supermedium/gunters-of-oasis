@@ -31,6 +31,7 @@
     "babel-preset-stage-0": "6.24.1",
     "body-parser": "1.18.2",
     "css-loader": "^0.28.7",
+    "fantasy-names": "^1.1.2",
     "html-minifier": "^3.5.8",
     "ip": "1.1.5",
     "json-loader": "^0.5.7",

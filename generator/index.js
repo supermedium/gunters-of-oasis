@@ -1,3 +1,4 @@
+var fantasyNames = require('fantasy-names');
 var fs = require('fs');
 var Nunjucks = require('nunjucks');
 
@@ -63,25 +64,27 @@ SECTORS.forEach((sector, sectorIndex) => {
     seed = randomId();
     SECTOR_PAGES[sectorIndex].push({
       environment: `preset: ${sector.environmentType}; seed: ${seed}`,
+      name: capitalize(randomName()),
       sectorType: sector.environmentType,
-      seed: seed
+      seed: seed,
+      url: `oasis/${seed}.html`,
     });
   }
 });
 
 // Generate links.
 SECTOR_PAGES.forEach(sector => {
-  sector.forEach(pageData => {
+  sector.forEach(zone => {
     var i;
     var randomZone;
-    pageData.links = [];
+    zone.links = [];
     for (i = 0; i < Math.round(Math.random() * 5) + 2; i++) {
       // Get random zone.
-      randomZone = sector[Math.floor(Math.random() * sector.length)];
-      pageData.links.push({
+      randomZone = Object.assign({}, sector[Math.floor(Math.random() * sector.length)]);
+      delete randomZone.links;
+      zone.links.push({
         position: `${Math.random() * 30 - 15} 0 ${Math.random() * 30 - 15}`,
-        sectorType: randomZone.sectorType,
-        url: `oasis/${randomZone.seed}.html`
+        zone: Object.assign({}, randomZone)
       })
     }
   });
@@ -92,11 +95,11 @@ var HOME_ZONE = {
   IS_HOME: true,
   links: SECTOR_PAGES.map((sector, i) => {
     var randomZone;
-    randomZone = sector[Math.floor(Math.random() * sector.length)];
+    randomZone = Object.assign({}, sector[Math.floor(Math.random() * sector.length)]);
+    delete randomZone.links;
     return {
       position: `${i} 1.6 -5`,
-      sectorType: randomZone.sectorType,
-      url: `oasis/${randomZone.seed}.html`
+      zone: randomZone
     };
   })
 };
@@ -136,4 +139,33 @@ function randomId () {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;
+}
+
+var GROUPS = [
+  ['places', 'planets'],
+  ['places', 'realms'],
+  ['places', 'stars'],
+];
+
+function randomName (sectorType) {
+  if (sectorType === 'dream') {
+    return fantasyNames('places', 'sky_islands');
+  }
+  if (sectorType === 'tron') {
+    return fantasyNames('places', 'space_colonys');
+  }
+  if (sectorType === 'volcano') {
+    return fantasyNames('places', 'volcanos');
+  }
+  if (Math.random() < 0.3) {
+    return fantasyNames('places', 'planets');
+  } else if (Math.random() < 0.6) {
+    return fantasyNames('places', 'realms');
+  } else {
+    return fantasyNames('places', 'lands');
+  }
+}
+
+function capitalize (string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }

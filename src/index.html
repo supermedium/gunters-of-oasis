@@ -40,7 +40,7 @@
           {% for link in links %}
             <a-entity
               mixin="portal"
-              oasis-portal="href: {{ link.url }}; image: {{ ROOT }}assets/img/{{ link.sectorType }}.png"
+              oasis-portal="href: {{ link.zone.url }}; image: {{ ROOT }}assets/img/{{ link.zone.sectorType }}.png; title: {{ link.zone.name }}"
               {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
           {% endfor %}
       </a-entity>

@@ -13,7 +13,10 @@
       <a-assets>
         <a-mixin id="portal"
           link="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
+          look-at="#camera"
           raycastable></a-mixin>
+        <a-mixin id="hoverAnimation"
+          animation="property: object3D.position.y; from: 1.6; to: 1.7; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
       </a-assets>
 
       <a-entity id="cameraRig">
@@ -31,7 +34,7 @@
       </a-entity>
 
       
-        <a-entity id="homeLinks" layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
+        <a-entity id="homeLinks" mixin="hoverAnimation" layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
           
             <a-entity mixin="portal" link="href: oasis/csU9X.html"></a-entity>
           

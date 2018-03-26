@@ -14,8 +14,8 @@
     <a-scene environment="{{ environment or 'preset: forest' }}">
       <a-assets>
         <a-mixin id="portal"
-          link="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
           look-at="#camera"
+          oasis-portal="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
           raycastable></a-mixin>
         <a-mixin id="hoverAnimation"
           animation="property: object3D.position.y; from: 1.6; to: 1.7; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
@@ -38,12 +38,12 @@
       {% if IS_HOME %}
         <a-entity id="homeLinks" mixin="hoverAnimation" layout="type: circle; radius: 10; plane: xz" position="0 1.6 0">
           {% for link in links %}
-            <a-entity mixin="portal" link="href: {{ link.url }}"></a-entity>
+            <a-entity mixin="portal" oasis-portal="href: {{ link.url }}"></a-entity>
           {% endfor %}
         </a-entity>
       {% else %}
         {% for link in links %}
-          <a-entity mixin="portal hoverAnimation" link="href: {{ link.url }}" position="{{ link.position }}"></a-entity>
+          <a-entity mixin="portal hoverAnimation" oasis-portal="href: {{ link.url }}" position="{{ link.position }}"></a-entity>
         {% endfor %}
       {% endif %}
 

@@ -19,7 +19,7 @@
     "aframe-proxy-event-component": "^1.1.1",
     "aframe-slice9-component": "github:ngokevin/aframe-slice9-component#atlas",
     "aframe-state-component": "^2.3.1",
-    "aframe-teleport-controls": "^0.3.1",
+    "aframe-teleport-controls": "github:ngokevin/aframe-teleport-controls#opt",
     "autoprefixer": "^7.2.3",
     "babel": "6.23.0",
     "babel-core": "6.24.1",

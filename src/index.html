@@ -9,17 +9,18 @@
     {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
   </head>
   <body>
-    <a-scene environment="{{ environment or 'preset: forest' }}">
+    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: forest' }}">
       <a-assets>
         {% if IS_GOAL %}
-        <img src="{{ ROOT }}assets/img/envmap.jpg" id="envmapImg">
-        <img src="{{ ROOT }}assets/img/grad.png" id="gradImg">
+          <img src="{{ ROOT }}assets/img/envmap.jpg" id="envmapImg">
+          <img src="{{ ROOT }}assets/img/grad.png" id="gradImg">
         {% endif %}
-
-        <a-mixin id="teleport" teleport-controls="type: parabolic; collisionEntities: a-entity[raycastable], .environment; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05"></a-mixin>
+        <a-mixin id="teleport" teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05; checkCollisionChildren: false"></a-mixin>
         <a-mixin id="portal"
+          animation__mouseenter="property: oasis-portal.borderColor; from: #113; to: #AAC; startEvents: mouseenter; easing: easeInOutCubic; dur: 200"
+          animation__mouseleave="property: oasis-portal.borderColor; from: #AAC; to: #113; startEvents: mouseleave; easing: easeInOutCubic; dur: 200"
           look-at="#camera"
-          oasis-portal="backgroundColor: #333; borderColor: #111; visualAspectEnabled: true"
+          oasis-portal="backgroundColor: #333; borderColor: #113; visualAspectEnabled: true"
           raycastable></a-mixin>
         <a-mixin id="hoverAnimation"
           animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
@@ -51,7 +52,7 @@
       </a-entity>
 
       {% if not IS_PRODUCTION %}
-        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]"></a-entity>
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]" debug-cursor></a-entity>
       {% endif %}
 
       {% if IS_GOAL %}
@@ -63,7 +64,7 @@
           <a-entity position="0 1.949 -0.578" light="type:point;color:#ee9439;distance:20;intensity:3;decay:0.39">
             <a-animation attribute="light.intensity" to="2.5" easing="ease-in-out-bounce" fill="forwards" repeat="indefinite" direction="alternate" dur="1000"></a-animation>
           </a-entity>
-          
+
           <a-entity geometry="depth:0.14;height:1.82;width:2.95" material="color:#2d2e37;metalness:0.7;roughness:0.51" position="0 3.597 1.169" rotation="0 180.02333923010465 0">
             <a-entity text="width:4.7;align:center;value:YOU FOUND THE EGG;font:kelsonsans;color:#eaac1c" position="0 0.371 0.086"></a-entity>
             <a-entity text="value:Congratulations, good gunter,\n\n\nthe prize is waiting for you.\n\nSend the next passphrase to team@supermedium.com:\n\n<< I LIKE BANANAS WITH AVOCADO >>;align:center;width:2.41;font:kelsonsans;lineHeight:40;letterSpacing:0.76;color:#fcf3e0" position="0 0.011 0.083"></a-entity>
@@ -76,7 +77,7 @@
           <a-entity sub-object="from:#model;name:egg" rotation="0 30 0" position="0 1.808 -0.011" scale="1.047 1.047 1.047" material="depthWrite: false; side: double; metalness: 0.86; roughness: 0.25; sphericalEnvMap: #envmapImg; emissive: #a78201; color: #eec06c; transparent: true; opacity: 0.35">
             <a-animation attribute="rotation" to="0 360 0" easing="linear" fill="forwards" repeat="indefinite" dur="20000"></a-animation>
           </a-entity>
-         
+
           <a-entity sub-object="from:#model;name:egg-stand-ornaments" material="color:#e0af1d;metalness:0.4;roughness:0.56"></a-entity>
           <a-entity sub-object="from:#model;name:egg-stand" material="color:#705b47;roughness:0.12;metalness:0.24"></a-entity>
           <a-entity sub-object="from:#model;name:egg-dragon" material="color:#ada8c1;metalness:0.53;roughness:0.59"></a-entity>
@@ -91,8 +92,6 @@
           </a-entity>
         </a-entity>
       {% endif %}
-
-
     </a-scene>
   </body>
 </html>

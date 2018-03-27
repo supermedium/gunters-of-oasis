@@ -56,7 +56,7 @@ AFRAME.registerComponent('oasis-portal', {
     semiSphereEl = this.semiSphereEl = this.semiSphereEl || document.createElement('a-entity');
 
     // Set portal.
-    el.setAttribute('geometry', {primitive: 'circle', radius: 1.0, segments: 24});
+    el.setAttribute('geometry', {primitive: 'circle', radius: 1.0, segments: 36});
     el.setAttribute('material', {shader: 'oasisPortal', pano: this.data.image, side: 'double'});
 
     // Set text that displays the link title and URL.

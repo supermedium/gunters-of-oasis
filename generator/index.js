@@ -1,8 +1,9 @@
 var fantasyNames = require('fantasy-names');
 var fs = require('fs');
 var Nunjucks = require('nunjucks');
+var path = require('path');
 
-var nunjucks = Nunjucks.configure(__dirname, {noCache: true});
+var nunjucks = Nunjucks.configure('src', {noCache: true});
 
 // Generate from JSON filename.
 function generateFromJson (filename) {

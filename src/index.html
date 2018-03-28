@@ -56,41 +56,7 @@
       {% endif %}
 
       {% if IS_GOAL %}
-        <a-entity obj-model="obj:assets/models/egg/egg.obj" id="model" visible="false"></a-entity>
-
-        <a-entity position="1.552 3.453 1.357" light="color:#ef3858;groundColor:#999;intensity:0.34"></a-entity>
-
-        <a-entity position="-30.822 -0.031 24.65" rotation="0.343 -13.75 0">
-          <a-entity position="0 1.949 -0.578" light="type:point;color:#ee9439;distance:20;intensity:3;decay:0.39">
-            <a-animation attribute="light.intensity" to="2.5" easing="ease-in-out-bounce" fill="forwards" repeat="indefinite" direction="alternate" dur="1000"></a-animation>
-          </a-entity>
-
-          <a-entity geometry="depth:0.14;height:1.82;width:2.95" material="color:#2d2e37;metalness:0.7;roughness:0.51" position="0 3.597 1.169" rotation="0 180.02333923010465 0">
-            <a-entity text="width:4.7;align:center;value:YOU FOUND THE EGG;font:kelsonsans;color:#eaac1c" position="0 0.371 0.086"></a-entity>
-            <a-entity text="value:Congratulations, good gunter,\n\n\nthe prize is waiting for you.\n\nSend the next passphrase to team@supermedium.com:\n\n<< I LIKE BANANAS WITH AVOCADO >>;align:center;width:2.41;font:kelsonsans;lineHeight:40;letterSpacing:0.76;color:#fcf3e0" position="0 0.011 0.083"></a-entity>
-          </a-entity>
-
-          <a-entity sub-object="from:#model;name:egg" position="0 1.808 -0.011" material="metalness: 0.86; roughness: 0.25; sphericalEnvMap: #envmapImg; emissive: #a78201; color: #faeead;">
-            <a-animation attribute="rotation" to="0 -360 0" easing="linear" fill="forwards" repeat="indefinite" dur="30000"></a-animation>
-          </a-entity>
-
-          <a-entity sub-object="from:#model;name:egg" rotation="0 30 0" position="0 1.808 -0.011" scale="1.047 1.047 1.047" material="depthWrite: false; side: double; metalness: 0.86; roughness: 0.25; sphericalEnvMap: #envmapImg; emissive: #a78201; color: #eec06c; transparent: true; opacity: 0.35">
-            <a-animation attribute="rotation" to="0 360 0" easing="linear" fill="forwards" repeat="indefinite" dur="20000"></a-animation>
-          </a-entity>
-
-          <a-entity sub-object="from:#model;name:egg-stand-ornaments" material="color:#e0af1d;metalness:0.4;roughness:0.56"></a-entity>
-          <a-entity sub-object="from:#model;name:egg-stand" material="color:#705b47;roughness:0.12;metalness:0.24"></a-entity>
-          <a-entity sub-object="from:#model;name:egg-dragon" material="color:#ada8c1;metalness:0.53;roughness:0.59"></a-entity>
-          <a-entity sub-object="from:#model;name:egg-rays1" additive position="0 1.808 -0.011" material="depthWrite: false; side: double; opacity: 0.2; shader: flat; transparent: true; color: #eac97b; src: #gradImg">
-            <a-animation attribute="rotation" to="40 360 100" easing="linear" fill="forwards" repeat="indefinite" dur="15000"></a-animation>
-          </a-entity>
-          <a-entity sub-object="from:#model;name:egg-rays1" additive position="0 1.808 -0.011" material="depthWrite: false; side: double; opacity: 0.2; shader: flat; transparent: true; color: #eac97b; src: #gradImg">
-            <a-animation attribute="rotation" to="200 360 360" easing="linear" fill="forwards" repeat="indefinite" dur="18000"></a-animation>
-          </a-entity>
-          <a-entity sub-object="from:#model;name:egg-rays2" additive position="0 1.808 -0.011" material="depthWrite: false; side: double; opacity: 0.2; shader: flat; transparent: true; color: #eac97b; src: #gradImg">
-            <a-animation attribute="rotation" to="360 360 40" easing="linear" fill="forwards" repeat="indefinite" dur="11000"></a-animation>
-          </a-entity>
-        </a-entity>
+        {% include "./templates/goal.html" %}
       {% endif %}
     </a-scene>
   </body>

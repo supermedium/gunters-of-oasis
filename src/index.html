@@ -12,7 +12,8 @@
     </style>
   </head>
   <body>
-    <audio src="{{ ROOT }}{{ song }}" autoplay></audio>
+    <audio id="audio" src="{{ song }}" autoplay></audio>
+    <script>document.getElementById('audio').volume = 0.25;</script>
 
     <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron' }}" teleport-refresh>
       <a-assets>

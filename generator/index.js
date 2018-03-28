@@ -1,9 +1,11 @@
 var fantasyNames = require('fantasy-names');
 var fs = require('fs');
+var htmlMinify = require('html-minifier').minify;
 var glob = require('glob');
 var Nunjucks = require('nunjucks');
 var path = require('path');
 
+var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true, removeComments: true};
 var nunjucks = Nunjucks.configure('src', {noCache: true});
 var songs = JSON.parse(fs.readFileSync('./assets/songs.json'));
 
@@ -109,19 +111,26 @@ var HOME_ZONE = {
 };
 
 // Generate goal zone.
+var GOAL_SEED = randomId();
 var GOAL_ZONE = {
   IS_GOAL: true,
   environment: 'preset: goldmine; seed: 660; skyColor: #361c1b; horizonColor: #943842; lighting: none; fog: 0.669; flatShading: false; playArea: 1.5; groundYScale: 20.18; groundColor: #361c1b; groundColor2: #38292b; dressing: cubes; dressingAmount: 100; dressingColor: #d19747; dressingScale: 3.65; dressingVariance: 2 2 2; dressingOnPlayArea: 0.0',
-  links: SECTOR_PAGES.map((sector, i) => {
-    var randomZone;
-    randomZone = Object.assign({}, sector[Math.floor(Math.random() * sector.length)]);
-    delete randomZone.links;
-    return {
-      position: `${i} 1.6 -5`,
-      zone: randomZone
-    };
-  })
+  links: [],
+  name: capitalize(randomName()),
+  sectorType: 'goldmine',
+  seed: GOAL_SEED,
+  song: `https://supermedium.com/oasis-audio/${randomArray(songs)}`,
+  url: `../oasis/${GOAL_SEED}.html`
 };
+
+// Add goal link to random zone.
+var PRE_GOAL_ZONE = randomArray(randomArray(SECTOR_PAGES));
+PRE_GOAL_ZONE.links.push({
+  position: `${Math.random() * 30 - 15} 0 ${Math.random() * 30 - 15}`,
+  zone: GOAL_ZONE
+});
+console.log(`Pre-goal: ${PRE_GOAL_ZONE.seed}`);
+console.log(`Goal: ${GOAL_ZONE.seed}`);
 
 // Compile final data structure.
 var DATA = {HOME: HOME_ZONE, SECTORS: SECTOR_PAGES, GOAL: GOAL_ZONE};
@@ -133,18 +142,26 @@ fs.writeFileSync('oasis.json', JSON.stringify(DATA));
 generate(DATA);
 
 function generate (data) {
-  var template = fs.readFileSync('./src/index.html', 'utf-8');
+  var html;
+  var template;
+
+  template = fs.readFileSync('./src/index.html', 'utf-8');
 
   // Write home.
-  fs.writeFileSync(`index.html`, nunjucks.renderString(template, data.HOME));
+  html = nunjucks.renderString(template, data.HOME);
+  html = htmlMinify(html, htmlMinifyConfig);
+  fs.writeFileSync(`index.html`, html);
 
   // Write goal.
-  fs.writeFileSync(`goal.html`, nunjucks.renderString(template, data.GOAL));
+  html = nunjucks.renderString(template, data.GOAL);
+  html = htmlMinify(html, htmlMinifyConfig);
+  fs.writeFileSync(`oasis/${data.GOAL.seed}.html`, html);
 
   // Write sectors.
   data.SECTORS.forEach(sector => {
     sector.forEach(pageData => {
       html = nunjucks.renderString(template, pageData);
+      html = htmlMinify(html, htmlMinifyConfig);
       fs.writeFileSync(`oasis/${pageData.seed}.html`, html);
     });
   });
@@ -157,7 +174,7 @@ function randomId () {
 	var i;
   var possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   var text = '';
-  for (i = 0; i < 5; i++) {
+  for (i = 0; i < 10; i++) {
     text += possible.charAt(Math.floor(Math.random() * possible.length));
   }
   return text;

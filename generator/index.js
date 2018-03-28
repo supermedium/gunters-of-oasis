@@ -104,8 +104,23 @@ var HOME_ZONE = {
   })
 };
 
+// Generate goal zone.
+var GOAL_ZONE = {
+  IS_GOAL: true,
+  environment: 'preset: goldmine; seed: 660; skyColor: #361c1b; horizonColor: #943842; lighting: none; fog: 0.669; flatShading: false; playArea: 1.5; groundYScale: 20.18; groundColor: #361c1b; groundColor2: #38292b; dressing: cubes; dressingAmount: 100; dressingColor: #d19747; dressingScale: 3.65; dressingVariance: 2 2 2; dressingOnPlayArea: 0.0',
+  links: SECTOR_PAGES.map((sector, i) => {
+    var randomZone;
+    randomZone = Object.assign({}, sector[Math.floor(Math.random() * sector.length)]);
+    delete randomZone.links;
+    return {
+      position: `${i} 1.6 -5`,
+      zone: randomZone
+    };
+  })
+};
+
 // Compile final data structure.
-var DATA = {HOME: HOME_ZONE, SECTORS: SECTOR_PAGES};
+var DATA = {HOME: HOME_ZONE, SECTORS: SECTOR_PAGES, GOAL: GOAL_ZONE};
 
 // Write JSON.
 fs.writeFileSync('oasis.json', JSON.stringify(DATA));
@@ -118,6 +133,9 @@ function generate (data) {
 
   // Write home.
   fs.writeFileSync(`index.html`, nunjucks.renderString(template, data.HOME));
+
+  // Write goal.
+  fs.writeFileSync(`goal.html`, nunjucks.renderString(template, data.GOAL));
 
   // Write sectors.
   data.SECTORS.forEach(sector => {

@@ -12,7 +12,6 @@
   "dependencies": {
     "aframe-animation-component": "^4.1.1",
     "aframe-animation-timeline-component": "^1.3.0",
-    "aframe-environment-component": "^1.0.0",
     "aframe-event-set-component": "^4.1.1",
     "aframe-gltf-part-component": "1.1.0",
     "aframe-layout-component": "4.3.0",

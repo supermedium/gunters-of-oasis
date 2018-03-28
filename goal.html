@@ -1,20 +1,20 @@
-{% set ROOT = IS_HOME and '' or '../' %}
+
 
 <html>
   <head>
     <title>OASIS</title>
-    <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
-    <script src="{{ ROOT }}build/build.js"></script>
-    {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
+    <script src="../build/build.js"></script>
+    
   </head>
   <body>
-    <a-scene environment="{{ environment or 'preset: forest' }}">
+    <a-scene environment="preset: goldmine; seed: 660; skyColor: #361c1b; horizonColor: #943842; lighting: none; fog: 0.669; flatShading: false; playArea: 1.5; groundYScale: 20.18; groundColor: #361c1b; groundColor2: #38292b; dressing: cubes; dressingAmount: 100; dressingColor: #d19747; dressingScale: 3.65; dressingVariance: 2 2 2; dressingOnPlayArea: 0.0">
       <a-assets>
-        {% if IS_GOAL %}
-        <img src="{{ ROOT }}assets/img/envmap.jpg" id="envmapImg">
-        <img src="{{ ROOT }}assets/img/grad.png" id="gradImg">
-        {% endif %}
+        
+        <img src="../assets/img/envmap.jpg" id="envmapImg">
+        <img src="../assets/img/grad.png" id="gradImg">
+        
 
         <a-mixin id="teleport" teleport-controls="type: parabolic; collisionEntities: a-entity[raycastable], .environment; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05"></a-mixin>
         <a-mixin id="portal"
@@ -41,20 +41,90 @@
 
       <a-entity id="portals"
         mixin="hoverAnimation"
-        {% if IS_HOME %}layout="type: circle; radius: 10; plane: xz" position="0 1.6 0"{% endif %}>
-          {% for link in links %}
+        >
+          
             <a-entity
               mixin="portal"
-              oasis-portal="href: {{ link.zone.url }}; image: {{ ROOT }}assets/img/{{ link.zone.sectorType }}.png; title: {{ link.zone.name }}"
-              {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
-          {% endfor %}
+              oasis-portal="href: oasis/JPZPr.html; image: ../assets/img/forest.png; title: The Vast Prairie"
+              position="0 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/hONy4.html; image: ../assets/img/tron.png; title: The Thundering Expanse"
+              position="1 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/Zcnco.html; image: ../assets/img/volcano.png; title: Zustoegantu"
+              position="2 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/H3bmu.html; image: ../assets/img/arches.png; title: Unogana"
+              position="3 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/jB5WG.html; image: ../assets/img/japan.png; title: Peocury"
+              position="4 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/5Jajh.html; image: ../assets/img/egypt.png; title: Waterless Barrens"
+              position="5 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/QOEFJ.html; image: ../assets/img/contact.png; title: The Western Tundra"
+              position="6 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/QvZgo.html; image: ../assets/img/goaland.png; title: The Arctic Ocean"
+              position="7 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/iZGq5.html; image: ../assets/img/yavapai.png; title: Waterless Frontier"
+              position="8 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/TWTPk.html; image: ../assets/img/goldmine.png; title: The Mythic Vales"
+              position="9 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/RHE8n.html; image: ../assets/img/threetowers.png; title: The Lunar Terrain"
+              position="10 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/nGSnV.html; image: ../assets/img/poison.png; title: Chavether"
+              position="11 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/eiIjy.html; image: ../assets/img/dream.png; title: The Infernal Fields"
+              position="12 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/jTR2I.html; image: ../assets/img/starry.png; title: The All Nation"
+              position="13 1.6 -5"></a-entity>
+          
+            <a-entity
+              mixin="portal"
+              oasis-portal="href: oasis/foxZQ.html; image: ../assets/img/osiris.png; title: The Second Domain"
+              position="14 1.6 -5"></a-entity>
+          
       </a-entity>
 
-      {% if not IS_PRODUCTION %}
+      
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]"></a-entity>
-      {% endif %}
+      
 
-      {% if IS_GOAL %}
+      
         <a-entity obj-model="obj:assets/models/egg/egg.obj" id="model" visible="false"></a-entity>
 
         <a-entity position="1.552 3.453 1.357" light="color:#ef3858;groundColor:#999;intensity:0.34"></a-entity>
@@ -90,7 +160,7 @@
             <a-animation attribute="rotation" to="360 360 40" easing="linear" fill="forwards" repeat="indefinite" dur="11000"></a-animation>
           </a-entity>
         </a-entity>
-      {% endif %}
+      
 
 
     </a-scene>

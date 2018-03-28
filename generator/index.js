@@ -170,8 +170,12 @@ var GROUPS = [
 ];
 
 function randomName (sectorType) {
+  var random;
   if (sectorType === 'dream') {
     return fantasyNames('places', 'sky_islands');
+  }
+  if (sectorType === 'forest') {
+    return fantasyNames('places', 'grasslands');
   }
   if (sectorType === 'tron') {
     return fantasyNames('places', 'space_colonys');
@@ -179,13 +183,16 @@ function randomName (sectorType) {
   if (sectorType === 'volcano') {
     return fantasyNames('places', 'volcanos');
   }
-  if (Math.random() < 0.3) {
-    return fantasyNames('places', 'planets');
-  } else if (Math.random() < 0.6) {
-    return fantasyNames('places', 'realms');
-  } else {
-    return fantasyNames('places', 'lands');
-  }
+  random = [
+    fantasyNames('places', 'planets'),
+    fantasyNames('places', 'realms'),
+    fantasyNames('places', 'lands'),
+    fantasyNames('places', 'dimensions'),
+    fantasyNames('places', 'dungeons'),
+    fantasyNames('places', 'grasslands'),
+    fantasyNames('places', 'mountains')
+  ];
+  return randomArray(random);
 }
 
 function capitalize (string) {

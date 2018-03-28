@@ -20,7 +20,8 @@
           animation__mouseenter="property: oasis-portal.borderColor; from: #113; to: #AAC; startEvents: mouseenter; easing: easeInOutCubic; dur: 200"
           animation__mouseleave="property: oasis-portal.borderColor; from: #AAC; to: #113; startEvents: mouseleave; easing: easeInOutCubic; dur: 200"
           look-at="#camera"
-          oasis-portal="backgroundColor: #333; borderColor: #113; visualAspectEnabled: true"
+          geometry="primitive: circle; segments: 40"
+          material="shader: oasisPortal; backgroundColor: #333; strokeColor: #113"
           raycastable></a-mixin>
         <a-mixin id="hoverAnimation"
           animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
@@ -46,7 +47,8 @@
           {% for link in links %}
             <a-entity
               mixin="portal"
-              oasis-portal="href: {{ link.zone.url }}; image: {{ ROOT }}assets/img/{{ link.zone.sectorType }}.png; title: {{ link.zone.name }}"
+              link="href: {{ link.zone.url }}; visualAspectEnabled: false"
+              material="pano: {{ ROOT }}assets/img/{{ link.zone.sectorType }}.png"
               {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
           {% endfor %}
       </a-entity>

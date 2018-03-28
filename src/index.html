@@ -9,7 +9,7 @@
     {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
   </head>
   <body>
-    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: forest' }}">
+    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: forest' }}" teleport-refresh>
       <a-assets>
         {% if IS_GOAL %}
           <img src="{{ ROOT }}assets/img/envmap.jpg" id="envmapImg">

@@ -66,6 +66,6 @@ AFRAME.registerComponent('debug-controller', {
       document.getElementById('primaryHand').emit('controllerconnected', {
         name: 'vive-controls'
       });
-    }, 500);
+    }, 1000);
   }
 });

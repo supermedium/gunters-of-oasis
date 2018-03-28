@@ -9,3 +9,5 @@ require('aframe-slice9-component');
 require('aframe-teleport-controls');
 
 requireAll(require.context('./components/', true, /\.js$/));
+
+require('./utils');

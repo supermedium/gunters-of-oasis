@@ -1,4 +1,5 @@
 {% set ROOT = IS_HOME and '' or '../' %}
+{% from './templates/portal.html' import portal %}
 
 <html>
   <head>
@@ -71,15 +72,13 @@
         mixin="hoverAnimation"
         {% if IS_HOME %}layout="type: circle; radius: 10; plane: xz" position="0 1.6 0"{% endif %}>
           {% for link in links %}
-            <a-entity
-              class="portal"
-              mixin="portal"
-              oasis-portal="href: {{ link.zone.url }}"
-              material="pano: {{ ROOT }}assets/img/{{ link.zone.sectorType }}.png"
-              {% if not IS_HOME %}position="{{ link.position }}"{% endif %}>
-              <a-entity class="portalText" mixin="slice" slice9="color: #111; height: 0.3; width: 2.5" text="align: center; color: #6D6; value: {{ link.zone.name }}; side: double; width: 4; zOffset: 0.01" position="0 1.3 0"></a-entity>
-            </a-entity>
+            {{ portal(link.zone.name, link.zone.url, link.zone.sectorType,
+                      not IS_HOME and link.position, ROOT) }}
           {% endfor %}
+
+          {% if not IS_HOME %}
+            {{ portal('Start Zone', '../index.html', 'tron', '0 0 3', ROOT) }}
+          {% endif %}
       </a-entity>
 
       <a-entity id="portalShadows"

@@ -12,7 +12,9 @@
     </style>
   </head>
   <body>
-    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: forest' }}" teleport-refresh>
+    <audio src="{{ ROOT }}{{ song }}" autoplay></audio>
+
+    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron' }}" teleport-refresh>
       <a-assets>
         <img id="shadowImg" src="{{ ROOT }}assets/img/shadow.png">
         <img id="sliceImg" src="{{ ROOT }}assets/img/slice.png">

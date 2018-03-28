@@ -1,9 +1,11 @@
 var fantasyNames = require('fantasy-names');
 var fs = require('fs');
+var glob = require('glob');
 var Nunjucks = require('nunjucks');
 var path = require('path');
 
 var nunjucks = Nunjucks.configure('src', {noCache: true});
+var songs = JSON.parse(fs.readFileSync('./assets/songs.json'));
 
 // Generate from JSON filename.
 function generateFromJson (filename) {
@@ -68,6 +70,7 @@ SECTORS.forEach((sector, sectorIndex) => {
       name: capitalize(randomName()),
       sectorType: sector.environmentType,
       seed: seed,
+      song: `https://supermedium.com/oasis-audio/${randomArray(songs)}`,
       url: `../oasis/${seed}.html`,
     });
   }
@@ -187,4 +190,8 @@ function randomName (sectorType) {
 
 function capitalize (string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+function randomArray (arr) {
+  return arr[Math.floor(Math.random() * arr.length)];
 }

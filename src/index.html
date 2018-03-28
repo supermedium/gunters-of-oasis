@@ -12,13 +12,16 @@
     </style>
   </head>
   <body>
-    <audio id="audio" src="{{ song }}" autoplay></audio>
+    <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay></audio>
     <script>document.getElementById('audio').volume = 0.25;</script>
 
     <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron' }}" teleport-refresh>
       <a-assets>
         <img id="shadowImg" src="{{ ROOT }}assets/img/shadow.png">
         <img id="sliceImg" src="{{ ROOT }}assets/img/slice.png">
+        {% if IS_HOME %}
+          <img id="logo" src="{{ ROOT }}assets/img/logo.png">
+        {% endif %}
         {% if IS_GOAL %}
           <img src="{{ ROOT }}assets/img/envmap.jpg" id="envmapImg">
           <img src="{{ ROOT }}assets/img/grad.png" id="gradImg">
@@ -38,6 +41,17 @@
         <a-mixin id="hoverAnimation"
           animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
       </a-assets>
+
+      {% if IS_HOME %}
+        <a-entity
+          animation="property: object3D.position.y; from: 10; to: 11; dir: alternate; loop: true; dur: 8000; easing: easeInOutCubic"
+          geometry="primitive: plane; width: 8; height: 3.1" material="shader: flat; src: #logo; transparent: true" position="0 10 -15" scale="1.3 1.3 1.3"></a-entity>
+
+        <a-entity
+          mixin="slice"
+          slice9="color: #111; height: 4.8; width: 12.5"
+          text="color: #6D6; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT HALF A HUNDRED DOLLARS\n~; width: 12; wrapCount: 35; xOffset: 0.1; zOffset: 0.1" position="12 10 -9" look-at="#camera"></a-entity>
+      {% endif %}
 
       <a-entity id="cameraRig">
         <a-camera id="camera" look-controls position="0 1.6 0"></a-camera>

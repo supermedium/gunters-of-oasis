@@ -53,6 +53,18 @@
           {% endfor %}
       </a-entity>
 
+      <a-entity id="portalShadows"
+        {% if IS_HOME %}layout="type: circle; radius: 10; plane: xz"{% endif %}
+        position="0 0.05 0">
+          {% for link in links %}
+            <a-entity
+              geometry="primitive: plane; width: 2; height: 2"
+              material="src: {{ ROOT }}assets/img/shadow.png; shader: flat; transparent: true"
+              rotation="-90 0 0"
+              {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
+          {% endfor %}
+      </a-entity>
+
       {% if not IS_PRODUCTION %}
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]" debug-cursor></a-entity>
       {% endif %}

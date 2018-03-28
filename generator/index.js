@@ -68,7 +68,7 @@ SECTORS.forEach((sector, sectorIndex) => {
       name: capitalize(randomName()),
       sectorType: sector.environmentType,
       seed: seed,
-      url: `oasis/${seed}.html`,
+      url: `../oasis/${seed}.html`,
     });
   }
 });

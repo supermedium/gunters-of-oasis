@@ -87,6 +87,9 @@ SECTOR_PAGES.forEach(sector => {
     for (i = 0; i < Math.round(Math.random() * 5) + 2; i++) {
       // Get random zone.
       randomZone = Object.assign({}, sector[Math.floor(Math.random() * sector.length)]);
+
+      if (randomZone.seed === zone.seed) { continue; }
+
       delete randomZone.links;
       zone.links.push({
         position: `${Math.random() * 30 - 15} 0 ${Math.random() * 30 - 15}`,

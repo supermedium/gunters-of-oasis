@@ -1,11 +1,26 @@
+var previousZone = localStorage.getItem('previousZone');
+localStorage.setItem('previousZone', window.location.href);
+
 AFRAME.registerComponent('oasis-portal', {
   schema: {
-    href: {type: 'string'}
+    href: {type: 'string'},
+    isBackPortal: {default: false}
   },
 
   init: function () {
+    if (this.data.isBackPortal) {
+      if (!previousZone || previousZone === window.location.href) {
+        this.el.object3D.visible = false;
+        return;
+      }
+    }
+
     this.el.addEventListener('click', () => {
-      window.location.href = this.data.href;
+      if (this.data.isBackPortal) {
+        window.location.href = localStorage.getItem('previousZone');
+      } else {
+        window.location.href = this.data.href;
+      }
     });
   }
 });

@@ -6,6 +6,8 @@
     <title>OASIS</title>
     <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
+    <script src="https://shy-teeth.glitch.me/easyrtc/easyrtc.js"></script>
     <script src="{{ ROOT }}build/build.js"></script>
     {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
     <style>
@@ -16,7 +18,7 @@
     <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay></audio>
     <script>document.getElementById('audio').volume = 0.25;</script>
 
-    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron' }}" teleport-refresh>
+    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron' }}" teleport-refresh networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
       <a-assets>
         <img id="shadowImg" src="{{ ROOT }}assets/img/shadow.png">
         <img id="sliceImg" src="{{ ROOT }}assets/img/slice.png">
@@ -44,6 +46,8 @@
           raycastable></a-mixin>
         <a-mixin id="hoverAnimation"
           animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
+
+        {% include './templates/avatar.html' %}
       </a-assets>
 
       {% if IS_HOME %}
@@ -58,7 +62,7 @@
       {% endif %}
 
       <a-entity id="cameraRig">
-        <a-camera id="camera" look-controls position="0 1.6 0"></a-camera>
+        <a-camera id="camera" look-controls position="0 1.6 0" networked="template: #avatarTemplate; showLocalTemplate: false"></a-camera>
 
         <!-- Primary hand. -->
         <a-entity id="primaryHandContainer">
@@ -99,6 +103,10 @@
 
       {% if not IS_PRODUCTION %}
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]" debug-cursor></a-entity>
+      {% endif %}
+
+      {% if hasHint %}
+        <a-entity obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl" position="0 0.5 -4" hint="inThisSector: {{ inThisSector }}"></a-entity>
       {% endif %}
 
       {% if IS_GOAL %}

@@ -92,7 +92,7 @@ SECTOR_PAGES.forEach(sector => {
 
       delete randomZone.links;
       zone.links.push({
-        position: `${Math.random() * 30 - 15} 0 ${Math.random() * 30 - 15}`,
+        position: randomLinkPosition(),
         zone: Object.assign({}, randomZone)
       })
     }
@@ -113,6 +113,7 @@ var HOME_ZONE = {
   })
 };
 
+
 // Generate goal zone.
 var GOAL_SEED = randomId();
 var GOAL_ZONE = {
@@ -129,11 +130,22 @@ var GOAL_ZONE = {
 // Add goal link to random zone.
 var PRE_GOAL_ZONE = randomArray(randomArray(SECTOR_PAGES));
 PRE_GOAL_ZONE.links.push({
-  position: `${Math.random() * 30 - 15} 0 ${Math.random() * 30 - 15}`,
+  position: randomLinkPosition(),
   zone: GOAL_ZONE
 });
 console.log(`Pre-goal: ${PRE_GOAL_ZONE.seed}`);
 console.log(`Goal: ${GOAL_ZONE.seed}`);
+
+// Add hints.
+SECTOR_PAGES.forEach(sector => {
+  var hintZone;
+  var i;
+  for (i = 0; i < 2; i++) {
+    hintZone = randomArray(sector);
+    hintZone.hasHint = true;
+    hintZone.inThisSector = GOAL_ZONE.sectorType === sector[0].sectorType;
+  }
+});
 
 // Compile final data structure.
 var DATA = {HOME: HOME_ZONE, SECTORS: SECTOR_PAGES, GOAL: GOAL_ZONE};
@@ -221,4 +233,18 @@ function capitalize (string) {
 
 function randomArray (arr) {
   return arr[Math.floor(Math.random() * arr.length)];
+}
+
+function randomLinkPosition () {
+ var x = Math.random() * 30 - 15;
+ var z = Math.random() * 30 - 15;
+ if (x >= -5 || x <= 5) {
+  if (x < 0) { x -= 5; }
+  if (x >= 0) { x += 5; }
+ }
+ if (z >= -5 || z <= 5) {
+  if (z < 0) { z -= 5; }
+  if (z >= 0) { z += 5; }
+ }
+ return `${x} 0 ${z}`;
 }

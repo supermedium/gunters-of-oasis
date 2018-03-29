@@ -5,8 +5,11 @@ require('aframe-event-set-component');
 require('aframe-layout-component');
 require('aframe-look-at-component');
 require('aframe-proxy-event-component');
+require('aframe-randomizer-components');
 require('aframe-slice9-component');
 require('aframe-teleport-controls');
+
+require('networked-aframe');
 
 requireAll(require.context('./components/', true, /\.js$/));
 

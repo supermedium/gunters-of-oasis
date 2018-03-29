@@ -11,13 +11,13 @@ function enviroGetSettings () {
   document.querySelector('[environment]').components['environment'].logPreset();
 }
 
-var dressingTypes = ['cubes', 'pyramids', 'cylinders', 'hexagons', 'stones', 'trees', 'mushrooms', 'towers', 'apparatus', 'arches', 'torii'];
+var dressingTypes = ['none', 'cubes', 'pyramids', 'cylinders', 'hexagons', 'stones', 'trees', 'mushrooms', 'towers', 'apparatus', 'arches', 'torii', 'grass', 'islands'];
 
 AFRAME.registerComponent('environment', {
   schema: {
     active: {default: false},
     preset: {default: 'default', oneOf: ['none', 'default', 'contact', 'egypt', 'checkerboard', 'forest', 'goaland', 'yavapai', 'goldmine', 'arches', 'threetowers', 'poison', 'tron', 'japan', 'dream', 'volcano', 'starry', 'osiris']},
-    aeed: {type: 'string'},
+    seed: {type: 'string'},
 
     skyType: {default: 'color', oneOf:['none', 'color', 'gradient', 'atmosphere']},
     skyColor: {type: 'color'},
@@ -37,13 +37,21 @@ AFRAME.registerComponent('environment', {
     groundColor:  {type: 'color', default: '#553e35'},
     groundColor2: {type: 'color', default: '#694439'},
 
-    dressing: {default: 'none', oneOf: dressingTypes},
-    dressingAmount: {type: 'int', default: 10, min: 0, max: 1000},
-    dressingColor:  {type: 'color', default: '#795449'},
-    dressingScale: {type: 'float', default: 5, min: 0, max: 100},
-    dressingVariance: {type: 'vec3', default: {x: 1, y: 1, z: 1}},
-    dressingUniformScale: {default: false},
-    dressingOnPlayArea: {type: 'float', default: 0, min: 0, max: 1},
+    dressing1: {default: 'none', oneOf: dressingTypes},
+    dressing1Amount: {type: 'int', default: 10, min: 0, max: 1000},
+    dressing1Color:  {type: 'color', default: '#795449'},
+    dressing1Scale: {type: 'float', default: 5, min: 0, max: 100},
+    dressing1Variance: {type: 'vec3', default: {x: 1, y: 1, z: 1}},
+    dressing1UniformScale: {default: false},
+    dressing1OnPlayArea: {type: 'float', default: 0, min: 0, max: 1},
+
+    dressing2: {default: 'none', oneOf: dressingTypes},
+    dressing2Amount: {type: 'int', default: 10, min: 0, max: 1000},
+    dressing2Color:  {type: 'color', default: '#795449'},
+    dressing2Scale: {type: 'float', default: 5, min: 0, max: 100},
+    dressing2Variance: {type: 'vec3', default: {x: 1, y: 1, z: 1}},
+    dressing2UniformScale: {default: false},
+    dressing2OnPlayArea: {type: 'float', default: 0, min: 0, max: 1},
 
     grid: {default:'none', oneOf:['none', '1x1', '2x2', 'crosses', 'dots', 'xlines', 'ylines']},
     gridColor: {type: 'color', default: '#ccc'}
@@ -53,23 +61,23 @@ AFRAME.registerComponent('environment', {
 
   presets: {
     'none' : {},
-    'default' : {active: true, seed: 1, skyType: 'atmosphere', skyColor: '#88c', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: -0.11, y: 1, z: 0.33}, fog: 0.78, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 3, groundTexture: 'checkerboard', groundColor: '#454545', groundColor2: '#5d5d5d', dressing: 'none', dressingAmount: 10, dressingColor: '#795449', dressingScale: 1, dressingVariance: { x: 0, y: 0, z: 0}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'none', gridColor: '#ccc', shadow: false},
-    'contact': {active: true, seed: 14, skyType: 'gradient', skyColor: '#478d54', horizonColor: '#b696cb', lighting: 'distant', lightPosition: { x: 0, y: 2.01, z: -1}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'spikes', groundYScale: 4.91, groundTexture: 'none', groundColor: '#2e455f', groundColor2: '#694439', dressing: 'apparatus', dressingAmount: 30, dressingColor: '#657067', dressingScale: 20, dressingVariance: { x: 20, y: 20, z: 20}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: '1x1', gridColor: '#478d54', shadow: false},
-    'egypt': {active: true, seed: 26, skyType: 'gradient', skyColor: '#1b7660', horizonColor: '#e4b676', lighting: 'distant', lightPosition: { x: 0, y: 1.65, z: -1}, fog: 0.75, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 5, groundTexture: 'walkernoise', groundColor: '#664735', groundColor2: '#6c4b39', dressing: 'pyramids', dressingAmount: 20, dressingColor: '#7c5c45', dressingScale: 5, dressingVariance: { x: 20, y: 20, z: 20}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'spots', gridColor: '#e4b676', shadow: false},
-    'checkerboard': {active: true, seed: 1, skyType: 'gradient', skyColor: '#0d0d0d', horizonColor: '#404040', lighting: 'distant', lightPosition: { x: 0, y: 1, z: -0.2}, fog: 0.81, flatShading: true, playArea: 1.5, ground: 'hills', groundYScale: 4.81, groundTexture: 'checkerboard', groundColor: '#252525', groundColor2: '#111111', dressing: 'cubes', dressingAmount: 20, dressingColor: '#9f9f9f', dressingScale: 1.51, dressingVariance: { x: 5, y: 20, z: 5}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'dots', gridColor: '#ccc', shadow: false},
-    'forest': {active: true, seed: 8, skyType: 'gradient', skyColor: '#24b59f', horizonColor: '#eff9b7', lighting: 'distant', lightPosition: { x: -1.2, y: 0.88, z: -0.55}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'noise', groundYScale: 4.18, groundTexture: 'squares', groundColor: '#937a24', groundColor2: '#987d2e', dressing: 'trees', dressingAmount: 500, dressingColor: '#888b1d', dressingScale: 1, dressingVariance: { x: 10, y: 10, z: 10}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'none', gridColor: '#c5a543', shadow: false},
-    'goaland': {active: true, seed: 17, skyType: 'gradient', skyColor: '#14645f', horizonColor: '#a3dab8', lighting: 'point', lightPosition: { x: 0.1, y: 4, z: 0.56}, fog: 0.73, flatShading: false, playArea: 1.5, ground: 'noise', groundYScale: 0.81, groundTexture: 'none', groundColor: '#ae3241', groundColor2: '#db4453', dressing: 'mushrooms', dressingAmount: 150, dressingColor: '#a9313d', dressingScale: 5, dressingVariance: { x: 5, y: 10, z: 5}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'dots', gridColor: '#239893', shadow: false},
-    'yavapai': {active: true, seed: 11, skyType: 'gradient', skyColor: '#239849', horizonColor: '#cfe0af', lighting: 'distant', lightPosition: { x: 0.5, y: 1, z: 0}, fog: 0.8, flatShading: true, playArea: 1.5, ground: 'canyon', groundYScale: 9.76, groundTexture: 'walkernoise', groundColor: '#C66344', groundColor2: '#c96b4b', dressing: 'stones', dressingAmount: 500, dressingColor: '#C66344', dressingScale: 0.06, dressingVariance: { x: 0.2, y: 0.1, z: 0.2}, dressingUniformScale: true, dressingOnPlayArea: 1, grid: 'none', gridColor: '#239893', shadow: false},
-    'goldmine': {active: true, seed: 53, skyType: 'gradient', skyColor: '#1e1c1a', horizonColor: '#8c7964', lighting: 'point', lightPosition: { x: -0.09, y: 3, z: 0.33}, fog: 0.43, flatShading: true, playArea: 1.5, ground: 'canyon', groundYScale: 50, groundTexture: 'none', groundColor: '#353535', groundColor2: '#454545', dressing: 'hexagons', dressingAmount: 300, dressingColor: '#fe921b', dressingScale: 0.5, dressingVariance: { x: 2, y: 8, z: 2}, dressingUniformScale: true, dressingOnPlayArea: 0.03, grid: 'none', gridColor: '#ccc', shadow: false},
-    'threetowers': {active: true, seed: 5, skyType: 'gradient', skyColor: '#23a06b', horizonColor: '#f5e170', lighting: 'distant', lightPosition: { x: 0.5, y: 1, z: 0}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'spikes', groundYScale: 4.26, groundTexture: 'walkernoise', groundColor: '#273a49', groundColor2: '#2b464f', dressing: 'towers', dressingAmount: 15, dressingColor: '#5f6d94', dressingScale: 50, dressingVariance: { x: 10, y: 100, z: 10}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'none', gridColor: '#239893', shadow: false},
-    'poison': {active: true, seed: 92, skyType: 'gradient', skyColor: '#1ea84a', horizonColor: '#177132', lighting: 'distant', lightPosition: { x: 0.5, y: 1, z: 0}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'canyon', groundYScale: 9.76, groundTexture: 'none', groundColor: '#851f31', groundColor2: '#912235', dressing: 'hexagons', dressingAmount: 40, dressingColor: '#c7415b', dressingScale: 20, dressingVariance: { x: 20, y: 200, z: 20}, dressingUniformScale: false, dressingOnPlayArea: 0, grid: 'crosses', gridColor: '#1ea84a', shadow: false},
-    'arches': {active: true, seed: 19, skyType: 'atmosphere', skyColor: '#8cbdc8', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: -0.11, y: 0.16, z: 0.33}, fog: 0.67, flatShading: true, playArea: 1.5, ground: 'canyon', groundYScale: 10, groundTexture: 'walkernoise', groundColor: '#a87d6f', groundColor2: '#795449', dressing: 'arches', dressingAmount: 30, dressingColor: '#795449', dressingScale: 26, dressingVariance: { x: 20, y: 40, z: 20}, dressingUniformScale: true, dressingOnPlayArea: 0.04, grid: 'none', gridColor: '#ccc', shadow: false},
-    'tron': {active: true, seed: 14, skyType: 'gradient', skyColor: '#091b39', horizonColor: '#284a9e', lighting: 'distant', lightPosition: { x: -0.72, y: 0.62, z: 0.4}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'spikes', groundYScale: 4.91, groundTexture: 'none', groundColor: '#061123', groundColor2: '#694439', dressing: 'towers', dressingAmount: 20, dressingColor: '#fb000e', dressingScale: 15, dressingVariance: { x: 20, y: 20, z: 20}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: '1x1', gridColor: '#fb000e', shadow: false},
-    'japan': {active: true, seed: 14, skyType: 'gradient', skyColor: '#7e5db5', horizonColor: '#b4adda', lighting: 'distant', lightPosition: { x: 1.33, y: 1, z: 0.24}, fog: 0.9, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 25, groundTexture: 'walkernoise', groundColor: '#7e5db5', groundColor2: '#cabdf5', dressing: 'torii', dressingAmount: 20, dressingColor: '#bc5e7c', dressingScale: 15, dressingVariance: { x: 0, y: 0, z: 0}, dressingUniformScale: true, dressingOnPlayArea: 0, grid: 'spots', gridColor: '#e4b676', shadow: false},
-    'dream': {active: true, seed: 17, skyType: 'gradient', skyColor: '#87faf4', horizonColor: '#b34093', lighting: 'distant', lightPosition: { x: -0.72, y: 0.53, z: 0.97}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 20, groundTexture: 'checkerboard', groundColor: '#b34093', groundColor2: '#c050a2', dressing: 'mushrooms', dressingAmount: 300, dressingColor: '#3cf7ed', dressingScale: 0.2, dressingVariance: { x: 0.2, y: 0.2, z: 0.2}, dressingUniformScale: true, dressingOnPlayArea: 1, grid: 'none', gridColor: '#239893', shadow: false},
-    'volcano': {active: true, seed: 92, skyType: 'gradient', skyColor: '#4a070f', horizonColor: '#f62300', lighting: 'point', lightPosition: { x: 0.5, y: 2.25, z: 0}, fog: 0.87, flatShading: false, playArea: 1.5, ground: 'canyon', groundYScale: 9.76, groundTexture: 'walkernoise', groundColor: '#fb0803', groundColor2: '#510000', dressing: 'arches', dressingAmount: 15, dressingColor: '#fb0803', dressingScale: 3, dressingVariance: { x: 10, y: 100, z: 10}, dressingUniformScale: false, dressingOnPlayArea: 0.2, grid: 'none', gridColor: '#fa0e00', shadow: false},
-    'starry': {active: true, seed: 1, skyType: 'atmosphere', skyColor: '#88c', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: 0, y: -0.01, z: -0.46}, fog: 0.7, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 3, groundTexture: 'none', groundColor: '#553e35', groundColor2: '#694439', dressing: 'none', dressingAmount: 100, dressingColor: '#795449', dressingScale: 5, dressingVariance: { x: 1, y: 1, z: 1}, dressingUniformScale: true, grid: '1x1', dressingOnPlayArea: 0, gridColor: '#39d2f2', shadow: false},
-    'osiris': {active: true, seed: 46, skyType: 'atmosphere', skyColor: '#88c', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: 0, y: 0.02, z: -0.46}, fog: 0, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 3, groundTexture: 'none', groundColor: '#9e7b47', groundColor2: '#9e7b47', dressing: 'pyramids', dressingAmount: 15, dressingColor: '#9e7b47', dressingScale: 5, dressingVariance: { x: 30, y: 30, z: 30}, dressingUniformScale: true, grid: 'dots', dressingOnPlayArea: 0, gridColor: '#daa452', shadow: false}
+    'default' : {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 1, skyType: 'atmosphere', skyColor: '#88c', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: -0.11, y: 1, z: 0.33}, fog: 0.78, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 3, groundTexture: 'checkerboard', groundColor: '#454545', groundColor2: '#5d5d5d', dressing1: 'none', dressing1Amount: 10, dressing1Color: '#795449', dressing1Scale: 1, dressing1Variance: { x: 0, y: 0, z: 0}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: 'none', gridColor: '#ccc', shadow: false},
+    'contact': {dressing2: 'apparatus', dressing2Amount: 10, dressing2Color: '#657067', dressing2Scale: 2, dressing2Variance: { x: 10, y: 10, z: 10}, dressing2UniformScale: true, dressing2OnPlayArea: 0.8, active: true, seed: 14, skyType: 'gradient', skyColor: '#478d54', horizonColor: '#b696cb', lighting: 'distant', lightPosition: { x: 0, y: 2.01, z: -1}, fog: 0.64, flatShading: false, playArea: 1.5, ground: 'spikes', groundYScale: 100, groundTexture: 'none', groundColor: '#2e455f', groundColor2: '#694439', dressing1: 'apparatus', dressing1Amount: 30, dressing1Color: '#657067', dressing1Scale: 20, dressing1Variance: { x: 20, y: 20, z: 20}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: '1x1', gridColor: '#478d54', shadow: false},
+    'egypt': {dressing2: 'stones', dressing2Amount: 200, dressing2Color: '#99694f', dressing2Scale: 0.26, dressing2Variance: {x:0.2, y: 0.2, z: 0.2}, dressing2UniformScale: false, dressing2OnPlayArea: 0.8, active: true, seed: 26, skyType: 'gradient', skyColor: '#1b7660', horizonColor: '#e4b676', lighting: 'distant', lightPosition: { x: 0, y: 1.65, z: -1}, fog: 0.75, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 20, groundTexture: 'walkernoise', groundColor: '#97684f', groundColor2: '#97684f', dressing1: 'pyramids', dressing1Amount: 20, dressing1Color: '#7c5c45', dressing1Scale: 5, dressing1Variance: { x: 20, y: 20, z: 20}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: 'spots', gridColor: '#e4b676', shadow: false},
+    'checkerboard': {dressing2: 'islands', dressing2Amount: 100, dressing2Color: '#e40548', dressing2Scale: 0.14, dressing2Variance: { x: 0, y: 1, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0.7, active: true, seed: 1, skyType: 'gradient', skyColor: '#404040', horizonColor: '#e40548', lighting: 'distant', lightPosition: { x: 0, y: 1, z: -0.2}, fog: 0.71, flatShading: true, playArea: 1.5, ground: 'spikes', groundYScale: 30, groundTexture: 'checkerboard', groundColor: '#252525', groundColor2: '#111111', dressing1: 'islands', dressing1Amount: 20, dressing1Color: '#6b4ff0', dressing1Scale: 2.51, dressing1Variance: { x: 10, y: 15, z: 10}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: 'dots', gridColor: '#6b4ff0', shadow: false},
+    'forest': {dressing2: 'grass', dressing2Amount: 1500, dressing2Color: '#888b1d', dressing2Scale: 0.3, dressing2Variance: {x: 1, y: 2, z: 0}, dressing2UniformScale: false, dressing2OnPlayArea: 0.8, active: true, seed: 8, skyType: 'gradient', skyColor: '#24b59f', horizonColor: '#eff9b7', lighting: 'distant', lightPosition: { x: -1.2, y: 0.88, z: -0.55}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'noise', groundYScale: 4.18, groundTexture: 'squares', groundColor: '#937a24', groundColor2: '#987d2e', dressing1: 'trees', dressing1Amount: 500, dressing1Color: '#888b1d', dressing1Scale: 1, dressing1Variance: { x: 10, y: 10, z: 10}, dressing1UniformScale: true, dressing1OnPlayArea: 0.01, grid: 'none', gridColor: '#c5a543', shadow: true},
+    'goaland': {dressing2: 'grass', dressing2Amount: 1500, dressing2Color: '#db4453', dressing2Scale: 1, dressing2Variance: {x: 1, y: 2, z: 0}, dressing2UniformScale: false, dressing2OnPlayArea: 0.8, active: true, seed: 17, skyType: 'gradient', skyColor: '#14645f', horizonColor: '#7ccb9a', lighting: 'point', lightPosition: { x: 0.1, y: 4, z: 0.56}, fog: 0.73, flatShading: false, playArea: 1.5, ground: 'canyon', groundYScale: 100, groundTexture: 'none', groundColor: '#ae3241', groundColor2: '#db4453', dressing1: 'mushrooms', dressing1Amount: 150, dressing1Color: '#a9313d', dressing1Scale: 5, dressing1Variance: { x: 5, y: 10, z: 5}, dressing1UniformScale: true, dressing1OnPlayArea: 0.01, grid: 'none', gridColor: '#239893', shadow: false},
+    'yavapai': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 11, skyType: 'gradient', skyColor: '#239849', horizonColor: '#cfe0af', lighting: 'distant', lightPosition: { x: 0.5, y: 1, z: 0}, fog: 0.8, flatShading: true, playArea: 1.5, ground: 'canyon', groundYScale: 9.76, groundTexture: 'walkernoise', groundColor: '#C66344', groundColor2: '#c96b4b', dressing1: 'stones', dressing1Amount: 500, dressing1Color: '#C66344', dressing1Scale: 0.06, dressing1Variance: { x: 0.2, y: 0.1, z: 0.2}, dressing1UniformScale: true, dressing1OnPlayArea: 1, grid: 'none', gridColor: '#239893', shadow: false},
+    'goldmine': {dressing2: 'stones', dressing2Amount: 300, dressing2Color: '#fe921b', dressing2Scale: .2, dressing2Variance: { x: 0.2, y: 0.2, z: 0.2}, dressing2UniformScale: false, dressing2OnPlayArea: 0.83, active: true, seed: 53, skyType: 'gradient', skyColor: '#1e1c1a', horizonColor: '#8c7964', lighting: 'point', lightPosition: { x: 0, y: 1.5, z: 3.33}, fog: 0.25, flatShading: true, playArea: 1.5, ground: 'canyon', groundYScale: 100, groundTexture: 'none', groundColor: '#353535', groundColor2: '#252525', dressing1: 'hexagons', dressing1Amount: 200, dressing1Color: '#fe921b', dressing1Scale: 0.5, dressing1Variance: { x: 4, y: 14, z: 4}, dressing1UniformScale: true, dressing1OnPlayArea: 0.03, grid: 'none', gridColor: '#222', shadow: false},
+    'threetowers': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 5, skyType: 'gradient', skyColor: '#23a06b', horizonColor: '#f5e170', lighting: 'distant', lightPosition: { x: 0.5, y: 1, z: 0}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'spikes', groundYScale: 4.26, groundTexture: 'walkernoise', groundColor: '#273a49', groundColor2: '#2b464f', dressing1: 'towers', dressing1Amount: 15, dressing1Color: '#5f6d94', dressing1Scale: 50, dressing1Variance: { x: 10, y: 100, z: 10}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: 'none', gridColor: '#239893', shadow: false},
+    'poison': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 92, skyType: 'gradient', skyColor: '#1ea84a', horizonColor: '#177132', lighting: 'distant', lightPosition: { x: 0.5, y: 1, z: 0}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'canyon', groundYScale: 9.76, groundTexture: 'none', groundColor: '#851f31', groundColor2: '#912235', dressing1: 'hexagons', dressing1Amount: 40, dressing1Color: '#c7415b', dressing1Scale: 20, dressing1Variance: { x: 20, y: 200, z: 20}, dressing1UniformScale: false, dressing1OnPlayArea: 0, grid: 'crosses', gridColor: '#1ea84a', shadow: false},
+    'arches': {dressing2: 'islands', dressing2Amount: 50, dressing2Color: '#e446fb', dressing2Scale: 1, dressing2Variance: {x: 1, y: 2, z: 0}, dressing2UniformScale: false, dressing2OnPlayArea: 0.6, active: true, seed: 19, skyType: 'atmosphere', skyColor: '#8cbdc8', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: -0.11, y: 0.16, z: 0.33}, fog: 0.67, flatShading: true, playArea: 1.5, ground: 'canyon', groundYScale: 10, groundTexture: 'walkernoise', groundColor: '#5c4566', groundColor2: '#443a4e', dressing1: 'arches', dressing1Amount: 30, dressing1Color: '#62536f', dressing1Scale: 26, dressing1Variance: { x: 20, y: 40, z: 20}, dressing1UniformScale: true, dressing1OnPlayArea: 0.04, grid: 'none', gridColor: '#ccc', shadow: false},
+    'tron': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 14, skyType: 'gradient', skyColor: '#091b39', horizonColor: '#284a9e', lighting: 'distant', lightPosition: { x: -0.72, y: 0.62, z: 0.4}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'spikes', groundYScale: 4.91, groundTexture: 'none', groundColor: '#061123', groundColor2: '#694439', dressing1: 'towers', dressing1Amount: 20, dressing1Color: '#fb000e', dressing1Scale: 15, dressing1Variance: { x: 20, y: 20, z: 20}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: '1x1', gridColor: '#fb000e', shadow: false},
+    'japan': {dressing2: 'grass', dressing2Amount: 1500, dressing2Color: '#db4453', dressing2Scale: 0.5, dressing2Variance: {x: 1, y: 2, z: 0}, dressing2UniformScale: false, dressing2OnPlayArea: 0.6, active: true, seed: 14, skyType: 'gradient', skyColor: '#7e5db5', horizonColor: '#b4adda', lighting: 'distant', lightPosition: { x: 1.33, y: 1, z: 0.24}, fog: 0.9, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 25, groundTexture: 'walkernoise', groundColor: '#7e5db5', groundColor2: '#cabdf5', dressing1: 'torii', dressing1Amount: 20, dressing1Color: '#db4453', dressing1Scale: 15, dressing1Variance: { x: 0, y: 0, z: 0}, dressing1UniformScale: true, dressing1OnPlayArea: 0, grid: 'spots', gridColor: '#e4b676', shadow: false},
+    'dream': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 17, skyType: 'gradient', skyColor: '#87faf4', horizonColor: '#b34093', lighting: 'distant', lightPosition: { x: -0.72, y: 0.53, z: 0.97}, fog: 0.8, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 20, groundTexture: 'checkerboard', groundColor: '#b34093', groundColor2: '#c050a2', dressing1: 'mushrooms', dressing1Amount: 300, dressing1Color: '#3cf7ed', dressing1Scale: 0.2, dressing1Variance: { x: 0.2, y: 0.2, z: 0.2}, dressing1UniformScale: true, dressing1OnPlayArea: 1, grid: 'none', gridColor: '#239893', shadow: false},
+    'volcano': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 92, skyType: 'gradient', skyColor: '#4a070f', horizonColor: '#f62300', lighting: 'point', lightPosition: { x: 0.5, y: 2.25, z: 0}, fog: 0.87, flatShading: false, playArea: 1.5, ground: 'canyon', groundYScale: 9.76, groundTexture: 'walkernoise', groundColor: '#fb0803', groundColor2: '#510000', dressing1: 'arches', dressing1Amount: 15, dressing1Color: '#fb0803', dressing1Scale: 3, dressing1Variance: { x: 10, y: 100, z: 10}, dressing1UniformScale: false, dressing1OnPlayArea: 0.2, grid: 'none', gridColor: '#fa0e00', shadow: false},
+    'starry': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 1, skyType: 'atmosphere', skyColor: '#88c', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: 0, y: -0.01, z: -0.46}, fog: 0.7, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 3, groundTexture: 'none', groundColor: '#553e35', groundColor2: '#694439', dressing1: 'none', dressing1Amount: 100, dressing1Color: '#795449', dressing1Scale: 5, dressing1Variance: { x: 1, y: 1, z: 1}, dressing1UniformScale: true, grid: '1x1', dressing1OnPlayArea: 0, gridColor: '#39d2f2', shadow: false},
+    'osiris': {dressing2: 'none', dressing2Amount: 10, dressing2Color: '#795449', dressing2Scale: 1, dressing2Variance: { x: 0, y: 0, z: 0}, dressing2UniformScale: true, dressing2OnPlayArea: 0, active: true, seed: 46, skyType: 'atmosphere', skyColor: '#88c', horizonColor: '#ddd', lighting: 'distant', lightPosition: { x: 0, y: 0.02, z: -0.46}, fog: 0, flatShading: false, playArea: 1.5, ground: 'hills', groundYScale: 3, groundTexture: 'none', groundColor: '#9e7b47', groundColor2: '#9e7b47', dressing1: 'pyramids', dressing1Amount: 15, dressing1Color: '#9e7b47', dressing1Scale: 5, dressing1Variance: { x: 30, y: 30, z: 30}, dressing1UniformScale: true, grid: 'dots', dressing1OnPlayArea: 0, gridColor: '#daa452', shadow: false}
   },
 
   init: function () {
@@ -116,6 +124,31 @@ AFRAME.registerComponent('environment', {
           flatShading: true,
           vertices: [692,966,-52,661,834,-52,692,966,52,661,834,52,0,894,-52,0,776,-52,0,894,52,0,776,52,518,935,52,345,913,52,170,899,52,162,779,52,328,790,52,494,808,52,170,899,-52,345,913,-52,518,935,-52,494,808,-52,328,790,-52,162,779,-52,0,618,16,0,697,16,0,618,-16,0,697,-16,586,618,16,586,697,16,586,618,-16,586,697,-16,331,-29,-75,331,766,-52,369,-29,-65,357,766,-45,396,-29,-37,377,766,-26,406,-29,0,384,766,0,396,-29,37,377,766,26,369,-29,65,357,766,45,331,-29,75,331,766,52,294,-29,65,305,766,45,267,-29,37,286,766,26,257,-29,0,279,766,0,267,-29,-37,286,766,-26,294,-29,-65,305,766,-45,0,777,85,0,681,33,333,762,-75,333,806,-75,371,762,-65,371,806,-65,398,762,-37,398,806,-37,408,762,0,408,806,0,398,762,37,398,806,37,371,762,65,371,806,65,333,762,75,333,806,75,296,762,65,296,806,65,268,762,37,268,806,37,258,762,0,258,806,0,268,762,-37,268,806,-37,296,762,-65,296,806,-65,0,681,-33,0,777,-85,52,681,33,52,777,85,52,681,-33,52,777,-85],
           faces: [4,10,14,1,13,17,11,6,7,0,3,1,16,1,17,4,19,5,14,18,19,15,17,18,3,8,13,13,9,12,12,10,11,19,7,5,19,12,11,18,13,12,16,2,0,15,8,16,14,9,15,23,26,22,27,24,26,25,20,24,26,20,22,23,25,27,29,30,28,31,32,30,33,34,32,35,36,34,37,38,36,39,40,38,41,42,40,43,44,42,45,46,44,47,48,46,49,50,48,51,28,50,55,56,54,57,58,56,59,60,58,61,62,60,63,64,62,79,81,83,65,66,64,82,53,78,67,68,66,81,53,80,69,70,68,83,80,82,71,72,70,79,82,78,73,74,72,75,63,59,75,76,74,77,54,76,60,68,76,4,6,10,1,3,13,11,10,6,0,2,3,16,0,1,4,14,19,14,15,18,15,16,17,3,2,8,13,8,9,12,9,10,19,11,7,19,18,12,18,17,13,16,8,2,15,9,8,14,10,9,23,27,26,27,25,24,25,21,20,26,24,20,23,21,25,29,31,30,31,33,32,33,35,34,35,37,36,37,39,38,39,41,40,41,43,42,43,45,44,45,47,46,47,49,48,49,51,50,51,29,28,55,57,56,57,59,58,59,61,60,61,63,62,63,65,64,79,52,81,65,67,66,82,80,53,67,69,68,81,52,53,69,71,70,83,81,80,71,73,72,79,83,82,73,75,74,59,57,55,55,77,75,75,73,71,71,69,75,67,65,63,63,61,59,59,55,75,75,69,67,67,63,75,75,77,76,77,55,54,76,54,56,56,58,76,60,62,68,64,66,68,68,70,72,72,74,68,76,58,60,62,64,68,68,74,76]
+        }
+      ],
+      'islands':[
+        {
+          type: 'mesh',
+          flatShading: true,
+          vertices: [0,3814,0,-358,4995,910,-991,4998,-4,-233,5033,-865,200,5270,1092,-610,5199,-726,115,7344,272,650,4860,400,1021,5613,-198,644,5628,735,-926,5949,-65,707,5187,-783,-478,5991,830,-438,6319,-585,220,6075,-797],
+          faces: [0,7,1,0,1,2,0,2,3,0,3,11,2,1,10,1,4,12,4,9,6,5,10,13,8,14,6,14,13,6,13,12,6,13,10,12,12,4,6,6,9,8,8,11,14,3,13,14,3,5,13,11,3,14,5,2,10,10,1,12,4,7,9,9,7,8,7,11,8,3,2,5,7,0,11,1,7,4]
+        }
+      ],
+      'grass': [
+        {
+          type: 'mesh',
+          vertices: [-63,-21,68,65,-37,19,58,237,31,231,391,10,136,228,61,6,-5,9,24,-14,-4,0,350,-25,-52,-10,-29,-83,-18,1,-5,333,115,-46,-15,76,102,-4,96,83,236,60,74,0,27,60,139,54],
+          faces: [2,4,3,1,4,5,2,5,4,6,8,7,9,11,10,12,14,15,15,13,12,2,0,5]        
+        },
+        {
+          type: 'mesh',
+          vertices: [919,-21,-61,821,-18,-96,885,128,-87,795,264,-142,836,119,-154,865,-5,-152,630,-4,140,647,236,177,654,0,211,669,139,184],
+          faces: [2,4,3,1,4,5,2,5,4,6,8,9,9,7,6,2,0,5]
+        },
+        {
+          type: 'mesh',
+          vertices: [274,-12,-520,305,520,-536,274,-12,-535,289,-12,-528,274,254,-520,278,254,-535,289,254,-524,215,474,-552,268,495,-540,276,483,-554,314,452,-588,329,442,-570,271,490,-514,337,429,-630,303,493,-535,293,454,-584,300,461,-534,289,444,-503,277,436,-504,274,435,-469,311,448,-497,299,446,-533,343,441,-534,320,444,-516,300,457,-534,328,467,-558,332,470,-540,301,476,-535,305,516,-536,303,537,-533,308,540,-555],
+          faces: [4,1,5,5,3,2,3,1,6,6,1,4,6,0,3,4,2,0,7,8,9,9,8,14,7,12,8,13,10,11,14,8,12,11,10,16,13,15,10,16,10,15,19,17,18,18,17,21,19,20,17,21,17,20,23,22,24,26,25,27,29,28,30,5,1,3,6,4,0,4,5,2]
         }
       ],
       'hexagons': [
@@ -176,9 +209,12 @@ AFRAME.registerComponent('environment', {
     this.groundMaterial = null;
     this.groundGeometry = null;
 
-    this.dressing = document.createElement('a-entity');
-    this.dressing.classList.add('environmentDressing');
-    this.dressing.classList.add('environment');
+    this.dressing1 = document.createElement('a-entity');
+    this.dressing1.classList.add('environmentDressing');
+    this.dressing1.classList.add('environment');
+    this.dressing2 = document.createElement('a-entity');
+    this.dressing2.classList.add('environmentDressing');
+    this.dressing2.classList.add('environment');
 
     this.gridCanvas = null;
     this.gridTexture = null;
@@ -201,7 +237,8 @@ AFRAME.registerComponent('environment', {
     this.el.appendChild(this.hemilight);
     this.el.appendChild(this.sunlight);
     this.el.appendChild(this.ground);
-    this.el.appendChild(this.dressing);
+    this.el.appendChild(this.dressing1);
+    this.el.appendChild(this.dressing2);
     this.el.appendChild(this.sky);
   },
 
@@ -359,7 +396,8 @@ AFRAME.registerComponent('environment', {
     }
 
     // update dressing
-    this.updateDressing();
+    this.updateDressing(1);
+    this.updateDressing(2);
 
     this.sky.setAttribute('visible', skyType !== 'none');
 
@@ -821,6 +859,7 @@ AFRAME.registerComponent('environment', {
         for (var f = 0; f < faces.length; f += 3) {
           geo.faces.push(new THREE.Face3(faces[f], faces[f + 1], faces[f + 2]));
         }
+        
         if (this.data.flatShading || data[j]['flatShading']) {
           geo.computeFaceNormals();
         }
@@ -840,17 +879,28 @@ AFRAME.registerComponent('environment', {
   },
 
   // updates set dressing
-  updateDressing: function () {
-    var dressing = new THREE.Object3D();
-    this.dressing.setAttribute('visible', this.data.dressing != 'none');
-    if (this.data.dressing == 'none') {
+  updateDressing: function (which) {
+    var dressingObject = new THREE.Object3D();
+    var dresstr = 'dressing' + which;
+    var dressingEl = this[dresstr];
+
+    var dressing = this.data[dresstr];
+    var dressingColor = this.data[dresstr + 'Color'];
+    var dressingAmount = this.data[dresstr + 'Amount'];
+    var dressingVariance = this.data[dresstr + 'Variance'];
+    var dressingScale = this.data[dresstr + 'Scale'];
+    var dressingUniformScale = this.data[dresstr + 'UniformScale'];
+    var dressingOnPlayArea = this.data[dresstr + 'OnPlayArea'];
+
+    dressingEl.setAttribute('visible', dressing != 'none');
+    if (dressing == 'none') {
       return;
     }
     var geometry = new THREE.Geometry(); // mother geometry that will hold all instances
 
     // get array of geometries
     var geoset;
-    switch (this.data.dressing){
+    switch (dressing){
       case 'cubes': {
         geoset = [new THREE.BoxGeometry(1, 1, 1)];
         geoset[0].applyMatrix(new THREE.Matrix4().makeTranslation(0, 0.5, 0));
@@ -867,16 +917,16 @@ AFRAME.registerComponent('environment', {
         break;
       }
       default: {
-        geoset = this.getAssetGeometry(this.assets[this.data.dressing]);
+        geoset = this.getAssetGeometry(this.assets[dressing]);
         if (!geoset) return;
         break;
       }
     }
 
-    var dressingAmount = this.data.dressingAmount + Math.floor(this.random() * this.data.dressingAmount);
-    for (var i = 0, r = 88343; i < dressingAmount; i++, r++) {
+    var damount = dressingAmount + Math.floor(this.random() * dressingAmount);
+    for (var i = 0, r = 88343; i < damount; i++, r++) {
 
-      var geo = geoset[Math.floor(this.random(33 + i) * geoset.length)];
+      var geo = geoset[Math.floor(this.random(33 * which + i) * geoset.length)];
 /*
       // change vertex colors
       var color = new THREE.Color(0xFFFFFF).multiplyScalar(1 - this.random(66 + i) * 0.3);
@@ -891,21 +941,22 @@ AFRAME.registerComponent('environment', {
       }
 */
       // set random position, rotation and scale
-      var ds = this.data.dressingScale;
-      var dv = new THREE.Vector3(this.data.dressingVariance.x, this.data.dressingVariance.y, this.data.dressingVariance.z);
+      var ds = dressingScale;
+      var dv = new THREE.Vector3(dressingVariance.x, dressingVariance.y, dressingVariance.z);
       var distance;
-      var onPlayArea = this.random(r) < this.data.dressingOnPlayArea;
+      var rw = r * which;
+      var onPlayArea = this.random(rw) < dressingOnPlayArea;
       if (onPlayArea) {
-        distance = this.random(r + 1) * 15;
+        distance = this.random(rw + 1) * 15;
       }
       else {
-        distance = 10 + Math.max(dv.x, dv.z) + 10 * this.random(r + 1) + this.random(r + 2) * this.STAGE_SIZE / 3;
+        distance = 10 + Math.max(dv.x, dv.z) + 10 * this.random(rw + 1) + this.random(rw + 2) * this.STAGE_SIZE / 3;
       }
 
-      var direction = this.random(r + 3) * Math.PI * 2;
+      var direction = this.random(rw + 3) * Math.PI * 2;
       var matrix = new THREE.Matrix4();
-      var scale = this.random(r + 4);
-      var uniformScale = this.data.dressingUniformScale;
+      var scale = this.random(rw + 4);
+      var uniformScale = dressingUniformScale;
 
       matrix.compose(
         // position
@@ -917,13 +968,13 @@ AFRAME.registerComponent('environment', {
         // rotation
         new THREE.Quaternion().setFromAxisAngle(
           new THREE.Vector3(0, 1, 0),
-          (this.random(r + 5) - 0.5) * dv.length() * Math.PI * 2
+          (this.random(rw + 5) - 0.5) * dv.length() * Math.PI * 2
           ),
         // scale
         new THREE.Vector3(
-           ds + (uniformScale ? scale : this.random(r + 6)) * dv.x,
-           ds + (uniformScale ? scale : this.random(r + 7)) * dv.y,
-           ds + (uniformScale ? scale : this.random(r + 8)) * dv.z
+           ds + (uniformScale ? scale : this.random(rw + 6)) * dv.x,
+           ds + (uniformScale ? scale : this.random(rw + 7)) * dv.y,
+           ds + (uniformScale ? scale : this.random(rw + 8)) * dv.z
           )
         );
 
@@ -937,7 +988,7 @@ AFRAME.registerComponent('environment', {
 
     // setup material
     var material = new THREE.MeshLambertMaterial({
-      color: varyColor(new THREE.Color(this.data.dressingColor), this.random),
+      color: varyColor(new THREE.Color(dressingColor), this.random),
       vertexColors: THREE.VertexColors
     });
 
@@ -947,9 +998,9 @@ AFRAME.registerComponent('environment', {
 
     // create mesh
     var mesh = new THREE.Mesh(bufgeo, material);
-    dressing.add(mesh);
+    dressingObject.add(mesh);
     // add to scene
-    this.dressing.setObject3D('mesh', dressing);
+    dressingEl.setObject3D('mesh', dressingObject);
   },
 
   // initializes the BufferGeometry for the stars

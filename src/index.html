@@ -106,7 +106,14 @@
       {% endif %}
 
       {% if hasHint %}
-        <a-entity obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl" position="0 0.5 -4" hint="inThisSector: {{ inThisSector }}"></a-entity>
+        <a-entity obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl" position="0 0.6 -4" hint="inThisSector: {{ inThisSector }}">
+          <a-entity id="hintText"
+            mixin="slice"
+            slice9="color: #111; height: 0.75; width: 3.8"
+            text="color: #6D6; value: {{ inThisSector and 'THE EGG IS NEAR\n~' or 'THE EGG IS NOT IN THIS SECTOR\n~' }}; width: 3.8; wrapCount: 35; xOffset: 0.1; zOffset: 0.1"
+            position="0 -1 -0.5"
+            animation__activate="property: object3D.position.y; from: -1; to: 2; easing: easeInOutCubic; startEvents: activatehint"></a-entity>
+        </a-entity>
       {% endif %}
 
       {% if IS_GOAL %}

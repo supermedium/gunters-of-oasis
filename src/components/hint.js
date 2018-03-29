@@ -1,4 +1,8 @@
 AFRAME.registerComponent('hint', {
+  schema: {
+    inThisSector: {default: false}
+  },
+
   init: function () {
     this.hands = [
       document.getElementById('primaryHand'),
@@ -13,7 +17,7 @@ AFRAME.registerComponent('hint', {
       for (i = 0; i < this.hands.length; i++) {
         this.hands[i].object3D.getWorldPosition(pos);
         if (pos.sub(this.el.object3D.position).length() < 0.5) {
-          this.el.emit('activatehint');
+          document.getElementById('hintText').emit('activatehint');
           this.el.sceneEl.removeBehavior(this);
           return;
         }

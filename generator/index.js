@@ -144,6 +144,7 @@ SECTOR_PAGES.forEach(sector => {
     hintZone = randomArray(sector);
     hintZone.hasHint = true;
     hintZone.inThisSector = GOAL_ZONE.sectorType === sector[0].sectorType;
+    console.log(`Added hint to: ${hintZone.seed}`);
   }
 });
 

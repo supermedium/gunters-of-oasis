@@ -11,7 +11,7 @@ AFRAME.registerComponent('debug-controller', {
     var primaryHandContainer;
     var primaryHand;
 
-    if (!this.data.enabled && !AFRAME.utils.getUrlParameter('debug')) { return; }
+    if (!this.data.enabled || !AFRAME.utils.getUrlParameter('debug')) { return; }
 
     console.log('%c debug-controller enabled ', 'background: #111; color: red');
 

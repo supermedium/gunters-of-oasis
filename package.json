@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
+    "deploy": "npm run predeploy && ghpages git@github.com:supermedium/gunters-of-oasis.git -p .ghpages && shx rm -rf .ghpages",
     "generate": "node generator/index.js",
+    "predeploy": "npm run build && shx mkdir -p .ghpages && cp -r oasis *.html assets build .ghpages",
     "regenerate": "shx rm -f oasis/* && shx rm -f oasis.json && node generator/index.js",
     "start": "webpack-dev-server --host 0.0.0.0 --progress --colors --hot --inline --port 7007"
   },

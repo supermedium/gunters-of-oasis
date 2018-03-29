@@ -84,7 +84,7 @@
           {% endfor %}
 
           {% if not IS_HOME %}
-            {{ portal('Start Zone', '../index.html', 'tron', '-2 0 3', ROOT) }}
+            {{ portal('Start Zone', '../index.html', 'tron', '-2 0 3', ROOT, false, true) }}
             {{ portal('Previous Zone', '', sectorType, '2 0 3', ROOT, true) }}
           {% endif %}
       </a-entity>

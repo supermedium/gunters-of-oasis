@@ -1,8 +1,8 @@
-{% macro portal (name, url, sectorType, position, ROOT, isPrev) %}
+{% macro portal (name, url, sectorType, position, ROOT, isPrev, isHome) %}
   <a-entity
     class="portal"
     mixin="portal"
-    oasis-portal="href: {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}"
+    oasis-portal="href: {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}{% if isHome %}; isHomePortal: true{% endif %}""
     material="pano: {{ ROOT }}assets/img/{{ sectorType }}.png"
     {% if position %}position="{{ position }}"{% endif %}>
     <a-entity class="portalText" mixin="slice" slice9="color: #111; height: 0.3; width: 2.5" text="align: center; color: #6D6; value: {{ name }}; side: double; width: 4; zOffset: 0.01" position="0 1.3 0"></a-entity>

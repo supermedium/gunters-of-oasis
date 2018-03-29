@@ -30,7 +30,10 @@
 
         <a-mixin id="slice" slice9="color: #050505; src: #sliceImg; left: 50; right: 52; top: 50; bottom: 52; padding: 0.04"></a-mixin>
 
-        <a-mixin id="teleport" teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05; checkCollisionChildren: false"></a-mixin>
+        <a-mixin id="hand"
+          teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: triggerdown; endEvents: triggerup; landingMaxAngle: 360; hitCylinderColor: #e6e8e6; curveHitColor: #e6e8e6; hitCylinderHeight: 0.05; checkCollisionChildren: false"
+          teleport-listener
+        ></a-mixin>
 
         <a-mixin id="portal"
           animation__mouseenter="property: components.material.material.uniforms.strokeColor.value; type: color; from: #113; to: #DDE; startEvents: mouseenter; easing: easeInOutCubic; dur: 200"
@@ -59,12 +62,12 @@
 
         <!-- Primary hand. -->
         <a-entity id="primaryHandContainer">
-          <a-entity id="primaryHand" mixin="teleport" hand-controls="right"></a-entity>
+          <a-entity id="primaryHand" mixin="hand" hand-controls="right"></a-entity>
         </a-entity>
 
         <!-- Secondary hand. -->
         <a-entity id="secondaryHandContainer">
-          <a-entity id="secondaryHand" mixin="teleport" hand-controls="left"></a-entity>
+          <a-entity id="secondaryHand" mixin="hand" hand-controls="left"></a-entity>
         </a-entity>
       </a-entity>
 

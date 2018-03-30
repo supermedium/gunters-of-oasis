@@ -1,4 +1,4 @@
-#define RECIPROCAL_PI2 0.15915494,
+#define RECIPROCAL_PI2 0.15915494
 uniform sampler2D pano;
 uniform vec3 backgroundColor;
 uniform vec3 strokeColor;

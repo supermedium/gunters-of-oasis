@@ -18,7 +18,7 @@
     <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay></audio>
     <script>document.getElementById('audio').volume = 0.25;</script>
 
-    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron' }}" teleport-refresh networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
+    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}" teleport-refresh networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
       <a-assets>
         <img id="shadowImg" src="{{ ROOT }}assets/img/shadow.png">
         <img id="sliceImg" src="{{ ROOT }}assets/img/slice.png">
@@ -57,8 +57,8 @@
 
         <a-entity
           mixin="slice"
-          slice9="color: #111; height: 4.8; width: 12.5"
-          text="color: #6D6; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT HALF A HUNDRED DOLLARS\n~; width: 12; wrapCount: 35; xOffset: 0.1; zOffset: 0.1" position="12 10 -9" look-at="#camera"></a-entity>
+          slice9="color: #111; height: 5.5; width: 12.5"
+          text="color: #6D6; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~; width: 12; wrapCount: 35; xOffset: 0.1; zOffset: 0.1" position="12 10 -9" look-at="#camera"></a-entity>
       {% endif %}
 
       <a-entity id="cameraRig">
@@ -101,8 +101,12 @@
           {% endfor %}
       </a-entity>
 
+      {% if IS_HOME %}
+        <a-entity obj-model="obj: {{ ROOT }}assets/models/gundam/model.obj; mtl: {{ ROOT }}assets/models/gundam/materials.mtl" position="-10 7.8 -25" scale="5 5 5" rotation="0 210 0"></a-entity>
+      {% endif %}
+
       {% if not IS_PRODUCTION %}
-        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]" debug-cursor></a-entity>
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]; recursive: false" debug-cursor></a-entity>
       {% endif %}
 
       {% if hasHint %}

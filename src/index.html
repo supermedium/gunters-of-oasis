@@ -5,7 +5,7 @@
   <head>
     <title>OASIS</title>
     <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
-    <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
+    <script src="https://rawgit.com/aframevr/aframe/cc70719/dist/aframe-master.min.js"></script>
     <script src="{{ ROOT }}build/socket.io.min.js"></script>
     <script src="{{ ROOT }}build/easyrtc.js"></script>
     <script src="{{ ROOT }}build/build.js"></script>
@@ -25,8 +25,10 @@
 
     <a-scene
       {% if animatedSun %}animated-sun{% endif %}
+      {% if cromulon %}cromulon{% endif %}
       {% if randomColorEnvironment %}random-color-environment{% endif %}
       {% if shiftingColors %}shifting-colors{% endif %}
+      data-is-home="{{ IS_HOME and 'true' or 'false' }}"
       debug-controller="enabled: true"
       environment="{{ environment or 'preset: tron; gridColor: orange; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}"
       teleport-refresh

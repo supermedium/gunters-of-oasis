@@ -20,8 +20,9 @@ var path = require('path');
 // Then regenerate.
 var ZONE_PROPERTIES = {
   animatedSun: 1 / 20,
+  cromulon: 1 / 20,
   shiftingColors: 1 / 10,
-  randomColorEnvironment: 1 / 8
+  randomColorEnvironment: 1 / 8,
 };
 
 var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true,

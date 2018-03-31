@@ -1,9 +1,9 @@
-window.OASIS = {utils: {}};
+window.utils = {};
 
 /**
  * Helper to visualize lines.
  */
-window.OASIS.utils.drawLine = (function () {
+window.utils.drawLine = (function () {
   var els = {};
   return function (name, vec1, vec2, color) {
     if (!els[name]) {
@@ -20,7 +20,7 @@ window.OASIS.utils.drawLine = (function () {
 /**
  * Helper to visualize vectors.
  */
-window.OASIS.utils.drawVec3 = (function () {
+window.utils.drawVec3 = (function () {
   var els = {};
   return function (name, vec3, color) {
     if (!els[name]) {
@@ -38,7 +38,7 @@ window.OASIS.utils.drawVec3 = (function () {
 /**
  * Helper to get center point of face.
  */
-window.OASIS.utils.getFaceCenter = (function () {
+window.utils.getFaceCenter = (function () {
   return function (mesh, face, targetVec3) {
     targetVec3 = targetVec3 || new THREE.Vector3();
     return targetVec3
@@ -48,3 +48,7 @@ window.OASIS.utils.getFaceCenter = (function () {
       .divideScalar(3);
   };
 })();
+
+window.utils.assetPath = function (asset) {
+  return AFRAME.scenes[0].dataset.isHome === 'true' ? asset : `../${asset}`;
+}

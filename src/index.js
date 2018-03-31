@@ -1,5 +1,7 @@
 function requireAll (req) { req.keys().forEach(req); }
 
+require('./utils');
+
 require('aframe-animation-component');
 require('aframe-event-set-component');
 require('aframe-layout-component');
@@ -12,5 +14,3 @@ require('aframe-teleport-controls');
 require('networked-aframe');
 
 requireAll(require.context('./components/', true, /\.js$/));
-
-require('./utils');

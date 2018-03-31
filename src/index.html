@@ -25,6 +25,7 @@
 
     <a-scene
       {% if animatedSun %}animated-sun{% endif %}
+      {% if shiftingColors %}shifting-colors{% endif %}
       debug-controller="enabled: true"
       environment="{{ environment or 'preset: tron; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}"
       teleport-refresh

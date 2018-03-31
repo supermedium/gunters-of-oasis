@@ -1001,6 +1001,7 @@ AFRAME.registerComponent('environment', {
     dressingObject.add(mesh);
     // add to scene
     dressingEl.setObject3D('mesh', dressingObject);
+    dressingEl.object3D.materialToAnimate = material;
   },
 
   // initializes the BufferGeometry for the stars

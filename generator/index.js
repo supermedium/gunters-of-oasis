@@ -20,8 +20,7 @@ var path = require('path');
 // Then regenerate.
 var ZONE_PROPERTIES = {
   animatedSun: 1 / 20,
-  marioEasterEgg: 1 / 50,
-  shiftingColors: 1 / 40
+  shiftingColors: 1 / 10
 };
 
 var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true,

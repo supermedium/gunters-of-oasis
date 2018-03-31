@@ -7,12 +7,13 @@ Gunters (Egg Hunters) of OASIS (Open and Super Immersive Simulation).
 Run server.
 
 ```
+npm install
 npm run start
 ```
 
 Generate OASIS. Template of sectors at `src/index.html` and generator at
-`generator/index.js`. Need to have a home sector.
+`generator/index.js`.
 
 ```
-npm run generate
+npm run regenerate
 ```

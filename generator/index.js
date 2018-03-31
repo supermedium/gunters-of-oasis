@@ -5,6 +5,22 @@ var glob = require('glob');
 var Nunjucks = require('nunjucks');
 var path = require('path');
 
+// ADDING EASTER EGGS
+// ------------------
+// Easter eggs or procedural generation properties.
+// The key is the name of the property that will become available in the template.
+// The value is the chance that a zone will have that property (i.e., 1 out of 40).
+// Add a property here, and then in the template, can have an if statement like:
+//   {% if myZoneProperty %}
+//     <a-entity id="someEasterEgg"></a-entity>
+//   {% endif %}
+// Then regenerate.
+var ZONE_PROPERTIES = {
+  animatedLights: 1 / 20,
+  marioEasterEgg: 1 / 50,
+  shiftingColors: 1 / 40
+};
+
 var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true, removeComments: true};
 var nunjucks = Nunjucks.configure('src', {noCache: true});
 var songs = JSON.parse(fs.readFileSync('./assets/songs.json'));
@@ -62,19 +78,30 @@ var SECTOR_PAGES = [];
 SECTORS.forEach((sector, sectorIndex) => {
   var i;
   var seed;
+  var zone;
+  var zoneProperty;
 
   // Generate zones for the sector.
   SECTOR_PAGES[sectorIndex] = SECTOR_PAGES[sectorIndex] || [];
   for (i = 0; i < Math.random() * AVG_ZONES + MIN_ZONES; i++) {
     seed = randomId();
-    SECTOR_PAGES[sectorIndex].push({
+    zone = {
       environment: `preset: ${sector.environmentType}; seed: ${seed}`,
       name: capitalize(randomName()),
       sectorType: sector.environmentType,
       seed: seed,
       song: `https://supermedium.com/oasis-audio/${randomArray(songs)}`,
       url: `../oasis/${seed}.html`,
-    });
+    };
+
+    // Randomly specified zone properties.
+    for (zoneProperty in ZONE_PROPERTIES) {
+      if (Math.random() > ZONE_PROPERTIES[zoneProperty]) { continue; }
+      zone[zoneProperty] = true;
+      console.log(`Zone ${seed} has ${zoneProperty}.`);
+    }
+
+    SECTOR_PAGES[sectorIndex].push(zone);
   }
 });
 

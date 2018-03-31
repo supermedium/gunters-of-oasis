@@ -15,9 +15,11 @@
     </style>
   </head>
   <body>
-    <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay></audio>
+    <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay loop></audio>
+    <audio id="portalSound" src="{{ ROOT }}assets/audio/portal.wav"></audio>
+
     <script>
-      document.getElementById('audio').volume = 0.25;
+      document.getElementById('audio').volume = 0.20;
       if (window.self !== window.top) { document.getElementById('audio').volume = 0; }
     </script>
 

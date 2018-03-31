@@ -32,7 +32,7 @@ AFRAME.registerComponent('environment', {
     playArea: {type: 'float', default: 1.5, min: 0.5, max: 10},
 
     ground: {default: 'hills', oneOf:['none', 'flat', 'hills', 'canyon', 'spikes', 'noise']},
-    groundYScale: {type: 'float', default: 3, min: 0, max: 50},
+    groundYScale: {type: 'float', default: 20, min: 0, max: 50},
     groundTexture: {default: 'none', oneOf:['none', 'checkerboard', 'squares', 'walkernoise']},
     groundColor:  {type: 'color', default: '#553e35'},
     groundColor2: {type: 'color', default: '#694439'},
@@ -138,7 +138,7 @@ AFRAME.registerComponent('environment', {
         {
           type: 'mesh',
           vertices: [-63,-21,68,65,-37,19,58,237,31,231,391,10,136,228,61,6,-5,9,24,-14,-4,0,350,-25,-52,-10,-29,-83,-18,1,-5,333,115,-46,-15,76,102,-4,96,83,236,60,74,0,27,60,139,54],
-          faces: [2,4,3,1,4,5,2,5,4,6,8,7,9,11,10,12,14,15,15,13,12,2,0,5]        
+          faces: [2,4,3,1,4,5,2,5,4,6,8,7,9,11,10,12,14,15,15,13,12,2,0,5]
         },
         {
           type: 'mesh',
@@ -859,7 +859,7 @@ AFRAME.registerComponent('environment', {
         for (var f = 0; f < faces.length; f += 3) {
           geo.faces.push(new THREE.Face3(faces[f], faces[f + 1], faces[f + 2]));
         }
-        
+
         if (this.data.flatShading || data[j]['flatShading']) {
           geo.computeFaceNormals();
         }

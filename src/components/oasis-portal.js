@@ -5,6 +5,12 @@ var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '[]');
 visitedZones.push(window.location.href);
 localStorage.setItem('visitedZones', JSON.stringify(visitedZones));
 
+var portalSound = document.getElementById('portalSound');
+setTimeout(() => {
+  portalSound = document.getElementById('portalSound');
+  portalSound.volume = 0.25;
+}, 500);
+
 AFRAME.registerComponent('oasis-portal', {
   schema: {
     href: {type: 'string'},
@@ -25,11 +31,14 @@ AFRAME.registerComponent('oasis-portal', {
 
     // Navigate.
     el.addEventListener('click', () => {
-      if (this.data.isBackPortal) {
-        window.location.href = localStorage.getItem('previousZone');
-      } else {
-        window.location.href = this.data.href;
-      }
+      portalSound.play();
+      setTimeout(() => {
+        if (this.data.isBackPortal) {
+          window.location.href = localStorage.getItem('previousZone');
+        } else {
+          window.location.href = this.data.href;
+        }
+      }, 100);
     });
 
     // Change border color if visited already.

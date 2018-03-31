@@ -3,7 +3,6 @@
 node_modules
 lobby/index.html
 build.js
-package-lock.json
 .dropbox
 Icon*
 npm-debug.log

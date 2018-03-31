@@ -8,7 +8,7 @@ AFRAME.registerComponent('debug-controller', {
   },
 
   init: function () {
-    var primaryHandContainer;
+    var primaryHand;
     var primaryHand;
 
     if (!this.data.enabled || !AFRAME.utils.getUrlParameter('debug')) { return; }
@@ -17,10 +17,8 @@ AFRAME.registerComponent('debug-controller', {
 
     this.isTriggerDown = false;
 
-    primaryHandContainer = document.getElementById('primaryHandContainer');
-    primaryHandContainer.object3D.position.set(0.2, 1.5, -0.5);
-
     primaryHand = document.getElementById('primaryHand');
+    primaryHand.object3D.position.set(0.2, 1.5, -0.5);
 
     document.addEventListener('keydown', evt => {
       var primaryPosition;
@@ -41,7 +39,7 @@ AFRAME.registerComponent('debug-controller', {
       }
 
       // Position bindings.
-      primaryPosition = primaryHandContainer.object3D.position;
+      primaryPosition = primaryHand.object3D.position;
       if (evt.keyCode === 72) { primaryPosition.x -= 0.01 }  // h.
       if (evt.keyCode === 74) { primaryPosition.y -= 0.01 }  // j.
       if (evt.keyCode === 75) { primaryPosition.y += 0.01 }  // k.
@@ -51,13 +49,13 @@ AFRAME.registerComponent('debug-controller', {
 
       // Rotation bindings.
       var primaryRotation
-      primaryRotation = primaryHandContainer.getAttribute('rotation');
+      primaryRotation = primaryHand.getAttribute('rotation');
       if (evt.keyCode === 89) { primaryRotation.x -= 10 }  // y.
       if (evt.keyCode === 79) { primaryRotation.x += 10 }  // o.
       if (evt.keyCode === 85) { primaryRotation.y -= 10 }  // u.
       if (evt.keyCode === 73) { primaryRotation.y += 10 }  // i.
 
-      primaryHandContainer.setAttribute('rotation', AFRAME.utils.clone(primaryRotation));
+      primaryHand.setAttribute('rotation', AFRAME.utils.clone(primaryRotation));
     });
   },
 

@@ -6,8 +6,8 @@
     <title>OASIS</title>
     <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/aframevr/aframe/4d90df5/dist/aframe-master.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.5/socket.io.min.js"></script>
-    <script src="https://shy-teeth.glitch.me/easyrtc/easyrtc.js"></script>
+    <script src="{{ ROOT }}build/socket.io.min.js"></script>
+    <script src="{{ ROOT }}build/easyrtc.js"></script>
     <script src="{{ ROOT }}build/build.js"></script>
     {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
     <style>
@@ -16,7 +16,10 @@
   </head>
   <body>
     <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay></audio>
-    <script>document.getElementById('audio').volume = 0.25;</script>
+    <script>
+      document.getElementById('audio').volume = 0.25;
+      if (window.self !== window.top) { document.getElementById('audio').volume = 0; }
+    </script>
 
     <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}" teleport-refresh networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
       <a-assets>
@@ -61,18 +64,17 @@
           text="color: #6D6; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~; width: 12; wrapCount: 35; xOffset: 0.1; zOffset: 0.1" position="12 10 -9" look-at="#camera"></a-entity>
       {% endif %}
 
-      <a-entity id="cameraRig">
-        <a-camera id="camera" look-controls position="0 1.6 0" networked="template: #avatarTemplate; showLocalTemplate: false"></a-camera>
+      <a-entity id="cameraRig" networked="template: #rigTemplate">
+        <a-camera id="camera" look-controls position="0 1.6 0"
+                  networked="template: #headTemplate; showLocalTemplate: false"></a-camera>
 
         <!-- Primary hand. -->
-        <a-entity id="primaryHandContainer">
-          <a-entity id="primaryHand" mixin="hand" hand-controls="right"></a-entity>
-        </a-entity>
+        <a-entity id="primaryHand" mixin="hand" hand-controls="right"
+                  networked="template: #handTemplate; showLocalTemplate: false"></a-entity>
 
         <!-- Secondary hand. -->
-        <a-entity id="secondaryHandContainer">
-          <a-entity id="secondaryHand" mixin="hand" hand-controls="left"></a-entity>
-        </a-entity>
+        <a-entity id="secondaryHand" mixin="hand" hand-controls="left"
+                  networked="template: #handTemplate; showLocalTemplate: false"></a-entity>
       </a-entity>
 
       <a-entity id="portals"

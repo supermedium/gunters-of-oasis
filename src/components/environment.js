@@ -1351,21 +1351,21 @@ PerlinNoise.prototype.noise = function(x, y, z) {
 
 function varyColor (color, random) {
   if (random(1) < 0.5) {
-    color.r += random(2) * 0.1;
+    color.r += random(2) * 0.2;
   } else {
-    color.r -= random(3) * 0.1;
+    color.r -= random(3) * 0.2;
   }
 
   if (random(4) < 0.5) {
-    color.g += random(5) * 0.1;
+    color.g += random(5) * 0.2;
   } else {
-    color.g -= random(6) * 0.1;
+    color.g -= random(6) * 0.2;
   }
 
   if (random(7) < 0.5) {
-    color.b += random(8) * 0.1;
+    color.b += random(8) * 0.2;
   } else {
-    color.b -= random(9) * 0.1;
+    color.b -= random(9) * 0.2;
   }
 
   return color;

@@ -52,3 +52,13 @@ window.utils.getFaceCenter = (function () {
 window.utils.assetPath = function (asset) {
   return AFRAME.scenes[0].dataset.isHome === 'true' ? asset : `../${asset}`;
 }
+
+window.utils.random = function (x) {
+  var i;
+  var seed;
+  seed = 0;
+  for (i = 0; i < window.location.href.length; i++) {
+    seed += window.location.href.charCodeAt(i);
+  }
+  return parseFloat('0.' + Math.sin(seed * 9999 * x).toString().substr(7));
+}

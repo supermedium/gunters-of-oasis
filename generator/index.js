@@ -21,6 +21,8 @@ var path = require('path');
 var ZONE_PROPERTIES = {
   animatedSun: 1 / 20,
   cromulon: 1 / 20,
+  dalek: 1 / 40,
+  mechagodzilla: 1 / 40,
   shiftingColors: 1 / 10,
   randomColorEnvironment: 1 / 8,
 };
@@ -91,7 +93,7 @@ SECTORS.forEach((sector, sectorIndex) => {
   for (i = 0; i < Math.random() * AVG_ZONES + MIN_ZONES; i++) {
     seed = randomId();
     zone = {
-      environment: `preset: ${sector.environmentType}; seed: ${seed}`,
+      environment: `preset: ${sector.environmentType}; seed: ${seed}; shadow: true`,
       name: capitalize(randomName()),
       sectorType: sector.environmentType,
       seed: seed,

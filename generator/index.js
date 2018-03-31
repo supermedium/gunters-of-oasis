@@ -19,12 +19,13 @@ var path = require('path');
 //   {% endif %}
 // Then regenerate.
 var ZONE_PROPERTIES = {
-  animatedSun: 1 / 20,
+  'animated-sun': 1 / 20,
   cromulon: 1 / 20,
   dalek: 1 / 40,
   mechagodzilla: 1 / 40,
-  shiftingColors: 1 / 10,
-  randomColorEnvironment: 1 / 8,
+  'random-color-environment': 1 / 8,
+  'remember-machine': 1 / 50,
+  'shifting-colors': 1 / 10
 };
 
 var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true,
@@ -99,12 +100,13 @@ SECTORS.forEach((sector, sectorIndex) => {
       seed: seed,
       song: `https://supermedium.com/oasis-audio/${randomArray(songs)}`,
       url: `../oasis/${seed}.html`,
+      zoneProperties: []
     };
 
     // Randomly specified zone properties.
     for (zoneProperty in ZONE_PROPERTIES) {
       if (Math.random() > ZONE_PROPERTIES[zoneProperty]) { continue; }
-      zone[zoneProperty] = true;
+      zone.zoneProperties.push(zoneProperty);
       console.log(`Zone ${seed} has ${zoneProperty}.`);
     }
 

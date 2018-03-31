@@ -30,9 +30,9 @@ AFRAME.registerComponent('cromulon', {
     scale = random(s) * 30 + 10;
     img.object3D.scale.set(scale, scale, scale);
     img.object3D.position.set(
-      random(p) * 300 - 150,
-      random(p + 20) * 50 + 25,
-      random(p + 10) * 300 - 150);
+      random(p) * 200 - 100,
+      random(p + 20) * 30 + 25,
+      random(p + 10) * 200 - 100);
     img.object3D.lookAt(0, 0, 0);
 
     img.object3D.visible = false;

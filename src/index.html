@@ -23,7 +23,12 @@
       if (window.self !== window.top) { document.getElementById('audio').volume = 0; }
     </script>
 
-    <a-scene debug-controller="enabled: true" environment="{{ environment or 'preset: tron; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}" teleport-refresh networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
+    <a-scene
+      {% if animatedSun %}animated-sun{% endif %}
+      debug-controller="enabled: true"
+      environment="{{ environment or 'preset: tron; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}"
+      teleport-refresh
+      networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
       <a-assets>
         <img id="shadowImg" src="{{ ROOT }}assets/img/shadow.png">
         <img id="sliceImg" src="{{ ROOT }}assets/img/slice.png">

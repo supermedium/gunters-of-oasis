@@ -19,7 +19,7 @@ var path = require('path');
 //   {% endif %}
 // Then regenerate.
 var ZONE_PROPERTIES = {
-  animatedLights: 1 / 20,
+  animatedSun: 1 / 20,
   marioEasterEgg: 1 / 50,
   shiftingColors: 1 / 40
 };

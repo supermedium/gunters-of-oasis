@@ -53,17 +53,6 @@
         {% include './templates/avatar.html' %}
       </a-assets>
 
-      {% if IS_HOME %}
-        <a-entity
-          animation="property: object3D.position.y; from: 10; to: 11; dir: alternate; loop: true; dur: 8000; easing: easeInOutCubic"
-          geometry="primitive: plane; width: 8; height: 3.1" material="shader: flat; src: #logo; transparent: true" position="0 10 -15" scale="1.3 1.3 1.3"></a-entity>
-
-        <a-entity
-          mixin="slice"
-          slice9="color: #111; height: 5.5; width: 12.5"
-          text="color: #6D6; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~; width: 12; wrapCount: 35; xOffset: 0.1; zOffset: 0.1" position="12 10 -9" look-at="#camera"></a-entity>
-      {% endif %}
-
       <a-entity id="cameraRig" networked="template: #rigTemplate">
         <a-camera id="camera" look-controls position="0 1.6 0"
                   networked="template: #headTemplate; showLocalTemplate: false"></a-camera>
@@ -104,12 +93,31 @@
       </a-entity>
 
       {% if IS_HOME %}
-        <a-entity obj-model="obj: {{ ROOT }}assets/models/gundam/model.obj; mtl: {{ ROOT }}assets/models/gundam/materials.mtl" position="-10 7.8 -25" scale="5 5 5" rotation="0 210 0"></a-entity>
+        <a-entity id="jadeKey" mixin="hoverAnimation" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005" animation="dur: 1500; easing: easeInOutQuad"></a-entity>
+
+        <a-entity id="gundam" obj-model="obj: {{ ROOT }}assets/models/gundam/model.obj; mtl: {{ ROOT }}assets/models/gundam/materials.mtl" position="-10 7.8 -25" scale="5 5 5" rotation="0 210 0"></a-entity>
+
+        <a-entity
+          id="logo"
+          animation="property: object3D.position.y; from: 10; to: 11; dir: alternate; loop: true; dur: 8000; easing: easeInOutCubic"
+          geometry="primitive: plane; width: 8; height: 3.1" material="shader: flat; src: #logo; transparent: true" position="0 10 -15" scale="1.3 1.3 1.3"></a-entity>
+
+        <a-entity
+          id="leaderboard"
+          mixin="slice"
+          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.2"
+          leaderboard
+          text="baseline: bottom; color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: parzival | 2000\nart3mis | 1000" position="-12 10 -9" look-at="0 0 0">
+          <a-entity text="align: center; value: LEADERBOARD; width: 12" position="0 2 0.01"></a-entity>
+        </a-entity>
+
+        <a-entity
+          id="instructionText"
+          mixin="slice"
+          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.2"
+          text="color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0"></a-entity>
       {% endif %}
 
-      {% if not IS_PRODUCTION %}
-        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]; recursive: false" debug-cursor></a-entity>
-      {% endif %}
 
       {% if hasHint %}
         <a-entity obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl" position="0 0.6 -4" hint="inThisSector: {{ inThisSector }}">
@@ -124,6 +132,10 @@
 
       {% if IS_GOAL %}
         {% include "./templates/goal.html" %}
+      {% endif %}
+
+      {% if not IS_PRODUCTION %}
+        <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]; recursive: false" debug-cursor></a-entity>
       {% endif %}
     </a-scene>
   </body>

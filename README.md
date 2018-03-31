@@ -24,3 +24,26 @@ Generate OASIS. Template of sectors at `src/index.html` and generator at
 ```
 npm run regenerate
 ```
+
+### Adding a Easter Egg or Zone Property
+
+In `generator/index.js`, add to `ZONE_PROPERTIES` the name of the egg or
+property, and the percent chance a zone would have that.
+
+In `src/index.html`, add an if statement with respective name of property `{%
+if myZoneProperty %} ... {% endif %}`.
+
+For example, if we want one out of thirty zones to have Mario:
+
+```js
+ZONE_PROPERTIES = {
+  // ...
+  mario: 1 / 30
+};
+```
+
+```html
+{% if mario %}
+  <a-entity id="mario" gltf-model="mario.gltf" position="0 0 -10"></a-entity>
+{% endif %}
+```

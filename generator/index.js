@@ -1,3 +1,6 @@
+/**
+ * Generate sectors and zones.
+ */
 var fantasyNames = require('fantasy-names');
 var fs = require('fs');
 var htmlMinify = require('html-minifier').minify;
@@ -21,7 +24,8 @@ var ZONE_PROPERTIES = {
   shiftingColors: 1 / 40
 };
 
-var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true, removeComments: true};
+var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true,
+                        removeComments: true};
 var nunjucks = Nunjucks.configure('src', {noCache: true});
 var songs = JSON.parse(fs.readFileSync('./assets/songs.json'));
 

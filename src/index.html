@@ -128,15 +128,15 @@
           mixin="slice"
           slice9="color: #111; height: 5.5; width: 12.5; padding: 0.2"
           leaderboard
-          text="baseline: bottom; color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: parzival | 2000\nart3mis | 1000" position="-12 10 -9" look-at="0 0 0">
-          <a-entity text="align: center; value: LEADERBOARD; width: 12" position="0 2 0.01"></a-entity>
+          text="font: kelsonsans; baseline: bottom; color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: parzival | 2000\nart3mis | 1000" position="-12 10 -9" look-at="0 0 0">
+          <a-entity text="font: kelsonsans; align: center; value: LEADERBOARD; width: 12" position="0 2 0.01"></a-entity>
         </a-entity>
 
         <a-entity
           id="instructionText"
           mixin="slice"
-          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.2"
-          text="color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0">
+          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.7"
+          text="font: kelsonsans; color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0">
             <a-entity sound="src:#message; autoplay: true;"></a-entity>
           </a-entity>
       {% endif %}
@@ -151,7 +151,7 @@
           <a-entity id="hintText"
             mixin="slice"
             slice9="color: #111; height: 0.75; width: 3.8"
-            text="color: #6D6; value: {{ inThisSector and 'THE EGG IS NEAR\n~' or 'THE EGG IS NOT IN THIS SECTOR\n~' }}; width: 3.8; wrapCount: 35; xOffset: 0.1; zOffset: 0.1"
+            text="font: kelsonsans; color: #4ef580; value: {{ inThisSector and 'THE EGG IS NEAR\n~' or 'THE EGG IS NOT IN THIS SECTOR\n~' }}; width: 3.8; wrapCount: 35; xOffset: 0.1; zOffset: 0.1"
             position="0 -1 -0.5"
             animation__activate="property: object3D.position.y; from: -1; to: 2; easing: easeInOutCubic; startEvents: activatehint"></a-entity>
         </a-entity>

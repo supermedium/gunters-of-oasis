@@ -2,7 +2,9 @@ AFRAME.registerSystem('touch', {
   init: function () {
     this.touchables = [];
     this.el.addEventListener('loaded', () => {
-      this.touchables = [].slice.call(document.querySelectorAll('[touchable]'));
+      setTimeout(() => {
+        this.touchables = [].slice.call(document.querySelectorAll('a-entity[touchable]'));
+      }, 1000);
     });
   },
 });

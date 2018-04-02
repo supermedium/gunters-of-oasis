@@ -58,8 +58,16 @@
           geometry="primitive: circle; segments: 40"
           material="shader: oasisPortal; backgroundColor: #333; strokeColor: #113"
           raycastable></a-mixin>
+
         <a-mixin id="hoverAnimation"
-          animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic"></a-mxiin>
+          animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic; pauseEvents: touched"></a-mixin>
+
+        <a-mixin id="item"
+          mixin="hoverAnimation"
+          touchable
+          animation__itemtouched="property: object3D.rotation.y; dur: 2500; easing: easeInExpo; to: 25; startEvents: touched"
+          animation__itemtouched2="property: object3D.position.y; dur: 2500; easing: easeInExpo; to: 15; startEvents: touched"
+          animation__itemtouched3="property: visible; delay: 2500; from: true; to: false; startEvents: touched"></a-mixin>
 
         {% include './templates/avatar.html' %}
       </a-assets>

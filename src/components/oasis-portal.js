@@ -38,7 +38,7 @@ AFRAME.registerComponent('oasis-portal', {
         } else {
           window.location.href = this.data.href;
         }
-      }, 100);
+      }, 200);
     });
 
     // Change border color if visited already.

@@ -23,7 +23,7 @@ var ZONE_PROPERTIES = {
   cromulon: 1 / 20,
   dalek: 1 / 40,
   mechagodzilla: 1 / 40,
-  'random-color-environment': 1 / 8,
+  'random-color-environment': 1 / 4,
   'remember-machine': 1 / 50,
   'shifting-colors': 1 / 10
 };

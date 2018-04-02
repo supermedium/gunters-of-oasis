@@ -67,7 +67,8 @@
           touchable
           animation__itemtouched="property: object3D.rotation.y; dur: 2500; easing: easeInExpo; to: 25; startEvents: touched"
           animation__itemtouched2="property: object3D.position.y; dur: 2500; easing: easeInExpo; to: 15; startEvents: touched"
-          animation__itemtouched3="property: visible; delay: 2500; from: true; to: false; startEvents: touched"></a-mixin>
+          animation__itemtouched3="property: visible; delay: 2500; from: true; to: false; startEvents: touched"
+          play-audio="event: touched; audio: {{ ROOT }}assets/audio/zelda.mp3; volume: 0.5"></a-mixin>
 
         {% include './templates/avatar.html' %}
       </a-assets>
@@ -137,9 +138,13 @@
           text="color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0"></a-entity>
       {% endif %}
 
-
       {% if hasHint %}
-        <a-entity obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl" position="0 0.6 -4" touchable proxy-event="event: touched; to: #hintText; as: activatehint">
+        <a-entity
+          obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl"
+          position="0 0.6 -4"
+          touchable
+          proxy-event="event: touched; to: #hintText; as: activatehint"
+          >
           <a-entity id="hintText"
             mixin="slice"
             slice9="color: #111; height: 0.75; width: 3.8"

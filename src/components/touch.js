@@ -17,7 +17,6 @@ AFRAME.registerComponent('touch', {
   },
 
   tick: function () {
-    var audio;
     var el = this.el;
     var i;
     var touchables = el.sceneEl.systems.touch.touchables;
@@ -37,9 +36,6 @@ AFRAME.registerComponent('touch', {
 
     for (i = 0; i < this.touched.length; i++) {
       this.touched[i].emit('touched');
-      audio = new Audio(utils.assetPath('assets/audio/zelda.mp3'));
-      audio.volume = 0.5;
-      audio.play();
       touchables.splice(this.touched[i], 1);
     }
   }

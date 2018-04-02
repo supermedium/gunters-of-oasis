@@ -15,7 +15,7 @@ AFRAME.registerComponent('cromulon', {
     audio = new Audio(utils.assetPath('assets/audio/cromulon.mp3'));
     audio.volume = 0.5;
     setInterval(() => {
-      if (Math.random() < 0.20) { audio.play(); }
+      if (Math.random() < 0.11) { audio.play(); }
     }, 1000);
   },
 
@@ -30,9 +30,9 @@ AFRAME.registerComponent('cromulon', {
     scale = random(s) * 30 + 10;
     img.object3D.scale.set(scale, scale, scale);
     img.object3D.position.set(
-      random(p) * 200 - 100,
+      random(p) * 150 - 75,
       random(p + 20) * 30 + 25,
-      random(p + 10) * 200 - 100);
+      random(p + 10) * 150 - 75);
     img.object3D.lookAt(0, 0, 0);
 
     img.object3D.visible = false;

@@ -25,7 +25,7 @@ var ZONE_PROPERTIES = {
   mechagodzilla: 1 / 40,
   'random-color-environment': 1 / 4,
   'remember-machine': 1 / 50,
-  'shifting-colors': 1 / 10,
+  'shifting-colors': 1 / 8,
   upsidedown: 1 / 50
 };
 

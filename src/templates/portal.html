@@ -2,17 +2,17 @@
   <a-entity
     class="portal"
     mixin="portal"
-    oasis-portal="href: {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}{% if isHome %}; isHomePortal: true{% endif %}""
-    material="pano: {{ ROOT }}assets/img/{{ sectorType }}.png"
+    oasis-portal="href:  {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}{% if isHome %}; isHomePortal: true{% endif %}""
+    material="pano:  {{ ROOT }}assets/img/{{ sectorType }}.png"
     {% if position %}position="{{ position }}"{% endif %}>
 
-    <a-entity obj-model="obj:{{ ROOT }}assets/models/portal/portal.obj" additive material="color: #03c1e2; opacity: 0.6; depthWrite: false; shader:flat;transparent:true; src:{{ ROOT }}assets/img/portal.png" position="0 0 -0.017" rotation="90 0 0" scale="3.116 3.116 3.116"
-    animation="property:rotation; from: 0 90 90; to: 360 90 90; dur: 10000; loop: true; easing: linear"
-    ></a-entity>
-    <a-entity obj-model="obj:{{ ROOT }}assets/models/portal/portal.obj" additive material="color: #f37132; opacity: 0.6; depthWrite: false; shader:flat;transparent:true; src:{{ ROOT }}assets/img/portal.png" position="0 0 -0.058" rotation="90 0 0" scale="3.078 0.969 3.078"
-    animation="property:rotation; from: 0 90 90; to: 360 90 90; dur: 15000; loop: true; easing: linear"
-    ></a-entity>
-    <a-entity class="portalText" mixin="slice" slice9="color: #111; height: 0.3; width: 2.5; opacity: 0.7" text="font: kelsonsans; color: #4ef580; align: center; value: {{ name }}; side: double; width: 4; zOffset: 0.01" position="0 1.3 0"></a-entity>
+    <a-entity class="portalEffect1" obj-model="obj: {{ ROOT }}assets/models/portal/portal.obj" additive material="color: #03c1e2; opacity: 0.6; depthWrite: false; shader: flat; transparent: true; src: #portalImg" position="0 0 -0.017" rotation="0 90 90" scale="3.116 3.116 3.116"
+      animation="property: object3D.rotation.x; from: 0; to: 6.283185; dur: 10000; loop: true; easing: linear"></a-entity>
+
+    <a-entity class="portalEffect2" obj-model="obj: {{ ROOT }}assets/models/portal/portal.obj" additive material="color: #f37132; opacity: 0.6; depthWrite: false; shader: flat; transparent: true; src: #portalImg" position="0 0 -0.058" rotation="0 90 90" scale="3.078 0.969 3.078"
+      animation="property: object3D.rotation.x; from: 0; to: 6.283185; dur: 15000; loop: true; easing: linear"></a-entity>
+
+    <a-entity class="portalText" mixin="slice" slice9="color:  #111; height: 0.3; width: 2.5; opacity: 0.7" text="font: kelsonsans; color: #4ef580; align: center; value: {{ name }}; side: double; width: 4; zOffset: 0.01" position="0 1.3 0"></a-entity>
   </a-entity>
 {% endmacro %}
 

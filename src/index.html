@@ -15,13 +15,7 @@
     </style>
   </head>
   <body>
-    <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay loop></audio>
     <audio id="portalSound" src="{{ ROOT }}assets/audio/portal.mp3"></audio>
-
-    <script>
-      document.getElementById('audio').volume = 0.20;
-      if (window.self !== window.top) { document.getElementById('audio').volume = 0; }
-    </script>
 
     <a-scene
       {% for zoneProperty in zoneProperties %}
@@ -30,6 +24,7 @@
       data-is-home="{{ IS_HOME and 'true' or 'false' }}"
       debug-controller="enabled: true"
       environment="{{ environment or 'preset: tron; gridColor: orange; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}"
+      oasis-audio="isHome: {{ IS_HOME }}; zoneSong: {{ song }}"
       teleport-refresh
       networked-scene="serverURL: shy-teeth.glitch.me; room: {{ seed or 'default' }}; debug: true">
       <a-assets>
@@ -117,7 +112,7 @@
       </a-entity>
 
       {% if IS_HOME %}
-        <a-entity id="jadeKey" mixin="hoverAnimation" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005" animation="dur: 1500; easing: easeInOutQuad"></a-entity>
+        <a-entity id="jadeKey" mixin="hoverAnimation item" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005"></a-entity>
 
         <a-entity id="gundam" obj-model="obj: {{ ROOT }}assets/models/gundam/model.obj; mtl: {{ ROOT }}assets/models/gundam/materials.mtl" position="-10 7.8 -25" scale="5 5 5" rotation="0 210 0"></a-entity>
 

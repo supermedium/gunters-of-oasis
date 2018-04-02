@@ -54,6 +54,7 @@ AFRAME.registerComponent('oasis-portal', {
 AFRAME.registerShader('oasisPortal', {
   schema: {
     backgroundColor: {default: 'red', type: 'color', is: 'uniform'},
+    isGrayscale: {type: 'int', is: 'uniform', default: 0.0},
     pano: {type: 'map', is: 'uniform'},
     strokeColor: {default: 'white', type: 'color', is: 'uniform'},
     time: {type: 'time', is: 'uniform'}

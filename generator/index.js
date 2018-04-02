@@ -20,12 +20,13 @@ var path = require('path');
 // Then regenerate.
 var ZONE_PROPERTIES = {
   'animated-sun': 1 / 20,
-  cromulon: 1 / 20,
+  cromulon: 1 / 30,
   dalek: 1 / 40,
   mechagodzilla: 1 / 40,
   'random-color-environment': 1 / 4,
   'remember-machine': 1 / 50,
-  'shifting-colors': 1 / 10
+  'shifting-colors': 1 / 10,
+  upsidedown: 1 / 50
 };
 
 var htmlMinifyConfig = {collapse: true, collapseWhitespace: true, conservativeCollapse: true,
@@ -159,7 +160,7 @@ var GOAL_ZONE = {
   name: capitalize(randomName()),
   sectorType: 'goldmine',
   seed: GOAL_SEED,
-  song: `https://supermedium.com/oasis-audio/${randomArray(songs)}`,
+  song: `https://supermedium.github.io/oasis-audio/${randomArray(songs)}`,
   url: `../oasis/${GOAL_SEED}.html`
 };
 

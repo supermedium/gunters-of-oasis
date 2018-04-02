@@ -54,7 +54,8 @@ AFRAME.registerComponent('environment', {
     dressing2OnPlayArea: {type: 'float', default: 0, min: 0, max: 1},
 
     grid: {default:'none', oneOf:['none', '1x1', '2x2', 'crosses', 'dots', 'xlines', 'ylines']},
-    gridColor: {type: 'color', default: '#ccc'}
+    gridColor: {type: 'color', default: '#ccc'},
+    varyColor: {default: true}
   },
 
   multiple: false,
@@ -263,8 +264,8 @@ AFRAME.registerComponent('environment', {
 
       for (var i = 0; i < fogRatios.length; i++){
         if (sunHeight > fogRatios[i]){
-          var c1 = varyColor(new THREE.Color(fogColors[i - 1]), this.random);
-          var c2 = varyColor(new THREE.Color(fogColors[i]), this.random);
+          var c1 = varyColor(new THREE.Color(fogColors[i - 1]), this.random, this.data.varyColor);
+          var c2 = varyColor(new THREE.Color(fogColors[i]), this.random, this.data.varyColor);
           var a = (sunHeight - fogRatios[i]) / (fogRatios[i - 1] - fogRatios[i]);
           c2.lerp(c1, a);
           fogColor = c2;
@@ -724,8 +725,8 @@ AFRAME.registerComponent('environment', {
       case 'squares': {
         var numSquares = 16;
         var squareSize = size / numSquares;
-        col1 = varyColor(new THREE.Color(this.data.groundColor), this.random);
-        col2 = varyColor(new THREE.Color(this.data.groundColor2), this.random);
+        col1 = varyColor(new THREE.Color(this.data.groundColor), this.random, this.data.varyColor);
+        col2 = varyColor(new THREE.Color(this.data.groundColor2), this.random, this.data.varyColor);
         for (i = 0; i < numSquares * numSquares; i++) {
           col = this.random(i + 3) > 0.5 ? col1.clone() : col2.clone();
           col.addScalar(this.random(i + 3) * 0.1 - 0.05);
@@ -738,8 +739,8 @@ AFRAME.registerComponent('environment', {
       // TODO: fix
         imdata = ctx.getImageData(0, 0, size, size);
         im = imdata.data;
-        col1 = varyColor(new THREE.Color(this.data.groundColor), this.random);
-        col2 = varyColor(new THREE.Color(this.data.groundColor2), this.random);
+        col1 = varyColor(new THREE.Color(this.data.groundColor), this.random, this.data.varyColor);
+        col2 = varyColor(new THREE.Color(this.data.groundColor2), this.random, this.data.varyColor);
         var diff = new THREE.Color(col2.r - col1.r, col2.g - col1.g, col2.b - col1.b);
         var perlin = new PerlinNoise();
         for (i = 0, j = 0, numpixels = im.length; i < numpixels; i += 4, j++){
@@ -762,8 +763,8 @@ AFRAME.registerComponent('environment', {
         texctx.fillRect(0, 0, s, s);
         imdata = texctx.getImageData(0, 0, s, s);
         im = imdata.data;
-        col1 = varyColor(new THREE.Color(this.data.groundColor), this.random);
-        col2 = varyColor(new THREE.Color(this.data.groundColor2), this.random);
+        col1 = varyColor(new THREE.Color(this.data.groundColor), this.random, this.data.varyColor);
+        col2 = varyColor(new THREE.Color(this.data.groundColor2), this.random, this.data.varyColor);
         var walkers = [];
         var numwalkers = 1000;
         for (i = 0; i < numwalkers; i++) {
@@ -988,7 +989,7 @@ AFRAME.registerComponent('environment', {
 
     // setup material
     var material = new THREE.MeshLambertMaterial({
-      color: varyColor(new THREE.Color(dressingColor), this.random),
+      color: varyColor(new THREE.Color(dressingColor), this.random, this.data.varyColor),
       vertexColors: THREE.VertexColors
     });
 
@@ -1349,7 +1350,9 @@ PerlinNoise.prototype.noise = function(x, y, z) {
   return nxyz;
 };
 
-function varyColor (color, random) {
+function varyColor (color, random, varyEnabled) {
+  if (!varyEnabled) { return color; }
+
   if (random(1) < 0.5) {
     color.r += random(2) * 0.2;
   } else {

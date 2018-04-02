@@ -16,7 +16,7 @@
   </head>
   <body>
     <audio id="audio" src="{{ IS_HOME and 'assets/audio/worldinmyeyes.mp3' or song }}" autoplay loop></audio>
-    <audio id="portalSound" src="{{ ROOT }}assets/audio/portal.wav"></audio>
+    <audio id="portalSound" src="{{ ROOT }}assets/audio/portal.mp3"></audio>
 
     <script>
       document.getElementById('audio').volume = 0.20;
@@ -37,6 +37,7 @@
         <img id="sliceImg" src="{{ ROOT }}assets/img/slice.png">
         {% if IS_HOME %}
           <img id="logo" src="{{ ROOT }}assets/img/logo.png">
+          <audio id="message" src="{{ ROOT }}assets/audio/message.mp3" preload="auto"></audio>
         {% endif %}
         {% if IS_GOAL %}
           <img src="{{ ROOT }}assets/img/envmap.jpg" id="envmapImg">
@@ -135,7 +136,9 @@
           id="instructionText"
           mixin="slice"
           slice9="color: #111; height: 5.5; width: 12.5; padding: 0.2"
-          text="color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0"></a-entity>
+          text="color: #6D6; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0">
+            <a-entity sound="src:#message; autoplay: true;"></a-entity>
+          </a-entity>
       {% endif %}
 
       {% if hasHint %}

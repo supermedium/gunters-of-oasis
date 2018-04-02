@@ -3,7 +3,7 @@
     class="portal"
     mixin="portal"
     oasis-portal="href:  {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}{% if isHome %}; isHomePortal: true{% endif %}""
-    material="pano:  {{ ROOT }}assets/img/portal/{{ sectorType }}.jpg"
+    material="pano: {{ ROOT }}assets/img/portal/{{ sectorType }}.jpg"
     {% if position %}position="{{ position }}"{% endif %}>
 
     <a-entity class="portalEffect1" obj-model="obj: {{ ROOT }}assets/models/portal/portal.obj" additive material="color: #03c1e2; opacity: 0.6; depthWrite: false; shader: flat; transparent: true; src: #portalImg" position="0 0 -0.017" rotation="0 90 90" scale="3.116 3.116 3.116"

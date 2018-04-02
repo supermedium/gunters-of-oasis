@@ -55,7 +55,8 @@ AFRAME.registerShader('oasisPortal', {
   schema: {
     backgroundColor: {default: 'red', type: 'color', is: 'uniform'},
     pano: {type: 'map', is: 'uniform'},
-    strokeColor: {default: 'white', type: 'color', is: 'uniform'}
+    strokeColor: {default: 'white', type: 'color', is: 'uniform'},
+    time: {type: 'time', is: 'uniform'}
   },
 
   vertexShader: require('./shaders/oasisPortalVertex.glsl'),

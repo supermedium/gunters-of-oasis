@@ -2,12 +2,6 @@ var previousZone = localStorage.getItem('previousZone');
 
 var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 
-var portalSound = document.getElementById('portalSound');
-setTimeout(() => {
-  portalSound = document.getElementById('portalSound');
-  portalSound.volume = 0.25;
-}, 500);
-
 AFRAME.registerComponent('oasis-portal', {
   schema: {
     href: {type: 'string'},
@@ -17,6 +11,10 @@ AFRAME.registerComponent('oasis-portal', {
 
   init: function () {
     var el = this.el;
+    var portalSound;
+
+    portalSound = new Audio(utils.assetPath('assets/audio/portal.wav'));
+    portalSound.volume = 0.25;
 
     // Hide back portal if there is no back to go to.
     if (this.data.isBackPortal) {

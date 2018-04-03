@@ -1,9 +1,10 @@
 var MinifyPlugin = require('babel-minify-webpack-plugin');
-var Nunjucks = require('nunjucks');
 var fs = require('fs');
+var glob = require('glob');
 var htmlMinify = require('html-minifier').minify;
 var ip = require('ip');
 var moment = require('moment');
+var nunjucks = require('nunjucks');
 var path = require('path');
 var webpack = require('webpack');
 
@@ -11,6 +12,16 @@ var OasisGenerator = require('./generator/index');
 
 process.env.HOST = ip.address();
 process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+
+// Service worker.
+fs.writeFileSync('./serviceWorker.js', nunjucks.render('serviceWorker.js', {
+  cacheAlways: glob.sync('assets/img/*')
+    .concat(glob.sync('assets/img/portal/*'))
+    .concat(glob.sync('assets/fonts/portal/*'))
+    .concat(glob.sync('assets/models/**/*.obj'))
+    .concat(glob.sync('assets/models/**/*.mtl'))
+    .concat(glob.sync('assets/audio/*'))
+}));
 
 // For development, watch HTML for changes to compile Nunjucks.
 // The production Express server will handle Nunjucks by itself.

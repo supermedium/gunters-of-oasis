@@ -14,3 +14,11 @@ require('aframe-teleport-controls');
 require('networked-aframe');
 
 requireAll(require.context('./components/', true, /\.js$/));
+
+window.addEventListener('DOMContentLoaded', () => {
+  if (document.querySelector('a-scene').dataset.isHome === 'true') {
+    navigator.serviceWorker.register('serviceWorker.js');
+  } else {
+    navigator.serviceWorker.register('../serviceWorker.js');
+  }
+});

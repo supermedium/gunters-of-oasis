@@ -160,7 +160,7 @@ var GOAL_ZONE = {
   name: capitalize(randomName()),
   sectorType: 'goldmine',
   seed: GOAL_SEED,
-  song: `https://supermedium.github.io/oasis-audio/${randomArray(songs)}`,
+  song: `https://supermedium.com/oasis-audio/jump.mp3`,
   url: `../oasis/${GOAL_SEED}.html`
 };
 

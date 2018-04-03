@@ -9,8 +9,10 @@ AFRAME.registerComponent('teleport-listener', {
 
   init: function () {
     var el = this.el;
+    var hitEntity;
     var intersections;
     var soundPool;
+    var teleportEntity;
     var teleportFader;
 
     this.currentIntersection = null;
@@ -35,8 +37,10 @@ AFRAME.registerComponent('teleport-listener', {
     });
 
     // Apply effects to hitEntity.
-    el.components['teleport-controls'].hitEntity.setAttribute('material', 'opacity', 0.8);
-    el.components['teleport-controls'].hitEntity.setAttribute('animation__scale', {
+    hitEntity = el.components['teleport-controls'].hitEntity;
+    hitEntity.setAttribute('material', 'emissiveIntensity', 0.9);
+    hitEntity.setAttribute('material', 'emissiveColor', '#ff9f2b');
+    hitEntity.setAttribute('animation__scale', {
       property: 'scale',
       from: '1 1 1.2',
       to: '1.5 1.5 3.2',
@@ -47,7 +51,8 @@ AFRAME.registerComponent('teleport-listener', {
     });
 
     // Apply effects to teleportRay.
-    el.components['teleport-controls'].teleportEntity.setAttribute('material', 'opacity', 0);
+    teleportEntity = el.components['teleport-controls'].teleportEntity;
+    teleportEntity.setAttribute('material', 'opacity', 0);
   },
 
   tick: function () {

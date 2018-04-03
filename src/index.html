@@ -48,7 +48,7 @@
         <a-mixin id="slice" slice9="color: #050505; src: #sliceImg; left: 50; right: 52; top: 50; bottom: 52; padding: 0.04"></a-mixin>
 
         <a-mixin id="hand"
-          teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: trackpaddown, triggerdown; endEvents: trackpadup, triggerup; landingMaxAngle: 360; hitCylinderColor: #fdca40; curveHitColor: #fdca40; hitCylinderHeight: 0.05; checkCollisionChildren: false"
+          teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: trackpaddown, triggerdown; endEvents: trackpadup, triggerup; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #fdca40; hitCylinderHeight: 0.05; checkCollisionChildren: false"
           teleport-listener
           touch
         ></a-mixin>
@@ -99,8 +99,8 @@
           vive-controls="hand: right; model: false"
           windows-motion-controls="hand: right; model: false"
           networked="template: #handTemplate; showLocalTemplate: false">
-            <a-entity sub-object="from: #rightHandObj; name: glove-r" material="color: #383B44; metalness: 0.26; roughness: 0.6"></a-entity>
-            <a-entity sub-object="from: #rightHandObj; name: ornaments-r" material="color: #45484b; metalness: 0; roughness: 0.949; emissive: #696F74; emissiveIntensity: 0.079"></a-entity>
+            <a-entity sub-object="from: #rightHandObj; name: glove-r" material="color: #686B74; metalness: 0.26; roughness: 0.6"></a-entity>
+            <a-entity sub-object="from: #rightHandObj; name: ornaments-r" material="color: #ff9f2b; metalness: 0.2; roughness: 0.949; emissive: #ff9f2b; emissiveIntensity: 0.679"></a-entity>
         </a-entity>
 
         <!-- Secondary hand. -->
@@ -110,8 +110,8 @@
           vive-controls="hand: left; model: false"
           windows-motion-controls="hand: left; model: false"
           networked="template: #handTemplate; showLocalTemplate: false">
-            <a-entity sub-object="from: #leftHandObj; name: glove-l" material="color: #383B44; metalness: 0.26; roughness: 0.6;"></a-entity>
-            <a-entity sub-object="from: #leftHandObj; name: ornaments-l" material="color: #45484b; metalness: 0; roughness: 0.949; emissive: #696F74; emissiveIntensity: 0.079"></a-entity>
+            <a-entity sub-object="from: #leftHandObj; name: glove-l" material="color: #686B74; metalness: 0.26; roughness: 0.6;"></a-entity>
+            <a-entity sub-object="from: #leftHandObj; name: ornaments-l" material="color: #ff9f2b; metalness: 0; roughness: 0.949; emissive: #ff9f2b; emissiveIntensity: 0.679"></a-entity>
           </a-entity>
       </a-entity>
 

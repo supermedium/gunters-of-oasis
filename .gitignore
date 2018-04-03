@@ -11,7 +11,6 @@ lobby/track.html
 build
 dump.rdb
 .ghpages
-serviceWorker.js
 oasis/
 oasis.json
 index.html

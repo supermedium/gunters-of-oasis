@@ -8,6 +8,8 @@ var glob = require('glob');
 var Nunjucks = require('nunjucks');
 var path = require('path');
 
+var ZONES = {};
+
 // ADDING EASTER EGGS
 // ------------------
 // Easter eggs or procedural generation properties.
@@ -46,8 +48,8 @@ if (fs.existsSync('oasis.json')) {
   return;
 }
 
-var AVG_ZONES = 40;
-var MIN_ZONES = 20;
+var AVG_ZONES = 50;
+var MIN_ZONES = 30;
 
 // Generation config.
 var SECTORS = [
@@ -94,7 +96,7 @@ SECTORS.forEach((sector, sectorIndex) => {
   SECTOR_PAGES[sectorIndex] = SECTOR_PAGES[sectorIndex] || [];
   for (i = 0; i < Math.random() * AVG_ZONES + MIN_ZONES; i++) {
     seed = randomId();
-    zone = {
+    zone = ZONES[seed] = {
       environment: `preset: ${sector.environmentType}; seed: ${seed}; shadow: true`,
       name: capitalize(randomName()),
       sectorType: sector.environmentType,
@@ -150,7 +152,6 @@ var HOME_ZONE = {
   })
 };
 
-
 // Generate goal zone.
 var GOAL_SEED = randomId();
 var GOAL_ZONE = {
@@ -163,14 +164,16 @@ var GOAL_ZONE = {
   song: `https://supermedium.com/oasis-audio/jump.mp3`,
   url: `../oasis/${GOAL_SEED}.html`
 };
+ZONES[GOAL_SEED] = GOAL_ZONE;
 
-// Add goal link to random zone.
-var PRE_GOAL_ZONE = randomArray(randomArray(SECTOR_PAGES));
-PRE_GOAL_ZONE.links.push({
-  position: randomLinkPosition(),
-  zone: GOAL_ZONE
-});
-console.log(`Pre-goal: ${PRE_GOAL_ZONE.seed}`);
+// Add goal link to random zone. Walk from the home zone.
+var preGoalZone = ZONES[randomArray(HOME_ZONE.links).zone.seed];
+for (var i = 0; i < 50; i++) {
+  preGoalZone = ZONES[randomArray(preGoalZone.links).zone.seed];
+}
+preGoalZone.links.push({position: randomLinkPosition(), zone: GOAL_ZONE});
+
+console.log(`Pre-goal: ${preGoalZone.seed}`);
 console.log(`Goal: ${GOAL_ZONE.seed}`);
 
 // Add hints.

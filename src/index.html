@@ -95,22 +95,24 @@
 
         <!-- Primary hand. -->
         <a-entity id="rightHandObj" obj-model="obj: #rightGloveObj" visible="false"></a-entity>
-        <a-entity id="primaryHand" mixin="hand" 
-          vive-controls="hand: right; model: false" 
-          oculus-controls="hand: right; model: false" 
+        <a-entity id="primaryHand" mixin="hand"
+          oculus-controls="hand: right; model: false"
+          vive-controls="hand: right; model: false"
+          windows-motion-controls="hand: right; model: false"
           networked="template: #handTemplate; showLocalTemplate: false">
-            <a-entity sub-object="from:#rightHandObj; name:glove-r" material="color: #383B44; metalness: 0.26; roughness: 0.6;"></a-entity>
-            <a-entity sub-object="from:#rightHandObj; name:ornaments-r" material="color: #45484b; metalness: 0; roughness: 0.949; emissive: #696F74; emissiveIntensity: 0.079;"></a-entity>
+            <a-entity sub-object="from: #rightHandObj; name: glove-r" material="color: #383B44; metalness: 0.26; roughness: 0.6"></a-entity>
+            <a-entity sub-object="from: #rightHandObj; name: ornaments-r" material="color: #45484b; metalness: 0; roughness: 0.949; emissive: #696F74; emissiveIntensity: 0.079"></a-entity>
         </a-entity>
 
         <!-- Secondary hand. -->
         <a-entity id="leftHandObj" obj-model="obj: #leftGloveObj" visible="true"></a-entity>
-        <a-entity id="secondaryHand" mixin="hand" 
-          vive-controls="hand: left; model: false" 
-          oculus-controls="hand: left; model: false" 
+        <a-entity id="secondaryHand" mixin="hand"
+          oculus-controls="hand: left; model: false"
+          vive-controls="hand: left; model: false"
+          windows-motion-controls="hand: left; model: false"
           networked="template: #handTemplate; showLocalTemplate: false">
-            <a-entity sub-object="from:#leftHandObj; name:glove-l" material="color: #383B44; metalness: 0.26; roughness: 0.6;"></a-entity>
-            <a-entity sub-object="from:#leftHandObj; name:ornaments-l" material="color: #45484b; metalness: 0; roughness: 0.949; emissive: #696F74; emissiveIntensity: 0.079;"></a-entity>
+            <a-entity sub-object="from: #leftHandObj; name: glove-l" material="color: #383B44; metalness: 0.26; roughness: 0.6;"></a-entity>
+            <a-entity sub-object="from: #leftHandObj; name: ornaments-l" material="color: #45484b; metalness: 0; roughness: 0.949; emissive: #696F74; emissiveIntensity: 0.079"></a-entity>
           </a-entity>
       </a-entity>
 

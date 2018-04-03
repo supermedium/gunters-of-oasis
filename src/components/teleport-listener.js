@@ -1,3 +1,5 @@
+var SoundPool = require('../lib/soundpool');
+
 /**
  * Allow teleport into portal.
  * Update line and hit entity colors.
@@ -8,19 +10,18 @@ AFRAME.registerComponent('teleport-listener', {
   init: function () {
     var el = this.el;
     var intersections;
-    var portalSound;
+    var soundPool;
 
     intersections = el.components['teleport-controls'].intersections;
 
-    portalSound = new Audio(utils.assetPath('assets/audio/portal.wav'));
-    portalSound.volume = 0.25;
+    soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.5, 5);
 
     this.el.addEventListener('teleported', () => {
       if (!intersections.length) { return; }
       if (intersections[0].object.el.classList.contains('portal')) {
         intersections[0].object.el.emit('click');
       } else {
-        portalSound.play();
+        soundPool.play();
       }
     });
 

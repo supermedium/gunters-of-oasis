@@ -1,6 +1,12 @@
-var previousZone = localStorage.getItem('previousZone');
+var SoundPool = require('../lib/soundpool');
 
+var previousZone = localStorage.getItem('previousZone');
 var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
+
+var hoverSoundPool;
+document.addEventListener('DOMContentLoaded', () => {
+  hoverSoundPool = SoundPool(utils.assetPath('assets/audio/hover.wav'), 0.5, 2);
+});
 
 AFRAME.registerComponent('oasis-portal', {
   schema: {
@@ -37,6 +43,10 @@ AFRAME.registerComponent('oasis-portal', {
           window.location.href = this.data.href;
         }
       }, 500);
+    });
+
+    el.addEventListener('mouseenter', () => {
+      hoverSoundPool.play();
     });
 
     // Change border color if visited already.

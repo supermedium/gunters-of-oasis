@@ -38,6 +38,7 @@ AFRAME.registerComponent('teleport-listener', {
 
     // Apply effects to hitEntity.
     hitEntity = this.hitEntity = el.components['teleport-controls'].hitEntity;
+    hitEntity.object3D.rotation.x = -1 * Math.PI / 2;
     hitEntity.setAttribute('material', 'emissiveIntensity', 0.9);
     hitEntity.setAttribute('material', 'emissiveColor', '#ff9f2b');
     hitEntity.setAttribute('animation__scale', {
@@ -51,13 +52,14 @@ AFRAME.registerComponent('teleport-listener', {
     });
 
     // Apply effects to teleportRay.
-    teleportEntity = el.components['teleport-controls'].teleportEntity;
-    teleportEntity.setAttribute('material', 'opacity', 0);
+    this.teleportEntity = el.components['teleport-controls'].teleportEntity;
+    this.teleportEntity.getObject3D('mesh').material.opacity = 0.5;
   },
 
   tick: function () {
     var el = this.el;
     var intersection;
+    var intersectingPortal;
 
     if (!el.components['teleport-controls'].active) { return; }
 
@@ -71,8 +73,10 @@ AFRAME.registerComponent('teleport-listener', {
 
     if (intersection.object.el === this.currentIntersection) { return; }
 
-    this.hitEntity.children[0].object3D.visible = !intersection.object.el.classList.contains('portal');
-    this.hitEntity.children[1].object3D.visible = !intersection.object.el.classList.contains('portal');
+    intersectingPortal = intersection.object.el.classList.contains('portal');
+    this.hitEntity.children[0].object3D.visible = !intersectingPortal;
+    this.hitEntity.children[1].object3D.visible = !intersectingPortal;
+    this.teleportEntity.getObject3D('mesh').visible = intersectingPortal;
 
     if (this.currentIntersection) { this.currentIntersection.emit('mouseleave'); }
     intersection.object.el.emit('mouseenter');

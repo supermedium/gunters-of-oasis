@@ -571,7 +571,7 @@ AFRAME.registerComponent('environment', {
     }
 
     // apply Y scale. There's no need to recalculate the geometry for this. Just change scale
-    this.ground.object3D.scale.z = this.random(1000) * 100;
+    this.ground.object3D.scale.z = Math.max(this.random(1000) * 100, 1.0);
 
     // update ground, playarea and grid textures.
     var groundResolution = 2048;

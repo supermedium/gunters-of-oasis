@@ -13,10 +13,11 @@ AFRAME.registerComponent('teleport-listener', {
     var soundPool;
     var teleportFader;
 
+    this.currentIntersection = null;
     intersections = el.components['teleport-controls'].intersections;
 
+    // Listen to teleported for blink effect and play sound.
     soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.6, 5);
-
     teleportFader = document.getElementById('teleportFader');
     this.el.addEventListener('teleported', () => {
       if (!intersections.length) { return; }
@@ -33,7 +34,20 @@ AFRAME.registerComponent('teleport-listener', {
       }
     });
 
-    this.currentIntersection = null;
+    // Apply effects to hitEntity.
+    el.components['teleport-controls'].hitEntity.setAttribute('material', 'opacity', 0.8);
+    el.components['teleport-controls'].hitEntity.setAttribute('animation__scale', {
+      property: 'scale',
+      from: '1 1 1.2',
+      to: '1.5 1.5 3.2',
+      easing: 'easeInOutCubic',
+      dir: 'alternate',
+      dur: 600,
+      loop: true
+    });
+
+    // Apply effects to teleportRay.
+    el.components['teleport-controls'].teleportEntity.setAttribute('material', 'opacity', 0);
   },
 
   tick: function () {

@@ -153,10 +153,13 @@
 
       {% if hasHint %}
         <a-entity
+          animation__itemtouched="property: object3D.rotation.y; dur: 2500; easing: easeInExpo; to: 25; startEvents: touched"
+          animation__itemtouched2="property: object3D.position.y; dur: 2500; easing: easeInExpo; from: 1.6; to: 15; startEvents: touched"
+          animation__itemtouched3="property: visible; delay: 2500; from: true; to: false; startEvents: touched"
+          hint="near: {{ inThisSector }}"
           obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl"
           position="0 0.6 -4"
-          touchable
-          proxy-event="event: touched; to: #hintText; as: activatehint">
+          touchable>
         </a-entity>
       {% endif %}
 

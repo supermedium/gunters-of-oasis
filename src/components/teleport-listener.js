@@ -37,7 +37,7 @@ AFRAME.registerComponent('teleport-listener', {
     });
 
     // Apply effects to hitEntity.
-    hitEntity = el.components['teleport-controls'].hitEntity;
+    hitEntity = this.hitEntity = el.components['teleport-controls'].hitEntity;
     hitEntity.setAttribute('material', 'emissiveIntensity', 0.9);
     hitEntity.setAttribute('material', 'emissiveColor', '#ff9f2b');
     hitEntity.setAttribute('animation__scale', {
@@ -70,6 +70,9 @@ AFRAME.registerComponent('teleport-listener', {
     }
 
     if (intersection.object.el === this.currentIntersection) { return; }
+
+    this.hitEntity.children[0].object3D.visible = !intersection.object.el.classList.contains('portal');
+    this.hitEntity.children[1].object3D.visible = !intersection.object.el.classList.contains('portal');
 
     if (this.currentIntersection) { this.currentIntersection.emit('mouseleave'); }
     intersection.object.el.emit('mouseenter');

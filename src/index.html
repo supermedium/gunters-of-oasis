@@ -48,7 +48,7 @@
         <a-mixin id="slice" slice9="color: #050505; src: #sliceImg; left: 50; right: 52; top: 50; bottom: 52; padding: 0.04"></a-mixin>
 
         <a-mixin id="hand"
-          teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: trackpaddown, triggerdown; endEvents: trackpadup, triggerup; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #fdca40; hitCylinderHeight: 0.05; checkCollisionChildren: false"
+          teleport-controls="type: line; collisionEntities: [mixin~=portal], .environmentGround; cameraRig: #cameraRig; teleportOrigin: #camera; startEvents: trackpaddown, triggerdown; endEvents: trackpadup, triggerup; landingMaxAngle: 360; hitCylinderColor: #ff9f2b; curveHitColor: #fdca40; hitCylinderHeight: 0.05; checkCollisionChildren: false; hitEntityAlignNormal: false"
           teleport-listener
           touch
         ></a-mixin>
@@ -57,7 +57,9 @@
           look-at="#camera"
           geometry="primitive: circle; segments: 64"
           material="shader: oasisPortal; backgroundColor: #333; transparent: true"
-          raycastable></a-mixin>
+          raycastable
+          animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave; resumeEvents: mouseenter"
+          event-set__mouseleave="_event: mouseleave; scale: 1 1 1"></a-mixin>
 
         <a-mixin id="shadow"
             geometry="primitive: plane; width: 2; height: 2"

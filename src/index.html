@@ -5,7 +5,7 @@
   <head>
     <title>OASIS</title>
     <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
-    <script src="https://rawgit.com/aframevr/aframe/cc70719/dist/aframe-master.min.js"></script>
+    <script src="https://rawgit.com/ngokevin/aframe/posfirstdist/dist/aframe-master.min.js"></script>
     <script src="{{ ROOT }}build/socket.io.min.js"></script>
     <script src="{{ ROOT }}build/easyrtc.js"></script>
     <script src="{{ ROOT }}build/build.js"></script>
@@ -65,16 +65,25 @@
           mixin="hoverAnimation"
           touchable
           animation__itemtouched="property: object3D.rotation.y; dur: 2500; easing: easeInExpo; to: 25; startEvents: touched"
-          animation__itemtouched2="property: object3D.position.y; dur: 2500; easing: easeInExpo; to: 15; startEvents: touched"
+          animation__itemtouched2="property: object3D.position.y; dur: 2500; easing: easeInExpo; from: 1.6; to: 15; startEvents: touched"
           animation__itemtouched3="property: visible; delay: 2500; from: true; to: false; startEvents: touched"
+          item
           play-audio="event: touched; audio: {{ ROOT }}assets/audio/zelda.mp3; volume: 0.5"></a-mixin>
+
+        <a-mixin id="itemText"
+          mixin="slice font"
+          slice9="color: #111; height: 1.0; width: 4.0; side: double"
+          text="color: #4ef580; width: 3.8; wrapCount: 35; xOffset: 0.1; zOffset: 0.1; side: double"
+          animation__activate="property: object3D.position.y; from: -1; to: 2; easing: easeInOutCubic; startEvents: itemtouched"></a-entity>
 
         {% include './templates/avatar.html' %}
       </a-assets>
 
       <a-entity id="cameraRig" networked="template: #rigTemplate; showLocalTemplate: false">
         <a-camera id="camera" look-controls position="0 1.6 0"
-                  networked="template: #headTemplate; showLocalTemplate: false"></a-camera>
+                  networked="template: #headTemplate; showLocalTemplate: false">
+          <a-entity id="cameraFront" position="0 0 -3"></a-entity>
+        </a-camera>
 
         <!-- Primary hand. -->
         <a-entity id="primaryHand" mixin="hand" hand-controls="right"
@@ -112,7 +121,7 @@
       </a-entity>
 
       {% if IS_HOME %}
-        <a-entity id="jadeKey" mixin="hoverAnimation item" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005"></a-entity>
+        <a-entity id="jadeKey" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005" item="message: You've received the Jade Key\nExplore the OASIS\nDiscover the secrets it may unlock\n~; storeAs: jadekey"></a-entity>
 
         <a-entity id="gundam" obj-model="obj: {{ ROOT }}assets/models/gundam/model.obj; mtl: {{ ROOT }}assets/models/gundam/materials.mtl" position="-10 7.8 -25" scale="5 5 5" rotation="0 210 0"></a-entity>
 
@@ -124,7 +133,7 @@
         <a-entity
           id="leaderboard"
           mixin="slice font"
-          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.2"
+          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.3"
           leaderboard
           text="baseline: bottom; color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: parzival | 2000\nart3mis | 1000" position="-12 10 -9" look-at="0 0 0">
           <a-entity mixin="font" text="align: center; value: LEADERBOARD; width: 12" position="0 2 0.01"></a-entity>
@@ -133,7 +142,7 @@
         <a-entity
           id="instructionText"
           mixin="slice font"
-          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.7"
+          slice9="color: #111; height: 5.5; width: 12.5; padding: 0.3"
           text="color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0">
             <a-entity sound="src:#message; autoplay: true;"></a-entity>
           </a-entity>
@@ -144,14 +153,7 @@
           obj-model="obj: {{ ROOT }}assets/models/chest/model.obj; mtl: {{ ROOT }}assets/models/chest/materials.mtl"
           position="0 0.6 -4"
           touchable
-          proxy-event="event: touched; to: #hintText; as: activatehint"
-          >
-          <a-entity id="hintText"
-            mixin="slice font"
-            slice9="color: #111; height: 0.75; width: 3.8"
-            text="color: #4ef580; value: {{ inThisSector and 'THE EGG IS NEAR\n~' or 'THE EGG IS NOT IN THIS SECTOR\n~' }}; width: 3.8; wrapCount: 35; xOffset: 0.1; zOffset: 0.1"
-            position="0 -1 -0.5"
-            animation__activate="property: object3D.position.y; from: -1; to: 2; easing: easeInOutCubic; startEvents: activatehint"></a-entity>
+          proxy-event="event: touched; to: #hintText; as: activatehint">
         </a-entity>
       {% endif %}
 

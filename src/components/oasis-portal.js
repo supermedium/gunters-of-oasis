@@ -56,6 +56,9 @@ AFRAME.registerComponent('oasis-portal', {
     el.setAttribute('material', 'strokeColor', color);
     el.querySelector('.portalEffect1').setAttribute('material', 'color', color);
     el.querySelector('.portalText').setAttribute('text', 'color', color);
+
+    el.setAttribute('animation__mouseenter', 'from', color);
+    el.setAttribute('animation__mouseleave', 'to', color);
   }
 });
 

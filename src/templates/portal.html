@@ -2,7 +2,7 @@
   <a-entity
     class="portal"
     mixin="portal"
-    oasis-portal="href:  {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}{% if isHome %}; isHomePortal: true{% endif %}""
+    oasis-portal="href: {{ url }}{% if isPrev %}; isBackPortal: true{% endif %}{% if isHome %}; isHomePortal: true{% endif %}""
     material="pano: {{ ROOT }}assets/img/portal/{{ sectorType }}.jpg"
     {% if position %}position="{{ position }}"{% endif %}>
 

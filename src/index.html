@@ -58,6 +58,11 @@
           material="shader: oasisPortal; backgroundColor: #333; strokeColor: #113; transparent: true"
           raycastable></a-mixin>
 
+        <a-mixin id="shadow"
+            geometry="primitive: plane; width: 2; height: 2"
+            material="src: #shadowImg; shader: flat; transparent: true"
+            rotation="-90 0 0"></a-mixin>
+
         <a-mixin id="hoverAnimation"
           animation="property: object3D.position.y; from: 1.6; to: 1.8; dir: alternate; loop: true; dur: 5000; easing: easeInOutCubic; pauseEvents: touched"></a-mixin>
 
@@ -112,12 +117,10 @@
         {% if IS_HOME %}layout="type: circle; radius: 10; plane: xz"{% endif %}
         position="0 0.05 0">
           {% for link in links %}
-            <a-entity
-              geometry="primitive: plane; width: 2; height: 2"
-              material="src: #shadowImg; shader: flat; transparent: true"
-              rotation="-90 0 0"
-              {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
+            <a-entity mixin="shadow" {% if not IS_HOME %}position="{{ link.position }}"{% endif %}></a-entity>
           {% endfor %}
+          <a-entity mixin="shadow" {% if not IS_HOME %}position="-2 0 3"{% endif %}></a-entity>
+          <a-entity mixin="shadow" {% if not IS_HOME %}position="2 0 3"{% endif %}></a-entity>
       </a-entity>
 
       {% if IS_HOME %}

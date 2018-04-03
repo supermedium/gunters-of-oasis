@@ -1,9 +1,6 @@
 var previousZone = localStorage.getItem('previousZone');
-localStorage.setItem('previousZone', window.location.href);
 
-var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '[]');
-visitedZones.push(window.location.href);
-localStorage.setItem('visitedZones', JSON.stringify(visitedZones));
+var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 
 var portalSound = document.getElementById('portalSound');
 setTimeout(() => {
@@ -36,18 +33,29 @@ AFRAME.registerComponent('oasis-portal', {
         if (this.data.isBackPortal) {
           window.location.href = localStorage.getItem('previousZone');
         } else {
+          visitedZones[this.data.href] = true;
+          localStorage.setItem('previousZone', window.location.href);
+          localStorage.setItem('visitedZones', JSON.stringify(visitedZones));
           window.location.href = this.data.href;
         }
       }, 500);
     });
 
     // Change border color if visited already.
-    if (visitedZones.indexOf(this.data.href) !== -1) {
-      el.setAttribute('material', 'strokeColor', '#480355');
+    if (localStorage.getItem('waybackmachine') === 'true' &&
+        visitedZones[this.data.href]) {
+      this.setColor('#AF55AF');
     }
 
-    if (this.data.isBackPortal) { el.setAttribute('material', 'strokeColor', '#e6e8e6'); }
-    if (this.data.isHomePortal) { el.setAttribute('material', 'strokeColor', '#3772ff'); }
+    if (this.data.isBackPortal) { this.setColor('#6688cc'); }
+    if (this.data.isHomePortal) { this.setColor('#33aa33'); }
+  },
+
+  setColor: function (color) {
+    var el = this.el;
+    el.setAttribute('material', 'strokeColor', color);
+    el.querySelector('.portalEffect1').setAttribute('material', 'color', color);
+    el.querySelector('.portalText').setAttribute('text', 'color', color);
   }
 });
 

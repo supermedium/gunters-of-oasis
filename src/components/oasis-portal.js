@@ -46,22 +46,30 @@ AFRAME.registerComponent('oasis-portal', {
     });
 
     el.addEventListener('mouseenter', () => {
+      this.setColor('#DADADA');
       hoverSoundPool.play();
     });
 
-    // Change border color if visited already.
-    if (localStorage.getItem('waybackmachine') === 'true' &&
-        visitedZones[this.data.href]) {
-      this.setColor('#AF55AF');
+    el.addEventListener('mouseleave', () => {
+      this.setColor(this.originalColor);
+    });
+
+    this.originalColor = '#AAA';
+    if (this.data.isBackPortal) {
+      this.originalColor = '#6688cc';
+    } else if (this.data.isHomePortal) {
+      this.originalColor = '#33aa33';
+    } else if (localStorage.getItem('waybackmachine') === 'true' &&
+               visitedZones[this.data.href]) {
+      // Change border color if visited already.
+      this.originalColor = '#AF55AF';
     }
 
-    if (this.data.isBackPortal) { this.setColor('#6688cc'); }
-    if (this.data.isHomePortal) { this.setColor('#33aa33'); }
+    this.setColor(this.originalColor);
   },
 
   setColor: function (color) {
     var el = this.el;
-    el.setAttribute('material', 'strokeColor', color);
     el.querySelector('.portalEffect1').setAttribute('material', 'color', color);
     el.querySelector('.portalText').setAttribute('text', 'color', color);
 
@@ -75,7 +83,6 @@ AFRAME.registerShader('oasisPortal', {
     backgroundColor: {default: 'red', type: 'color', is: 'uniform'},
     isGrayscale: {type: 'int', is: 'uniform', default: 0.0},
     pano: {type: 'map', is: 'uniform'},
-    strokeColor: {default: 'white', type: 'color', is: 'uniform'},
     time: {type: 'time', is: 'uniform'}
   },
 

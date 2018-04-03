@@ -54,11 +54,9 @@
         ></a-mixin>
 
         <a-mixin id="portal"
-          animation__mouseenter="property: components.material.material.uniforms.strokeColor.value; type: color; from: #113; to: #DDE; startEvents: mouseenter; easing: easeInOutCubic; dur: 400"
-          animation__mouseleave="property: components.material.material.uniforms.strokeColor.value; type: color; from: #DDE; to: #113; startEvents: mouseleave; easing: easeInOutCubic; dur: 400"
           look-at="#camera"
-          geometry="primitive: circle; segments: 40"
-          material="shader: oasisPortal; backgroundColor: #333; strokeColor: #113; transparent: true"
+          geometry="primitive: circle; segments: 64"
+          material="shader: oasisPortal; backgroundColor: #333; transparent: true"
           raycastable></a-mixin>
 
         <a-mixin id="shadow"

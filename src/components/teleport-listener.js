@@ -11,13 +11,21 @@ AFRAME.registerComponent('teleport-listener', {
     var el = this.el;
     var intersections;
     var soundPool;
+    var teleportFader;
 
     intersections = el.components['teleport-controls'].intersections;
 
-    soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.5, 5);
+    soundPool = SoundPool(utils.assetPath('assets/audio/portal.wav'), 0.6, 5);
 
+    teleportFader = document.getElementById('teleportFader');
     this.el.addEventListener('teleported', () => {
       if (!intersections.length) { return; }
+
+      teleportFader.object3D.visible = true;
+      setTimeout(() => {
+        teleportFader.object3D.visible = false;
+      }, 160);
+
       if (intersections[0].object.el.classList.contains('portal')) {
         intersections[0].object.el.emit('click');
       } else {

@@ -24,6 +24,7 @@ void main() {
   alpha = (alpha + 1.0) / 2.0;
   alpha = mix(0.85, 1.0, alpha);
   color = texture2D(pano, sampleUV).xyz;
+  alpha = smoothstep(0.05, 1.0, 1.6 - vDistanceToCenter);
   gl_FragColor = vec4(color, alpha);
 
   if (isGrayscale == 1) {

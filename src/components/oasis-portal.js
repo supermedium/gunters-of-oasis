@@ -46,7 +46,7 @@ AFRAME.registerComponent('oasis-portal', {
     });
 
     el.addEventListener('mouseenter', () => {
-      this.setColor('#DADADA');
+      this.setColor('#FFF');
       hoverSoundPool.play();
     });
 
@@ -54,7 +54,7 @@ AFRAME.registerComponent('oasis-portal', {
       this.setColor(this.originalColor);
     });
 
-    this.originalColor = '#AAA';
+    this.originalColor = '#999';
     if (this.data.isBackPortal) {
       this.originalColor = '#6688cc';
     } else if (this.data.isHomePortal) {

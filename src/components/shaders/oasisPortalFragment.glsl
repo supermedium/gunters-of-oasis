@@ -27,7 +27,7 @@ void main() {
     // Opacity portal effect, positive sin wave from 0.5 to 1.0.
     alpha = sin(time / 800.0);
     alpha = (alpha + 1.0) / 2.0;
-    alpha = mix(0.75, 1.0, alpha);
+    alpha = mix(0.85, 1.0, alpha);
     color = texture2D(pano, sampleUV).xyz;
     gl_FragColor = vec4(color, alpha);
 

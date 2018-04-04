@@ -49,8 +49,8 @@ if (fs.existsSync('oasis.json')) {
   return;
 }
 
-var AVG_ZONES = 50;
-var MIN_ZONES = 30;
+var AVG_ZONES = 70;
+var MIN_ZONES = 50;
 
 // Generation config.
 var SECTORS = [
@@ -222,6 +222,8 @@ function generate (data) {
       fs.writeFileSync(`oasis/${pageData.seed}.html`, html);
     });
   });
+
+  console.log(`Generated ${Object.keys(ZONES).length} zones.`);
 }
 
 /**

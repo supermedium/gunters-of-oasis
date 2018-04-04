@@ -157,7 +157,7 @@ var HOME_ZONE = {
 var GOAL_SEED = randomId();
 var GOAL_ZONE = {
   IS_GOAL: true,
-  environment: 'preset: goldmine; seed: 660; skyColor: #361c1b; horizonColor: #943842; lighting: none; fog: 0.669; flatShading: false; playArea: 1.5; groundYScale: 20.18; groundColor: #361c1b; groundColor2: #38292b; dressing: cubes; dressingAmount: 100; dressingColor: #d19747; dressingScale: 3.65; dressingVariance: 2 2 2; dressingOnPlayArea: 0.0',
+  environment: 'preset: goldmine; seed: 664; skyColor: #361c1b; horizonColor: #943842; lighting: none; fog: 0.669; flatShading: false; playArea: 1.5; groundYScale: 20.18; groundColor: #361c1b; groundColor2: #38292b; dressing: cubes; dressingAmount: 100; dressingColor: #d19747; dressingScale: 3.65; dressingVariance: 2 2 2; dressingOnPlayArea: 0.0',
   links: [],
   name: capitalize(randomName()),
   sectorType: 'goldmine',

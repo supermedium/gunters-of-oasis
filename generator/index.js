@@ -25,8 +25,9 @@ var ZONE_PROPERTIES = {
   cromulon: 1 / 30,
   dalek: 1 / 40,
   mechagodzilla: 1 / 40,
-  'random-color-environment': 1 / 4,
+  'random-color-environment': 1 / 5,
   'shifting-colors': 1 / 8,
+  solidsnake: 1 / 50,
   upsidedown: 1 / 30,
   'wayback-machine': 1 / 50
 };

@@ -21,6 +21,7 @@ AFRAME.registerComponent('upsidedown', {
     portals = document.querySelectorAll('.portal');
     for (i = 0; i < portals.length; i++) {
       portals[i].setAttribute('material', 'isGrayscale', 1);
+      portals[i].setAttribute('oasis-portal', 'color', '#FAFAFA');
       portals[i].querySelector('.portalText').setAttribute('text', 'color', '#FAFAFA');
       portals[i].querySelector('.portalEffect1').setAttribute('material', 'color', '#111');
       portals[i].querySelector('.portalEffect2').setAttribute('material', 'color', '#AAA');

@@ -10,6 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 AFRAME.registerComponent('oasis-portal', {
   schema: {
+    color: {type: 'string'},
     href: {type: 'string'},
     isBackPortal: {default: false},
     isHomePortal: {default: false}
@@ -52,6 +53,9 @@ AFRAME.registerComponent('oasis-portal', {
 
     el.addEventListener('mouseleave', () => {
       this.setColor(this.originalColor);
+      setTimeout(() => {
+        el.object3D.scale.set(1, 1, 1);
+      });
     });
 
     this.originalColor = '#999';
@@ -60,12 +64,16 @@ AFRAME.registerComponent('oasis-portal', {
     } else if (this.data.isHomePortal) {
       this.originalColor = '#33aa33';
     } else if (localStorage.getItem('waybackmachine') === 'true' &&
-               visitedZones[this.data.href]) {
+               visitedZones[this.data.href] === true) {
       // Change border color if visited already.
       this.originalColor = '#AF55AF';
     }
 
     this.setColor(this.originalColor);
+  },
+
+  update: function () {
+    if (this.data.color) { this.originalColor = this.data.color; }
   },
 
   setColor: function (color) {

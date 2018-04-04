@@ -1,15 +1,18 @@
 AFRAME.registerSystem('touch', {
   init: function () {
     this.touchables = [];
-    this.el.addEventListener('loaded', () => {
-      setTimeout(() => {
-        this.touchables = [].slice.call(document.querySelectorAll('a-entity[touchable]'));
-      }, 1000);
-    });
   },
+
+  register: function (el) {
+    this.touchables.push(el);
+  }
 });
 
 AFRAME.registerComponent('touch', {
+  schema: {
+    distance: {default: 0.50}
+  },
+
   init: function () {
     this.touched = [];
     this.worldVec3 = new THREE.Vector3();
@@ -27,7 +30,7 @@ AFRAME.registerComponent('touch', {
 
     this.touched.length = 0;
     for (i = 0; i < touchables.length; i++) {
-      if (this.worldVec3.distanceTo(touchables[i].object3D.position) < 0.25) {
+      if (this.worldVec3.distanceTo(touchables[i].object3D.position) < this.data.distance) {
         this.touched.push(touchables[i]);
       }
     }

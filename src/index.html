@@ -3,7 +3,7 @@
 
 <html>
   <head>
-    <title>OASIS</title>
+    <title>OASIS - {{ name }}</title>
     <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/ngokevin/aframe/posfirstdist/dist/aframe-master.min.js"></script>
     <script src="{{ ROOT }}build/socket.io.min.js"></script>
@@ -58,8 +58,7 @@
           geometry="primitive: circle; segments: 64"
           material="shader: oasisPortal; backgroundColor: #333; transparent: true"
           raycastable
-          animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave; resumeEvents: mouseenter"
-          event-set__mouseleave="_event: mouseleave; scale: 1 1 1"></a-mixin>
+          animation__mouseenterscale="property: scale; from: 1 1 1; to: 1.1 1.1 1.1; easing: easeInOutQuad; dir: alternate; loop: true; startEvents: mouseenter; dur: 1000; pauseEvents: mouseleave"></a-mixin>
 
         <a-mixin id="shadow"
             geometry="primitive: plane; width: 2; height: 2"
@@ -89,7 +88,8 @@
 
       <a-entity id="cameraRig" networked="template: #rigTemplate; showLocalTemplate: false">
         <a-camera id="camera" look-controls position="0 1.6 0"
-                  networked="template: #headTemplate; showLocalTemplate: false">
+                  networked="template: #headTemplate; showLocalTemplate: false"
+                  {% if not IS_PRODUCTION %}touch="distance: 1.8"{% endif %}>
           <a-entity id="cameraFront" position="0 0 -3"></a-entity>
           <a-entity id="teleportFader" geometry="primitive: box" material="color: #111; shader: flat; side: back" visible="false"></a-entity>
         </a-camera>

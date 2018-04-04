@@ -4,6 +4,9 @@
 AFRAME.registerComponent('wayback-machine', {
   init: function () {
     var el;
+
+    if (localStorage.getItem('waybackmachine') === 'true') { return; }
+
     el = document.createElement('a-entity');
 
     el.classList.add('waybackMachine');

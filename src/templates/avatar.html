@@ -1,24 +1,18 @@
-{% macro eye (position) %}
-  <a-sphere class="eye" color="#efefef" position="{{ position }}" radius="0.05">
-    <a-sphere class="pupil" color="#111" position="0 0 -0.05" radius="0.01"></a-sphere>
-  </a-sphere>
-{% endmacro %}
-
 <script id="rigTemplate" type="text/html">
   <a-entity></a-entity>
 </script>
 
 <script id="headTemplate" type="text/html">
-	<a-entity class="avatar">
-		<a-sphere class="head" color="#5985ff" scale="0.20 0.20 0.18" random-color></a-sphere>
-		<a-entity class="face" position="0 0.05 0">
-      {{ eye('-0.09 0.04 -0.13') }}
-      {{ eye('0.09 0.04 -0.13') }}
-		</a-entity>
-		<a-sphere class="mouth" color="#111" radius="0.04" position="0 -0.05 -0.15" scale="1.2 1 1" shader="flat"></a-sphere>
-	</a-entity>
+  <a-entity class="avatar" sub-object="from:#avatarObj; name: head" material="color: #62799f; metalness: 0.26; roughness: 0.6"></a-entity>
+  <a-entity class="avatar" sub-object="from:#avatarObj; name: headset" material="color: #22353F; metalness: 0.26; roughness: 0.6"></a-entity>
 </script>
 
-<script id="handTemplate" type="text/html">
-  <a-box scale="0.2 0.07 0.24" random-color></a-box>
+<script id="leftHandTemplate" type="text/html">
+  <a-entity sub-object="from: #leftHandObj; name: glove-l" material="color: #686B74; metalness: 0.26; roughness: 0.6;"></a-entity>
+  <a-entity sub-object="from: #leftHandObj; name: ornaments-l" material="color: #355DCE; metalness: 0; roughness: 0.949; emissive: #355DCE; emissiveIntensity: 0.679">
+</script>
+
+<script id="rightHandTemplate" type="text/html">
+  <a-entity sub-object="from: #rightHandObj; name: glove-r" material="color: #686B74; metalness: 0.26; roughness: 0.6;"></a-entity>
+  <a-entity sub-object="from: #rightHandObj; name: ornaments-r" material="color: #355DCE; metalness: 0; roughness: 0.949; emissive: #355DCE; emissiveIntensity: 0.679">
 </script>

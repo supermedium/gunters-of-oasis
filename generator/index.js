@@ -49,8 +49,8 @@ if (fs.existsSync('oasis.json')) {
   return;
 }
 
-var AVG_ZONES = 70;
-var MIN_ZONES = 50;
+var AVG_ZONES = 50;
+var MIN_ZONES = 35;
 
 // Generation config.
 var SECTORS = [

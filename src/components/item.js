@@ -38,6 +38,7 @@ AFRAME.registerComponent('item', {
       return;
     }
 
+    camera = document.getElementById('camera');
     cameraFront = document.getElementById('cameraFront');
 
     el.addEventListener('touched', () => {

@@ -97,7 +97,7 @@
         <!-- Primary hand. -->
         <a-entity id="rightHandObj" obj-model="obj: #rightGloveObj" visible="false"></a-entity>
         <a-entity id="primaryHand" mixin="hand"
-          oculus-controls="hand: right; model: false"
+          oculus-touch-controls="hand: right; model: false"
           vive-controls="hand: right; model: false"
           windows-motion-controls="hand: right; model: false"
           networked="template: #handTemplate; showLocalTemplate: false">
@@ -108,7 +108,7 @@
         <!-- Secondary hand. -->
         <a-entity id="leftHandObj" obj-model="obj: #leftGloveObj" visible="true"></a-entity>
         <a-entity id="secondaryHand" mixin="hand"
-          oculus-controls="hand: left; model: false"
+          oculus-touch-controls="hand: left; model: false"
           vive-controls="hand: left; model: false"
           windows-motion-controls="hand: left; model: false"
           networked="template: #handTemplate; showLocalTemplate: false">

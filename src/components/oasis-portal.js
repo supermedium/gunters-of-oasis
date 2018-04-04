@@ -5,7 +5,7 @@ var visitedZones = JSON.parse(localStorage.getItem('visitedZones') || '{}');
 
 var hoverSoundPool;
 document.addEventListener('DOMContentLoaded', () => {
-  hoverSoundPool = SoundPool(utils.assetPath('assets/audio/hover.wav'), 0.5, 2);
+  hoverSoundPool = SoundPool(utils.assetPath('assets/audio/hover.mp3'), 0.5, 2);
 });
 
 AFRAME.registerComponent('oasis-portal', {
@@ -20,7 +20,7 @@ AFRAME.registerComponent('oasis-portal', {
     var el = this.el;
     var portalSound;
 
-    portalSound = new Audio(utils.assetPath('assets/audio/portal.wav'));
+    portalSound = new Audio(utils.assetPath('assets/audio/portal.mp3'));
     portalSound.volume = 0.25;
 
     // Hide back portal if there is no back to go to.

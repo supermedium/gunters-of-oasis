@@ -1,9 +1,9 @@
-{% set ROOT = IS_HOME and '' or '../' %}
+{% set ROOT = '' if IS_HOME else '../' %}
 {% from './templates/portal.html' import portal %}
 
 <html>
   <head>
-    <title>OASIS - {{ name }}</title>
+    <title>OASIS - {{ 'Home' if IS_HOME else name }}</title>
     <link rel="shortcut icon" href="{{ ROOT }}assets/img/favicon.png" type="image/x-icon">
     <script src="https://rawgit.com/ngokevin/aframe/posfirstdist/dist/aframe-master.min.js"></script>
     <script src="{{ ROOT }}build/socket.io.min.js"></script>
@@ -21,7 +21,7 @@
       {% for zoneProperty in zoneProperties %}
         {{ zoneProperty + ' ' }}
       {% endfor %}
-      data-is-home="{{ IS_HOME and 'true' or 'false' }}"
+      data-is-home="{{ 'true' if IS_HOME else 'false' }}"
       debug-controller="enabled: true"
       environment="{{ environment or 'preset: tron; gridColor: orange; dressing1Amount: 80; dressing1Color: #B55; dressing2: islands; dressing2Amount: 30' }}"
       oasis-audio="isHome: {{ IS_HOME }}; zoneSong: {{ song }}"

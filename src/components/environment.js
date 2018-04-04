@@ -292,10 +292,7 @@ AFRAME.registerComponent('environment', {
       if (oldData) { return; } else { oldData = {}; }
     }
 
-    this.seed = this.data.seed;
-    if (isNaN(parseInt(this.seed))){
-      this.seed = this.seed.split('').map((x, i) => ''+(i+2)+x).reduce((a,b) => a + parseInt(b) * b.charCodeAt(1), 0);
-    }
+    this.seed = (this.data.seed + '').split('').map((x, i) => ''+(i+2)+x).reduce((a,b) => a + parseInt(b) * b.charCodeAt(1), 0);
 
     var skyType = this.data.skyType;
     var sunPos = new THREE.Vector3(this.data.lightPosition.x, this.data.lightPosition.y, this.data.lightPosition.z);
@@ -484,7 +481,13 @@ AFRAME.registerComponent('environment', {
 
   // Custom Math.random() with seed. Given this.data.seed and x, it always returns the same "random" number
   random: function (x) {
-    return parseFloat('0.' + Math.sin(this.seed * 9999 * x).toString().substr(7));
+    var seed;
+    var val;
+    val = parseFloat('0.' + Math.sin(this.seed * 9999 * x).toString().substr(7));
+    if (val === 0) {
+      val = parseFloat('0.' + Math.sin(this.seed * 99999 * x).toString().substr(7));
+    }
+    return val;
   },
 
 
@@ -925,6 +928,7 @@ AFRAME.registerComponent('environment', {
     }
 
     var damount = dressingAmount + Math.floor(this.random() * dressingAmount);
+    console.log(damount);
     for (var i = 0, r = 88343; i < damount; i++, r++) {
 
       var geo = geoset[Math.floor(this.random(33 * which + i) * geoset.length)];

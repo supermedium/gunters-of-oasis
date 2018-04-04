@@ -145,6 +145,7 @@ var HOME_ZONE = {
   links: SECTOR_PAGES.map((sector, i) => {
     var randomZone;
     randomZone = Object.assign({}, sector[Math.floor(Math.random() * sector.length)]);
+    randomZone.url = randomZone.url.replace('../', '');
     delete randomZone.links;
     return {
       position: `${i} 1.6 -5`,

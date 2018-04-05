@@ -18,7 +18,7 @@ AFRAME.registerComponent('hint', {
     textEl.object3D.position.copy(el.object3D.position);
     textEl.object3D.position.y = -1;
     textEl.object3D.position.z -= 0.5;
-    if (localStorage.getItem('bronzekey') === 'true') {
+    if (localStorage.getItem('bronzekey') === 'true' || localStorage.getItem('jadekey') === 'true') {
       textEl.setAttribute('text', 'value', this.data.near
         ? 'THE EGG IS NEAR\nWOULD YOU KINDLY...KEEP HUNTING?\n~'
         : 'OUR EGG IS IN ANOTHER CASTLE\n~');

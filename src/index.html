@@ -162,7 +162,7 @@
           leaderboard
           look-at="0 0 0"
           position="-12 10 -9">
-          <a-entity text="baseline: bottom; color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: 1.\n2.\n3.\n4.\n5." position="0.2 -1.8 0"></a-entity>
+          <a-entity text="baseline: bottom; color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: 1. banada                                             100000\n2.\n3.\n4.\n5." position="0.2 -1.8 0"></a-entity>
           <a-entity mixin="font" text="align: center; value: LEADERBOARD; width: 12" position="0 2 0.01"></a-entity>
         </a-entity>
 
@@ -173,6 +173,14 @@
           text="color: #4ef580; width: 12; wrapCount: 35; zOffset: 0.1; value: GUNTERS.\nINSIDE THE OASIS\nLIES HIDDEN AN EGG\nWHOEVER FINDS THE EGG\nWILL INHERIT THE OASIS\nAND HALF A HUNDRED DOLLARS\n~" position="12 10 -9" look-at="0 0 0">
             <a-entity sound="src:#message; autoplay: true;"></a-entity>
           </a-entity>
+
+       <a-entity
+        id="eggFound"
+        mixin="slice font hoverAnimation"
+        slice9="color: #111; height: 1; width: 2.1; padding: 0.1"
+        text="color: #4ef580; width: 2; value: The egg has been found by @banada!\nThere are 4 seats remaining on the High Five.\nGet notified on next round via @supermediumvr\nor newsletter on supermedium.com.\nThe OASIS is undergoing changes.\nFor now, you can explore the OASIS!"
+        look-at="0 1.6 0"
+        position="1.3 1.6 -2"></a-entity>
       {% endif %}
 
       {% if hasHint %}
@@ -194,6 +202,14 @@
       {% if not IS_PRODUCTION %}
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]; recursive: false" debug-cursor></a-entity>
       {% endif %}
+
+      <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111391431-8"></script>
+      <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-111391431-8');
+      </script>
     </a-scene>
   </body>
 </html>

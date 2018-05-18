@@ -9,6 +9,7 @@
     <script src="{{ ROOT }}build/socket.io.min.js"></script>
     <script src="{{ ROOT }}build/easyrtc.js"></script>
     <script src="{{ ROOT }}build/build.js"></script>
+    <script src="https://poc.virtuleap.com/library/gar-calculator-aframe.v1.0.min.js"></script>
     {% if IS_PRODUCTION %}<style>.a-inspector-loader{ display: none; }</style>{% endif %}
     <style>
       html { background: #111; }
@@ -146,7 +147,7 @@
       </a-entity>
 
       {% if IS_HOME %}
-        <a-entity id="jadeKey" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005" item="message: You've received the Jade Key\nExplore the OASIS\nDiscover the secrets it may unlock\n~; storeAs: jadekey"></a-entity>
+        <a-entity id="jadeKey" obj-model="obj: {{ ROOT }}assets/models/key/Key_01.obj" material="color: #AAFFAA" position="0 1.6 20" scale="0.005 0.005 0.005" item="message: You've received the Jade Key\nExplore the OASIS\nDiscover the secrets it may unlock\n~; storeAs: jadekey" gar-calculator-element="modelID: 4D8C-0F7086; experience_id: 1EDB-9D2618"></a-entity>
 
         <a-entity id="gundam" obj-model="obj: {{ ROOT }}assets/models/gundam/model.obj; mtl: {{ ROOT }}assets/models/gundam/materials.mtl" position="-10 7.8 -25" scale="5 5 5" rotation="0 210 0"></a-entity>
 

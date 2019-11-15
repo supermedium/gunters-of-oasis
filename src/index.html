@@ -181,7 +181,7 @@
         id="eggFound"
         mixin="slice font hoverAnimation"
         slice9="color: #111; height: 1; width: 2.1; padding: 0.1"
-        text="color: #4ef580; width: 2; value: The third egg has been found by WillieRo!\nThere are only 2 seats remaining on the High Five.\nGet notified on next round via @supermediumvr\nor newsletter on supermedium.com.\nThe OASIS is undergoing changes.\nFor now, you can explore the OASIS!"
+        text="color: #4ef580; width: 2; value: The eggs have been found!\nExplore the OASIS!"
         look-at="0 1.6 0"
         position="1.3 1.6 -2"></a-entity>
       {% endif %}
@@ -206,6 +206,14 @@
         <a-entity id="mouseCursor" cursor="rayOrigin: mouse" raycaster="objects: [raycastable]; recursive: false" debug-cursor></a-entity>
       {% endif %}
 
+      <div id="subscribeForm">
+        <h2>Get Updates on Our Upcoming VR Projects!</h2>
+        <form>
+          <input name="email" type="email" placeholder="Email address">
+          <button class="submit" type="submit">Subscribe</button>
+        </form>
+      </div>
+
       <script async src="https://www.googletagmanager.com/gtag/js?id=UA-111391431-8"></script>
       <script>
         window.dataLayer = window.dataLayer || [];
@@ -214,5 +222,59 @@
         gtag('config', 'UA-111391431-8');
       </script>
     </a-scene>
+
+    <style>
+      #subscribeForm {
+        background: rgba(0, 0, 0, 0.75);
+        box-shadow: 0px 0 1px #888;
+        bottom: 0;
+        color: #FAFAFA;
+        font-family: monospace;
+        height: 100px;
+        left: 0;
+        margin: 0;
+        min-width: 400px;
+        padding: 5px 10px 0 10px;
+        position: fixed;
+        text-align: center;
+        z-index: 9999999;
+      }
+
+      #subscribeForm h2 {
+        font-size: 16px;
+        font-weight: 300;
+      }
+
+      input[type="email"] {
+        background: #FAFAFA;
+        border: 0;
+        border-radius: 5px;
+        color: $gray;
+        height: 40px;
+        padding-left: 20px;
+        margin-right: 10px;
+        max-width: 480px;
+        text-transform: uppercase;
+        vertical-align: middle;
+        width: 50%;
+      }
+
+      button {
+        border: 0;
+        background: #FF74b8;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 14px;
+        color: #FAFAFA;
+        text-transform: uppercase;
+        transition: .1s all;
+        padding: 11px 20px;
+        vertical-align: middle;
+      }
+
+      button:hover {
+        background: #FF94C8;
+      }
+    </style>
   </body>
 </html>

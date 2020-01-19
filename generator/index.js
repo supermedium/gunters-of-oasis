@@ -185,7 +185,9 @@ SECTOR_PAGES.forEach(sector => {
   for (i = 0; i < 2; i++) {
     hintZone = randomArray(sector);
     hintZone.hasHint = true;
-    hintZone.inThisSector = GOAL_ZONE.sectorType === sector[0].sectorType;
+    // Using preGoalZone here instead of GOAL_ZONE, because GOAL_ZONE is always
+    // 'goldmine', even if it's reached from a different sector.
+    hintZone.inThisSector = preGoalZone.sectorType === sector[0].sectorType;
     console.log(`Added hint to: ${hintZone.seed}. In this sector: ${hintZone.inThisSector}.`);
   }
 });
